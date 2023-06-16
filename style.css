@@ -7,6 +7,31 @@ p {
 color: rgb(0, 138, 113);
 }
 
+a:link {
+  color: rgb(5, 100, 75);;;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(46, 133, 109);;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(28, 212, 160);;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: rgb(28, 212, 160);;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+
 header {
     background-color: rgb(150, 249, 215);
     padding: 30px;
@@ -102,28 +127,4 @@ color: rgb(5, 100, 75);
 position: -webkit-sticky;
 position: sticky;
 bottom: 0;
-}
-
-a:link {
-  color: rgb(5, 100, 75);;;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:visited {
-  color: rgb(46, 133, 109);;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:hover {
-  color: rgb(28, 212, 160);;
-  background-color: transparent;
-  text-decoration: underline;
-}
-
-a:active {
-  color: rgb(28, 212, 160);;
-  background-color: transparent;
-  text-decoration: underline;
 }
