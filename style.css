@@ -9,7 +9,6 @@ color: rgb(0, 138, 113);
 
 header {
     background-color: rgb(150, 249, 215);
-    text-align: center;
     padding: 30px;
     color: rgb(5, 100, 75);
 }
@@ -17,6 +16,20 @@ header {
 section {
     display: -webkit-flex;
     display: flex;
+    color: rgb(23, 117, 93);
+}
+section h1 {
+    font-size: 250%;
+    padding: 0;
+    margin: 0;
+}
+section h2 {
+    font-size: 200%;
+    padding: 0;
+    margin: 0;
+}
+section h3 {
+    font-size 150%;
 }
 
 @media (max-width: 600px) {
@@ -82,7 +95,7 @@ top: 0;
 }
 
 footer {
-    background-color: rgb(150, 249, 215);
+background-color: rgb(150, 249, 215);
 padding: 10px;
 text-align: center;
 color: rgb(5, 100, 75);
@@ -91,5 +104,28 @@ position: sticky;
 bottom: 0;
 }
 
+a:link {
+  color: rgb(5, 100, 75);;;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(46, 133, 109);;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(28, 212, 160);;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: rgb(28, 212, 160);;
+  background-color: transparent;
+  text-decoration: underline;
+}
   
   
