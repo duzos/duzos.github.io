@@ -1,47 +1,47 @@
 body {
-    background-color: rgb(193, 249, 215);
+    background-color: rgb(137, 89, 255);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 p {
-color: rgb(0, 138, 113);
+color: rgb(120, 66, 255);
 }
 
 a:link {
-  color: rgb(5, 100, 75);;;
+  color: rgb(120, 66, 255);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: rgb(46, 133, 109);;
+  color: rgb(138, 92, 255);;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(28, 212, 160);;
+  color: rgb(171, 138, 255);;
   background-color: transparent;
   text-decoration: underline;
 }
 
 a:active {
-  color: rgb(28, 212, 160);;
+  color: rgb(171, 138, 255);;
   background-color: transparent;
   text-decoration: underline;
 }
 
 
 header {
-    background-color: rgb(150, 249, 215);
+    background-color: rgb(195, 171, 255);
     padding: 30px;
-    color: rgb(5, 100, 75);
+    color: rgb(120, 66, 255);
 }
 
 section {
     display: -webkit-flex;
     display: flex;
-    color: rgb(23, 117, 93);
+    color: rgb(120, 66, 255);
 }
 section h1 {
     font-size: 250%;
@@ -74,7 +74,7 @@ div.discord.wrapper {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    background: rgb(168, 232, 209);
+    background: rgb(129, 89, 227);
     padding: 20px;
     right:auto;
 } 
@@ -97,7 +97,7 @@ article {
     -webkit-flex: 3;
     -ms-flex: 3;
     flex: 3;
-    background-color: rgb(217, 248, 237);
+    background-color: rgb(222, 209, 255);
     padding: 10px;
 }
 
@@ -120,7 +120,7 @@ top: 0;
 }
 
 footer {
-background-color: rgb(150, 249, 215);
+background-color: rgb(195, 171, 255);
 padding: 10px;
 text-align: center;
 color: rgb(5, 100, 75);
