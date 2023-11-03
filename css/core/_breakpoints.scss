@@ -1,0 +1,205 @@
+//
+// This SCSS file defines the breakpoints in use, and provides helper functions to make use of
+// them from other SCSS files
+//
+
+// maps breakpoint name to min width
+$breakpoints : (
+    "xsmall" : 0,
+	"small" : 481px,
+    "medium" : 737px,
+    "large" : 981px,
+    "xlarge" : 1281px
+);
+
+// Returns the min width at which the specified breakpoint applies.
+// @param name The name of the breakpoint to get the width for.
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@function getBreakpointMinWidth($name, $bps: $breakpoints) {
+    $width: map-get($bps, $name);
+    @return if($width != 0, $width, null);
+}
+
+// Returns the maximum width that applies to the given breakpoint before the next one takes effect.
+// If this is the largest breakpoint, returns null.
+// @param name The name of the breakpoint to get the width for.
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@function getBreakpointMaxWidth($name, $bps: $breakpoints) {
+
+    $n: index(map-keys($bps), $name);
+    @if $n {
+        $next: if($n < length($bps), nth(map-keys($bps), $n + 1), null);
+
+        @return if($next, getBreakpointMinWidth($next, $bps) - 0.02px, null);
+    } @else {
+        @return null;
+    }
+}
+
+//
+// SASS mixin to wrap the content in the appropriate media query for the given breakpoint.
+// This will apply the content to this breakpoint and any larger ones.
+// @param name the name of the breakpoint to use
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@mixin renderForBreakpoint($name, $bps: $breakpoints) {
+
+    $width: getBreakpointMinWidth($name, $bps);
+    $processedBpName: to-upper-case(str-slice($name, 1, 1)) + str-slice($name, 2);
+
+    @if $width {
+        @media (min-width: $width) {
+            @content($processedBpName);
+        }
+    } @else {
+        @content($processedBpName);
+    }
+
+}
+
+//
+// SASS mixin to wrap the content in the appropriate media query for the given breakpoint.
+// This will apply the content to only the specified breakpoint.
+// @param name the name of the breakpoint to use
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@mixin renderOnlyForBreakpoint($name, $bps: $breakpoints) {
+    $minWidth: getBreakpointMinWidth($name, $bps);
+    $maxWidth: getBreakpointMaxWidth($name, $bps);
+    $processedBpName: to-upper-case(str-slice($name, 1, 1)) + str-slice($name, 2);
+
+    @if ($minWidth and $maxWidth) {
+        @media (min-width: $minWidth) and (max-width: $maxWidth) {
+            @content($processedBpName);
+        }
+    } @else if ($minWidth) {
+        @media (min-width: $minWidth) {
+            @content($processedBpName);
+        }
+    } @else if ($maxWidth) {
+        @media (max-width: $maxWidth) {
+            @content($processedBpName);
+        }
+    } @else {
+
+        @content($processedBpName);
+    }
+}
+
+//
+// SASS mixin to wrap the content in the appropriate media query to apply to the given breakpoint range.
+// This will apply the content only to the specified range.
+// @param firstBp the name of the first breakpoint to use
+// @param secondBp the name of the second breakpoint to use
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@mixin renderForBreakpointRange($firstBp, $secondBp, $bps: $breakpoints) {
+    $minWidth: getBreakpointMinWidth($firstBp, $bps);
+    $maxWidth: getBreakpointMaxWidth($secondBp, $bps);
+    $processedBpName: to-upper-case(str-slice($firstBp, 1, 1)) + str-slice($firstBp, 2) + to-upper-case(str-slice($secondBp, 1, 1)) + str-slice($secondBp, 2);
+
+    @if ($minWidth and $maxWidth) {
+        @media (min-width: $minWidth) and (max-width: $maxWidth) {
+            @content($processedBpName);
+        }
+    } @else if ($minWidth) {
+        @media (min-width: $minWidth) {
+            @content($processedBpName);
+        }
+    } @else if ($maxWidth) {
+        @media (max-width: $maxWidth) {
+            @content($processedBpName);
+        }
+    } @else {
+
+        @content($processedBpName);
+    }
+}
+
+
+//
+// Outputs the given content for each breakpoint.  The name of the breakpoint will be given as an argument to the content
+// block so that class names etc can be adjusted accordingly.
+// With this version the generated content will apply to the given breakpoint and above, use createForEachBreakpointOnly
+// to generate content that only apply to a specific breakpoint, and not larger devices.
+//
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@mixin createForEachBreakpoint($bps: $breakpoints) {
+
+    @each $bpName in map-keys($bps) {
+
+        @include renderForBreakpoint($bpName, $bps) using ($processedBpName) {
+
+            @content($processedBpName)
+        }
+
+    }
+
+}
+
+//
+// This is the same as createForEachBreakpoint, but also outputs the content without a breakpoint suffix at all.
+//
+@mixin createForEachBreakpointWithDefault($bps: $breakpoints) {
+
+    //first output with a blank breakpoint name
+    @content('');
+
+    //now output for each defined breakpoint
+    @include createForEachBreakpoint($bps) using ($bp) {
+        @content($bp);
+    }
+}
+
+
+
+
+@mixin createForEachBreakpointUpTo($bpLimit, $bps: $breakpoints) {
+
+    @content('');
+
+    $bpFound: false;
+
+    @each $bpName in map-keys($bps) {
+
+        @if ($bpFound == false) {
+
+            @include renderForBreakpoint($bpName, $bps) using ($processedBpName) {
+
+                @content($processedBpName)
+            }
+        }
+
+        @if ($bpName == $bpLimit)
+        {
+            $bpFound : true;
+        }
+
+    }
+
+}
+
+//
+// Outputs the given content for each breakpoint.  The name of the breakpoint will be given as an argument to the content
+// block so that class names etc can be adjusted accordingly.
+// With this version the generated content will only apply to a specific breakpoint, and not larger breakpoints.
+// Use createForeEachBreakpoint to generate content that will apply to the breakpoint and above.
+//
+// @param bps Optional map of breakpoints to check. The global breakpoints variable will be used by default.
+//
+@mixin createForEachBreakpointOnly($bps: $breakpoints) {
+
+    @each $bpName in map-keys($bps) {
+
+        @include renderOnlyForBreakpoint($bpName, $bps) using ($bp){
+
+            @content($bp);
+
+        }
+
+    }
+
+}

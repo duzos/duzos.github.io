@@ -1,0 +1,464 @@
+@import 'breakpoints';
+
+
+/*
+ * ====================================================================================================
+ * WARNING This file is part of the base implementation for WebMaker, so it should not be edited or changed for any project.
+ * These files are replaced if a project is re-imported to the WebMaker Studio or migrated to a new version of the product.
+ * For guidance on 'How do I override or clone Hyfinity webapp files such as CSS & javascript?', please read the following relevant FAQ entry:
+ * http://www.hyfinity.net/faq/index/solution_id/1113
+ * ====================================================================================================
+ */
+
+
+
+// Set all elements to use border-box sizing by default so that sizing calculations are simplified.
+// In this mode, borders and padding are taken away from width not added to
+* {
+    box-sizing: border-box;
+}
+
+
+// Ideally use the new flex box layout approach, but fall back to
+// table based styling for older browsers.
+.layoutContainer
+{
+    display: table-cell;
+    display: flex;
+
+    // Overflow auto to force a scroll bar if a fixed size has been set, and the content is too big.
+    overflow : auto;
+}
+
+.grid
+{
+    display : grid;
+}
+
+
+@include createForEachBreakpointWithDefault() using ($bp)
+{
+    .layoutContainer.wrapContent#{$bp} {
+        flex-wrap: wrap;
+    }
+}
+
+// Stop flex items from being able to grow or shrink by default.
+// If the expand to fill space options have been selected, then the flex-grow
+// setting will be applied if needed below.
+.layoutContainer > *
+{
+    flex: 0 0 auto;
+}
+
+
+@include createForEachBreakpointWithDefault() using ($bp) {
+    .distributeVertically#{$bp} {
+        flex-direction: column;
+    }
+
+    .distributeHorizontally#{$bp} {
+        flex-direction: row;
+    }
+
+    .layoutContainer.distributeVertically#{$bp}  > * {
+        flex-shrink : 0;
+    }
+    .layoutContainer.distributeHorizontally#{$bp}  > * {
+        flex-shrink : 1;
+    }
+
+    .distributeVertically#{$bp}.alignTop#{$bp},
+    .distributeHorizontally#{$bp}.alignLeft#{$bp} {
+        justify-content: flex-start;
+    }
+    .distributeVertically#{$bp}.alignMiddle#{$bp},
+    .distributeHorizontally#{$bp}.alignCenter#{$bp} {
+        justify-content: safe center;
+    }
+    .distributeVertically#{$bp}.alignBottom#{$bp},
+    .distributeHorizontally#{$bp}.alignRight#{$bp} {
+        justify-content: safe flex-end;
+    }
+    .distributeVertically#{$bp}.alignLeft#{$bp},
+    .distributeHorizontally#{$bp}.alignTop#{$bp} {
+        align-items: flex-start;
+        align-content: flex-start;
+    }
+    .distributeVertically#{$bp}.alignCenter#{$bp},
+    .distributeHorizontally#{$bp}.alignMiddle#{$bp} {
+        align-items: safe center;
+		align-content: safe center;
+    }
+    .distributeVertically#{$bp}.alignRight#{$bp},
+    .distributeHorizontally#{$bp}.alignBottom#{$bp} {
+        align-items: safe flex-end;
+		align-content: safe flex-end;
+    }
+}
+
+// Styling for the controlWrapper structures to give us the alignment options etc. */
+.controlWrapper, .groupWrapper
+{
+    display : flex;
+}
+
+@include createForEachBreakpointWithDefault() using ($bp) {
+
+    .controlWrapper.labelLeft#{$bp},
+    .groupWrapper.labelLeft#{$bp} {
+        flex-direction: row;
+    }
+    .controlWrapper.labelRight#{$bp},
+    .groupWrapper.labelRight#{$bp} {
+        flex-direction: row-reverse;
+    }
+    .controlWrapper.labelAbove#{$bp},
+    .groupWrapper.labelAbove#{$bp} {
+        flex-direction: column;
+    }
+    .controlWrapper.labelBelow#{$bp},
+    .groupWrapper.labelBelow#{$bp} {
+        flex-direction: column-reverse;
+    }
+
+    .controlWrapper.attachStart#{$bp},
+    .groupWrapper.attachStart#{$bp} {
+        align-items : flex-start;
+    }
+    .controlWrapper.attachMiddle#{$bp},
+    .groupWrapper.attachMiddle#{$bp} {
+        align-items : center;
+    }
+    .controlWrapper.attachEnd#{$bp},
+    .groupWrapper.attachEnd#{$bp} {
+        align-items : flex-end;
+    }
+}
+
+
+@include createForEachBreakpointWithDefault() using ($bp) {
+    // Horizontal alignment settings (used for controls and labels, and non flex group containers????)
+    .alignLeft#{$bp}
+    {
+        text-align : left;
+    }
+    .alignRight#{$bp}
+    {
+        text-align : right;
+    }
+    .alignCenter#{$bp}
+    {
+        text-align : center;
+    }
+
+    // Switch round the alignment directions if using an RTL language so that the layout is still correct.
+    .direction_rtl .alignLeft#{$bp}
+    {
+        text-align : right;
+    }
+    .direction_rtl .alignRight#{$bp}
+    {
+        text-align : left;
+    }
+
+    // Vertical alignment settings (used for control and label containers, and groups containers in non flex box mode)
+    .alignTop#{$bp}
+    {
+        vertical-align : top;
+    }
+    .alignMiddle#{$bp}
+    {
+        vertical-align : middle;
+    }
+    .alignBottom#{$bp}
+    {
+        vertical-align : bottom;
+    }
+
+}
+
+
+@include createForEachBreakpointWithDefault() using ($bp) {
+
+    //Handle the expandWidth and expandHeight options
+    //The duplicate class names on some of the selectors here look redundant, but are actually needed
+    //Adding the same class again increases the specificity of the selector, and so makes sure that
+    //it matches those selectors that are using the not() check
+    //This ensures that selectors for later breakpoints correctly override all those from an earlier one
+    //@include createForEachBreakpointUpTo(to-lower-case($bp)) using ($bp2) {
+    @include createForEachBreakpointWithDefault() using ($bp2) {
+        .layoutContainer.distributeHorizontally#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .layoutContainer.distributeVertically#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .groupWrapper.labelLeft#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .groupWrapper.labelRight#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .groupWrapper.labelAbove#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .groupWrapper.labelBelow#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .controlWrapper.labelLeft#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .controlWrapper.labelRight#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .controlWrapper.labelAbove#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .controlWrapper.labelBelow#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp}
+        {
+            align-self : stretch;
+        }
+
+        .layoutContainer.distributeHorizontally#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .layoutContainer.distributeVertically#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .groupWrapper.labelLeft#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .groupWrapper.labelRight#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .groupWrapper.labelAbove#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .groupWrapper.labelBelow#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .controlWrapper.labelLeft#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .controlWrapper.labelRight#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .controlWrapper.labelAbove#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .controlWrapper.labelBelow#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+
+        .layoutContainer.distributeHorizontally#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .layoutContainer.distributeVertically#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .groupWrapper.labelLeft#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .groupWrapper.labelRight#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .groupWrapper.labelAbove#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .groupWrapper.labelBelow#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .controlWrapper.labelLeft#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .controlWrapper.labelRight#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .controlWrapper.labelAbove#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .controlWrapper.labelBelow#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp}
+        {
+            flex-grow : unset;
+        }
+
+        .layoutContainer.distributeHorizontally#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .layoutContainer.distributeVertically#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .groupWrapper.labelLeft#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .groupWrapper.labelRight#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .groupWrapper.labelAbove#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .groupWrapper.labelBelow#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .controlWrapper.labelLeft#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .controlWrapper.labelRight#{$bp2} > *.expandWidth#{$bp}.expandWidth#{$bp},
+        .controlWrapper.labelAbove#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp},
+        .controlWrapper.labelBelow#{$bp2} > *.expandHeight#{$bp}.expandHeight#{$bp}
+        {
+            flex-grow : 1;
+        }
+
+        .layoutContainer.distributeHorizontally#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .layoutContainer.distributeVertically#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .groupWrapper.labelLeft#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .groupWrapper.labelRight#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .groupWrapper.labelAbove#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .groupWrapper.labelBelow#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .controlWrapper.labelLeft#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .controlWrapper.labelRight#{$bp2} > *.expandWidth#{$bp}:not(.expandHeight#{$bp}),
+        .controlWrapper.labelAbove#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+        .controlWrapper.labelBelow#{$bp2} > *.expandHeight#{$bp}:not(.expandWidth#{$bp}),
+
+        .layoutContainer.distributeHorizontally#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .layoutContainer.distributeVertically#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .groupWrapper.labelLeft#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .groupWrapper.labelRight#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .groupWrapper.labelAbove#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .groupWrapper.labelBelow#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .controlWrapper.labelLeft#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .controlWrapper.labelRight#{$bp2} > *.setHeight#{$bp}.setHeight#{$bp},
+        .controlWrapper.labelAbove#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp},
+        .controlWrapper.labelBelow#{$bp2} > *.setWidth#{$bp}.setWidth#{$bp}
+        {
+            align-self: unset;
+        }
+
+    }
+
+    .fitWidth#{$bp}
+    {
+        width : auto;
+        width : -moz-fit-content;
+        width : -webkit-fit-content;
+        width : fit-content;
+    }
+    .fitHeight#{$bp}
+    {
+        height : auto;
+    }
+
+
+    // ensure the page_body container correctly fills the available width on screen
+    .layoutContainer.distributeVertically#{$bp} > *.page_body,
+    .layoutContainer.distributeHorizontally#{$bp} > *.page_body
+    {
+        align-self : stretch;
+        flex-grow : 1;
+
+        max-height : 100%;
+    }
+
+
+    .hyfControl.expandWidth#{$bp} > .controlBody,
+    .hyfControl.expandWidth#{$bp} > .dataPart,
+    .hyfControl.expandWidth#{$bp} > * > .dataPart
+    {
+        width : 100%;
+        width : -moz-available;
+        width : -webkit-fill-available;
+        width : stretch;
+        max-width : 100%;
+    }
+
+    .hyfControl.expandHeight#{$bp} > .controlBody,
+    .hyfControl.expandHeight#{$bp} > .dataPart,
+    .hyfControl.expandHeight#{$bp} > * > .dataPart
+    {
+        height : 100%;
+        // These options don't seem to work as expected currently
+        // so removed for now.  Using 100% is not ideal though as doesn't allow for margins */
+        //height : -moz-available;
+        //height : -webkit-fill-available;
+        //height : stretch;
+    }
+
+}
+
+
+
+
+
+// classes for radio button and multi checkbox layout
+.radioControl .dataPart,
+.multiCheckboxControl .dataPart {
+    display : grid;
+}
+
+@include createForEachBreakpointWithDefault() using ($bp) {
+    .radioControl .labelsBefore#{$bp},
+    .multiCheckboxControl .labelsBefore#{$bp} {
+
+        .selectBooleanEntry {
+            text-align : right;
+        }
+        .selectBoolean {
+            float : right;
+        }
+    }
+}
+
+
+
+// The following styles are used on output fields and labels to control the overflow of text
+.truncateText
+{
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    width: inherit;
+    height: inherit;
+}
+.clipText
+{
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:clip !important;
+    width: inherit;
+    height: inherit;
+}
+.wrapText
+{
+    white-space:pre-wrap !important;
+    overflow:visible !important;
+    width: inherit;
+    height: auto;
+}
+
+
+
+
+// This will hide an element and remove the space it takes up on the page
+.hide, .hidden, .hiddenWrapper
+{
+    display: none  !important;
+}
+// show will make the element visible for All Devices
+.show
+{
+    visibility: visible !important;
+}
+// This will hide an element, but preserve the space it takes up on the page
+.invisible
+{
+    visibility: hidden !important;
+}
+
+@include createForEachBreakpointOnly() using ($bp) {
+    .hideOn#{$bp} {
+        display: none;
+    }
+    .invisibleOn#{$bp} {
+        visibility: hidden;
+    }
+}
+
+
+// Print Only classes
+@media only print
+{
+    // hideOnPrint removes/collapses the space that is taken by an element that should not be shown for PRINT mode
+    .hideOnPrint
+    {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    // showOnPrint will make the element visible for PRINT mode
+    .showOnPrint
+    {
+        visibility: visible !important;
+    }
+    // invisibleOnPrint retains the space that is taken by an element that should not be shown for PRINT mode
+    .invisibleOnPrint
+    {
+        visibility: hidden !important;
+    }
+
+    // pageBreakOnPrint ensures that the next content is moved onto the next page
+    .pageBreakOnPrint
+    {
+        page-break-after: always;
+        visibility: none !important;
+    }
+}
+
+
+
+// responsive settings needed for the menu control
+@include renderForBreakpointRange(xsmall, small) using ($bp) {
+    .menuControl .controlBody .menu
+    {
+        max-height : none;
+
+        > .dijitMenuItem {
+            display :block;
+        }
+
+        &.collapsed
+        {
+            position : fixed;
+            left : 0;
+            right : 0;
+        }
+    }
+}
+
+@include renderForBreakpoint(medium) using ($bp) {
+
+    .menuControl .menuToggle {
+        display : none;
+    }
+
+    .menuControl .menu {
+        display : block;
+
+        > .dijitMenuItem {
+            display :inline-block;
+        }
+    }
+}
+
+
+

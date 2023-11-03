@@ -1,0 +1,46 @@
+@import 'breakpoints';
+
+#LandingPage .page_body {
+
+
+
+#layout_group_2 {
+
+
+
+@include renderForBreakpoint(xsmall) using ($bp) {
+width : 80%;
+
+}
+
+@include renderForBreakpoint(xsmall) using ($bp) {
+#logo_image_container .dataPart {
+width : 150px;
+height : 150px;
+
+}
+}
+
+}
+
+#grid {
+
+
+
+@include renderForBreakpoint(xsmall) using ($bp) {
+grid-row-gap : 20px; grid-template-rows: auto auto auto; grid-template-columns: 1fr; #grid_cell_1 { display : flex; grid-area : 1 / 1 / 2 / 2; }
+#grid_cell_2 { display : flex; grid-area : 2 / 1 / 3 / 2; }
+#grid_cell_3 { display : flex; grid-area : 3 / 1 / 4 / 2; }
+
+}
+
+@include renderForBreakpoint(medium) using ($bp) {
+grid-column-gap : 20px; grid-template-rows: auto; grid-template-columns: 1fr 1fr 1fr; #grid_cell_1 { display : flex; grid-area : 1 / 1 / 2 / 2; }
+#grid_cell_2 { display : flex; grid-area : 1 / 2 / 2 / 3; }
+#grid_cell_3 { display : flex; grid-area : 1 / 3 / 2 / 4; }
+
+}
+
+}
+
+}
