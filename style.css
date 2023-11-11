@@ -62,7 +62,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     object-fit: cover;
     width: 100%;
     border-radius: 50%;
-    border: 10px solid var(--color-3);
+    border: 10px solid var(--color-secondary);
 }
 .front-heading-container .whitespace {
     align-items: center;
@@ -81,7 +81,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     top: 0;
     transform: translateX(100%);
     width: var(--about-me-margin-size);
-  }
+}
 .about-me-container {
     --about-me-margin-size: 20em;
     margin-right: 12.5em;

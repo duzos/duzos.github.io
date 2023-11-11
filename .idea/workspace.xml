@@ -1,92 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/Page_LandingPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/Page_LandingPage.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/_breakpoints.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-default.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-specific-1.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-specific-1.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-specific-2.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-specific-2.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-specific-3.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/skin-specific-3.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/webmaker_layout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/core/webmaker_layout.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/pfp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/animations.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/BooleanValidator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/CalendarPopup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/DateValidator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/DisplayMessages.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/DisplayUtils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/ErrorDisplay.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/FMActions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/FormValidator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/NumberValidator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/StringValidator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/ValidationError.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/ValueConverter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/core/date.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery.easing.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/myscripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/css/print_completed.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/css/theme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/css/theme.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/MavenPro-Regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/OFL_MavernPro.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/OFL_Play.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/Play-Regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/HELP-US-OUT.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/animated.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/bordered-pulled.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/core.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/fixed-width.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/font-awesome.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/icons.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/larger.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/list.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/mixins.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/path.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/rotated-flipped.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/screen-reader.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/stacked.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/less/variables.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_animated.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_bordered-pulled.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_core.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_fixed-width.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_larger.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_list.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_path.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_rotated-flipped.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_screen-reader.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_stacked.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/fonts/font-awesome-4.7.0/scss/font-awesome.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/images/blake-richard-verdoorn-23459.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/images/blake-richard-verdoorn-23459_OLD.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/themeinfo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/theme/themeinfo.xml" beforeDir="false" />
-    </list>
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="redid the whole website again" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,6 +27,18 @@
       <option name="presentableId" value="Default" />
       <updated>1699742405015</updated>
     </task>
+    <task id="LOCAL-00001" summary="redid the whole website again">
+      <created>1699742482859</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699742482860</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="redid the whole website again" />
+    <option name="LAST_COMMIT_MESSAGE" value="redid the whole website again" />
   </component>
 </project>
