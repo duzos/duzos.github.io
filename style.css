@@ -1,9 +1,23 @@
 :root {
-    --color-primary: #2D898B;
+    /* Purple and Pinks*/
+    /* --color-primary: #2E294E;
+    --color-secondary: #EFBCD5;
+    --color-3: #88CCF1;
+    --color-4: #8661C1;
+    --color-5: #4B5267; */
+    /* Blues */
+    /* --color-primary: #2D898B;
     --color-secondary: #C1DFF0;
     --color-3: #88CCF1;
     --color-4: #3587A4;
-    --color-5: #2D848A;
+    --color-5: #2D848A; */
+    /*Greens*/
+    --color-primary: #52b788;
+    --color-secondary: #95d5b2;
+    --color-3: #88CCF1;
+    --color-4: #2d6a4f;
+    --color-5: #B8B08D;
+
     --drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     --logo-url: url("./img/logo.png");
     --whitespace-bg: url("./img/whitespace-bg.jpg")
