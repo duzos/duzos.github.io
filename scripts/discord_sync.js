@@ -69,9 +69,11 @@ function updateUI(data) {
     // Set default background if no album art
     // setGradientColors(lavaballs, ['black', 'gray', 'white']);
     // setGradientColors(body, ['rgba(16, 18, 27, 0.4)', 'rgba(16, 18, 27, 0.4)']);
-    song.textContent = 'No Song'
+    song.textContent = 'Spotify Offline - No song to display'
     artistalbum.textContent = 'No Artist - No Album';
+    artistalbum.style.opacity = 0;
     albumart.src = './img/spotify.png';
+    albumart.style.opacity = 0;
     albumart.style.boxShadow = 'none';
   }
 }
