@@ -201,7 +201,18 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
 .projects-container .content p {
     font-size: 1.25em;
 }
-
+.projects-container .sidebar {
+    position: absolute;
+    top: 10em;
+    right: 0;
+    transform: translateX(100%);
+    width: 20em;
+}
+.projects-container .sidebar img{
+    width: 20em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
 .contact-container::before {
     background-color: var(--color-secondary);
     content: "";
@@ -247,7 +258,14 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
 .contact-container .header-container h1 span {
     color: var(--color-primary);
 }
-.contact-container.content {
+.contact-container iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    width: 20em;
+}
+.contact-container .content {
     grid-gap: 1em;
     display: grid;
     font-family: "Overpass";
