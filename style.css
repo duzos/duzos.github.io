@@ -75,8 +75,10 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     -o-object-fit: cover;
     object-fit: cover;
     width: 100%;
-    border-radius: 50%;
-    border: 10px solid var(--color-secondary);
+    background: linear-gradient(var(--color-primary), var(--color-secondary)) padding-box,
+    linear-gradient(to right, var(--color-secondary), var(--color-primary)) border-box;
+    border-radius: 50em;
+    border: 10px solid transparent;
 }
 .front-heading-container .whitespace {
     align-items: center;
