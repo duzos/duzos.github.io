@@ -242,7 +242,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     margin-bottom: 2em;
 }
 .contact-container .header-container h1 {
-    padding-left: 0em;
+    padding-left: 1.75em;
     position: relative;
     margin-bottom: .25em;
 }
@@ -270,7 +270,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     display: grid;
     font-family: "Overpass";
     gap: 1em;
-    padding-left: 4em;
+    padding-left: 3.5em;
 }
 .contact-container .content a {
     text-decoration: none;
