@@ -253,7 +253,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     height: .25em;
     margin: auto;
     position: absolute;
-    width: 90%;
+    width: 80%;
 }
 .contact-container .header-container h1 span {
     color: var(--color-primary);
