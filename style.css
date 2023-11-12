@@ -209,9 +209,11 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     width: 20em;
 }
 .projects-container .sidebar img{
-    width: 20em;
-    padding-bottom: 1em;
-    padding-top: 1em;
+    width: 18em;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
 }
 .contact-container::before {
     background-color: var(--color-secondary);
