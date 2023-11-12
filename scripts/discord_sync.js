@@ -44,6 +44,8 @@ function updateUI(data) {
     song.textContent = spotify.song || 'No Song'
     artistalbum.textContent = spotify.artist ? `${spotify.artist} - ${spotify.album}` : 'No Artist - No Album';
     albumart.src = spotify.album_art_url;
+    albumart.style.opacity = 1;
+    artistalbum.style.opacity = 1;
 
     // // Get the most and less abundant colors from the album art
     // getDominantColors(albumart.src, (mostAbundantColors, lessAbundantColors) => {
