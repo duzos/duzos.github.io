@@ -281,7 +281,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     color: var(--color-primary)
 }
 .contact-container .content p {
-    font-size: 1.25em;
+    font-size: 1.5em;
 }
 .contact-container .content b {
     text-decoration: none;
