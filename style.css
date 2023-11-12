@@ -105,6 +105,33 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     padding: 4em 6.25em;
     position: relative;
 }
+.about-me-container .sidebar {
+    position: absolute;
+    top: 10em;
+    right: 0;
+    transform: translateX(100%);
+    width: 20em;
+}
+.about-me-container .sidebar .album-cover {
+    padding-left: 5em;
+}
+.about-me-container .sidebar .album-cover img {
+    border-radius: 10%;
+    width: 10em;
+    height: 10em;
+}
+.about-me-container .sidebar .album-cover img {
+    border-radius: 10%;
+    width: 10em;
+    height: 10em;
+    cursor: pointer;
+}
+.about-me-container .sidebar .song-info h1 {
+    font-size: 1em;
+    /* padding-left: 2.5em; */
+    text-align: center;
+    color: var(--color-4);
+}
 .about-me-container .header-container {
     display: flex;
     gap: 1em;
