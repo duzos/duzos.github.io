@@ -30,13 +30,13 @@
     --bold-color: var(--color-primary)
 }
 :root[data-theme="theme-dark"] {
-    --color-primary: #004242; 
-    --color-secondary: #3a5a40;
+    --color-primary: #1b4332; 
+    --color-secondary: #2d6a4f;
     --color-3: #88CCF1;
-    --color-4: #95d5b2;
+    --color-4: #d8f3dc;
     --color-5: #b88d8d;
 
-    --body-color: #1b1b1b ;
+    --body-color: #081c15 ;
     --text-color: white;
     --bold-color: #95d5b2;
 }
@@ -386,7 +386,7 @@ transform: scale(1.1);
 }
 .contact-container .content a:hover {
     text-decoration: none;
-    color: var(--color-primary)
+    color: var(--bold-color)
 }
 .contact-container .content p {
     font-size: 1.5em;
