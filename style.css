@@ -12,20 +12,41 @@
     --color-4: #3587A4;
     --color-5: #2D848A; */
     /*Greens*/
+
+    --drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
+    --logo-url: url("./img/logo.png");
+    --whitespace-bg: url("./img/whitespace-bg.jpg")
+}
+
+:root[data-theme="theme-light"] {
     --color-primary: #52b788;
     --color-secondary: #95d5b2;
     --color-3: #88CCF1;
     --color-4: #2d6a4f;
     --color-5: #B8B08D;
 
-    --drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
-    --logo-url: url("./img/logo.png");
-    --whitespace-bg: url("./img/whitespace-bg.jpg")
+    --body-color: white;
+    --text-color: black;
+    --bold-color: var(--color-primary)
 }
+:root[data-theme="theme-dark"] {
+    --color-primary: #004242; 
+    --color-secondary: #3a5a40;
+    --color-3: #88CCF1;
+    --color-4: #95d5b2;
+    --color-5: #b88d8d;
+
+    --body-color: #1b1b1b ;
+    --text-color: white;
+    --bold-color: #95d5b2;
+}
+
 body {
     font-family: Nunito,Arial,sans-serif;
     font-size: max(8px,1.25vw);
     margin: 0;
+    background-color: var(--body-color);
+    color: var(--text-color);
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: Poppins,Arial,sans-serif;
@@ -33,6 +54,58 @@ h1, h2, h3, h4, h5, h6 {
 img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     height: auto;
     max-width: 100%;
+}
+
+/* https://github.com/chaoocharles/dark-light-mode */
+.toggle-theme {
+    background: rgba(0, 93, 93, 0.5);
+    height: 3rem;
+    width: 3rem;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+}
+
+.toggle-theme:hover,
+.toggle-theme:focus {
+cursor: pointer;
+transform: scale(1.1);
+}
+
+.toggle-theme i {
+font-size: 2rem;
+position: absolute;
+transition: transform 0.5s ease, opacity 0.5s ease, color 0.5s ease;
+}
+
+.fa-sun {
+color: rgb(210, 216, 102);
+opacity: 0;
+transform: translateX(50px);
+}
+
+.fa-moon {
+color: rgb(216, 216, 215);
+transform: translateX(0px);
+}
+
+.checkbox {
+display: none;
+}
+
+.checkbox:checked ~ .toggle-theme .fa-sun{
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.checkbox:checked ~ .toggle-theme .fa-moon{
+    opacity: 0;
+    transform: translateX(-50px);
 }
 
 .front-heading-container {
@@ -48,6 +121,11 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     height: 100%;
     position: relative;
     width: 75%;
+}
+.front-heading-container .header-container .theme-switcher {
+    position:absolute;
+    bottom: 1em;
+    right: 1em;
 }
 .front-heading-container .header-container .container {
     margin: auto 15.625em auto 6.25em;
@@ -119,13 +197,14 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     border-radius: 10%;
     width: 10em;
     height: 10em;
+    transition: transform 0.5s ease;
 }
-.about-me-container .sidebar .album-cover img {
-    border-radius: 10%;
-    width: 10em;
-    height: 10em;
-    cursor: pointer;
+.about-me-container .sidebar .album-cover img:hover,
+.about-me-container .sidebar .album-cover img:focus {
+cursor: pointer;
+transform: scale(1.1);
 }
+
 .about-me-container .sidebar .song-info h1 {
     font-size: 1em;
     /* padding-left: 2.5em; */
@@ -142,10 +221,10 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     position: relative;
 }
 .about-me-container .header-container h1 span {
-    color: var(--color-primary);
+    color: var(--bold-color);
   }
 .about-me-container .header-container .line {
-    background: linear-gradient(90deg,var(--color-primary),var(--color-secondary));
+    background: linear-gradient(90deg,var(--bold-color),var(--color-secondary));
     flex: 1;
     height: 2px;
     margin: auto;

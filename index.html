@@ -20,6 +20,7 @@
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
         <script src="https://kit.fontawesome.com/2b1db366f1.js" crossorigin="anonymous"></script>
+        <script src="scripts/themes.js"></script>
     </head>
     <body>
         <div class="page">
@@ -27,6 +28,13 @@
                 <main>
                     <div class="front-heading-container">
                         <div class="header-container">
+                            <div class="theme-switcher">
+                                <input type="checkbox" onclick="checkboxClick()" id="theme-checkbox" class="checkbox" />
+                                <label for="theme-checkbox" class="toggle-theme">
+                                  <i class="fas fa-moon"></i>
+                                  <i class="fas fa-sun"></i>
+                                </label>                           
+                             </div>
                             <div class="container">
                                 <h1 class="header">duzo</h1>
                             </div>
