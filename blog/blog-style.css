@@ -21,6 +21,9 @@ a {
     text-decoration: none;
     color: #99746B;
 }
+a:hover {
+    color: #E6A595;
+}
 
 .content {
     width: 960px;
