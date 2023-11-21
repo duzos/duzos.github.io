@@ -108,6 +108,12 @@ display: none;
     transform: translateX(-50px);
 }
 
+.anchor {
+    width: 100%;
+    height: 0;
+    position: relative;
+}
+
 .front-heading-container {
     display: flex;
     height: calc(100vh);
