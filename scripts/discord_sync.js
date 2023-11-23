@@ -37,8 +37,9 @@ function updateUI(data) {
   const artistalbum = document.getElementById('spotifyartistalbum');
   const albumart = document.getElementById('albumart');
 
-  logo.style.background = statusColors[status];
-
+  if (logo != null) {
+    logo.style.background = statusColors[status];
+  }
 
   if (data.listening_to_spotify) {
     song.textContent = spotify.song || 'No Song'

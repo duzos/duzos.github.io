@@ -1,0 +1,43 @@
+.album-cover {
+    padding-left: 0em;
+    padding-top: 5%;
+}
+.album-cover img {
+    border-radius: 10%;
+    width: 20em;
+    height: 20em;
+    transition: transform 0.5s ease;
+}
+.album-cover img:hover,
+.album-cover img:focus {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.song-info h1 {
+    display:block;
+    font-size: 1.5em;
+    /* padding-left: 2.5em; */
+    text-align: center;
+}
+.spotify {
+    background: white;
+    border-radius: 5%;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 23em;
+}
+.spotify a {
+    color: #99746B;
+}
+.github-stats {
+    padding-top: 128px;
+    width: 347px;
+    overflow: hidden;
+}
+.discord {
+    padding-top: 64px;
+    width: 347px;
+    overflow: hidden;
+}

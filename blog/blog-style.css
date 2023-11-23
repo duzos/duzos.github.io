@@ -39,7 +39,7 @@ a:hover {
 .banner-divider {
     position: relative;
     background: #E6C97E;
-    height: 40px;
+    height: 20px;
 }
 
 .head-container {
@@ -73,6 +73,7 @@ a:hover {
 .description-container-right {
     float: right;
     width: 347px;
+    overflow: hidden;
 }
 
 .sticker {
@@ -107,9 +108,16 @@ a:hover {
     float: right;
     height: 40px;
     margin: 0px;
+    margin-left: 5px;
     padding: 0px;
     font-weight: 300;
     letter-spacing: 2px;
+}
+.footer-content a {
+    color: #91DDF2;
+}
+.footer-content a:hover {
+    color: #85A1F2;
 }
 .lightboxOverlay {
     position: absolute;
