@@ -20,16 +20,25 @@
     /* padding-left: 2.5em; */
     text-align: center;
 }
-.spotify {
+.sticker-container .spotify {
     background: white;
     border-radius: 5%;
     vertical-align: top;
     display: inline-block;
     text-align: center;
     width: 23em;
+    overflow: hidden;
+    clear: both;
+    max-zoom: 110%;
 }
-.spotify a {
+.sticker-container .spotify a {
     color: #99746B;
+}
+@media only screen and (max-width: 1760px) {
+    .sticker-container .spotify {
+        display: none;
+        background: black;
+    }
 }
 .github-stats {
     padding-top: 128px;
