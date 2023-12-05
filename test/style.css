@@ -1,0 +1,181 @@
+:root {
+    --color-1: #95D5B2;
+    --color-2: #D8F3DC;
+    --color-3: #B7E4C7;
+    --color-4: #74C69D;
+    --color-5: #52B788;
+
+    --logo-url: url("./img/logo.png");
+}
+
+/* this shit sucks its all hardcoded but its a website so its totally fine */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-2);
+}
+
+.title {
+    height: 25%;
+    background-color: var(--color-1);
+    border-bottom-left-radius: 64px;
+    border-bottom-right-radius: 64px;
+}
+.title .name {
+    margin: auto;
+    width: 50%;
+    position: relative;
+    text-align: center;
+    color: var(--color-2);
+    font-size: 7vw;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+.title img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    top: 16px;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 9999px;
+}
+
+.about {
+    margin-top: 36px;
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 64px;
+    height: 512px;
+    background-color: var(--color-4);
+}
+.about .ptext {
+    color: var(--color-2);
+    font-size: 7vw;
+    font-weight: 400;
+    margin-left: 32px;
+    margin-top: 32px;
+}
+.about .acards {
+    margin-top: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+    align-items: center;
+    display: flex;
+}
+.about .acard {
+    height: 256px;
+    width: 30%;
+    margin-left: auto; 
+    margin-right: auto;
+    background-color: var(--color-5);
+    border-radius: 64px;
+}
+.about .acard .atitle {
+    word-wrap: break-word;
+    color: var(--color-2);
+    font-size: 4vw;
+    font-weight: 400;
+    margin-top: 16px;
+    text-align: center;
+}
+.about .acard .adesc {
+    word-wrap: break-word;
+    color: white;
+    font-size: 1.5vw;
+    font-weight: 400;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.projects {
+    margin-top: 36px;
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 64px;
+    height: fit-content;
+    background-color: var(--color-4);
+}
+
+.projects .ptext {
+    color: var(--color-2);
+    font-size: 7vw;
+    font-weight: 400;
+    margin-left: 32px;
+    margin-top: 32px;
+}
+.projects .pinfo {
+    color: var(--color-2);
+    font-size: 2vw;
+    font-weight: 400;
+    margin-left: 32px;
+    margin-top: 4px;
+}
+.projects .pcards {
+    margin-top: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 32px;
+    align-items: center;
+    display: flex;
+}
+.projects .pcard {
+    height: 30vw;
+    width: 30%;
+    margin-left: auto; 
+    margin-right: auto;
+    background-color: var(--color-5);
+    border-radius: 64px;
+}
+.projects .pcard .ptitle {
+    word-wrap: break-word;
+    color: var(--color-2);
+    font-size: 4vw;
+    font-weight: 400;
+    margin-top: 16px;
+    text-align: center;
+}
+.projects .pcard img {
+    border-radius: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: block;
+    margin-top: 16px;
+    width: 15vw;
+    height: 15vw;
+}
+/* these are shit names but basically con means container */
+.projects .plinkcon {
+    margin: auto;
+    width: 50%;
+    background-color: var(--color-3);
+    margin-top: 32px;
+    height: 5vw;
+    align-content: center;
+    justify-content: center;
+    border-radius: 24px;
+}
+.projects .plinkconcon {
+  margin: auto;
+  width: 50%;
+  padding-top: 16px;
+}
+.projects .plinkcon .plinkconcon .plink {
+    border-radius: 9999px;
+    background-color: var(--color-2);
+    width: 4vw;
+    height: 4vw;
+    margin:auto;
+}
+.projects .plinkcon .plinkconcon .plink img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: inherit;
+    width: inherit;
+    height: inherit;
+    position: relative;
+}
