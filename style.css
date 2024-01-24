@@ -55,7 +55,6 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     height: auto;
     max-width: 100%;
 }
-
 /* https://github.com/chaoocharles/dark-light-mode */
 .toggle-theme {
     background: rgba(0, 93, 93, 0.5);
