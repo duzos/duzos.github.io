@@ -1,7 +1,12 @@
 :root {
-    --center-gap: 320px;
+    --center-gap: 160px;
+    --font-size: 32px;
+
     --background-color: #3c5e49;
     --text-color: #95d5b2;
+    --current-page-color: #c2e8d3;
+    --selected-color: #bbf9d7;
+
     --drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     --logo-url: url("../img/logo.png");
 }
@@ -12,8 +17,9 @@ body {
     display: flex;
     place-items: center;
     margin: 0;
-    font-size: 400%;
+    font-size: var(--font-size);
     font-family: Nunito,Arial,sans-serif;
+    overflow: scroll;
 }
 
 .center {
@@ -23,19 +29,24 @@ body {
     transform: translate(-50%, -50%);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
     max-width: 1280px
 }
 
-.left {
+.top {
     position: relative;
-    display: flex;
+    /* display: flex; */
     place-items: center;
-    padding-right: calc(var(--center-gap) / 2)
+    padding-bottom: calc(var(--center-gap) / 2)
 }
 
-.right {
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom {
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -48,8 +59,99 @@ body {
     object-fit: cover;
     border-radius: 50em;
     border: 10px solid transparent;
-    scale: 85%;
 }
 .name {
-    font-size: 200%;
+    font-size: calc(var(--font-size) * 2);
+}
+
+.nav {
+    border-top: 1px dotted var(--text-color);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+    font-size: var(--font-size);
+}
+
+.nav a {
+    transition: all ease;
+    display: inline-block;
+    padding: 0 1rem;
+    border-left: 1px solid var(--text-color);
+    text-decoration: none;
+    color: var(--text-color);
+}
+.nav a:hover {
+    color: var(--selected-color);
+}
+.nav .first {
+    border-left: none;
+}
+.nav .current {
+    color: var(--current-page-color);
+}
+
+.sticker {
+    display: inline-block;
+    position: relative;
+}
+@media only screen and (max-width: 1760px) {
+    .sticker-container {
+        display: none;
+    }
+}
+.sticker-container {
+    position: absolute;
+    top: 16px;
+    margin: 0px 16px;
+}
+.sticker-container.left {
+    left: 0px;
+    width: 0px;
+    height: 0px;
+}
+.sticker-container.right {
+    right: 0px;
+}
+.album-cover {
+    padding-left: 0em;
+    padding-top: 5%;
+}
+.album-cover img {
+    border-radius: 10%;
+    width: 128px;
+    height: 128px;
+    transition: transform 0.5s ease;
+}
+.album-cover img:hover,
+.album-cover img:focus {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.song-info h1 {
+    display:block;
+    font-size: var(--font-size);
+    /* padding-left: 2.5em; */
+    text-align: center;
+}
+.sticker-container .spotify {
+    background: white;
+    border-radius: 5%;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    clear: both;
+    max-zoom: 110%;
+}
+.sticker-container .spotify a {
+    color: var(--text-color);
+}
+@media only screen and (max-width: 1760px) {
+    .sticker-container .spotify {
+        display: none;
+        background: black;
+    }
 }
