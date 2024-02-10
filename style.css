@@ -19,10 +19,10 @@
 }
 
 :root[data-theme="theme-light"] {
-    --color-primary: #52b788;
-    --color-secondary: #95d5b2;
+    --color-primary: #2C7DA0;
+    --color-secondary: #A9D6E5;
     --color-3: #88CCF1;
-    --color-4: #2d6a4f;
+    --color-4: #2A6F97;
     --color-5: #B8B08D;
 
     --body-color: white;
@@ -30,15 +30,15 @@
     --bold-color: var(--color-primary)
 }
 :root[data-theme="theme-dark"] {
-    --color-primary: #1b4332; 
-    --color-secondary: #2d6a4f;
-    --color-3: #88CCF1;
-    --color-4: #d8f3dc;
+    --color-primary: #2d455a; 
+    --color-secondary: #3e5c76;
+    --color-3: #013A63;
+    --color-4: #A9D6E5;
     --color-5: #b88d8d;
 
-    --body-color: #081c15 ;
+    --body-color: #1d2d44;
     --text-color: white;
-    --bold-color: #95d5b2;
+    --bold-color: rgb(177, 197, 224);
 }
 
 body {
@@ -57,7 +57,7 @@ img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
 }
 /* https://github.com/chaoocharles/dark-light-mode */
 .toggle-theme {
-    background: rgba(0, 93, 93, 0.5);
+    background: var(--color-3);
     height: 3rem;
     width: 3rem;
     padding: 5px;
