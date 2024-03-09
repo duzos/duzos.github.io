@@ -136,12 +136,20 @@
         </div>
         <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
         <script>
-          kofiWidgetOverlay.draw('duzoo', {
-            'type': 'floating-chat',
-            'floating-chat.donateButton.text': 'Support me',
-            'floating-chat.donateButton.background-color': '#00b9fe',
-            'floating-chat.donateButton.text-color': '#fff'
-          });
+            // Doesn't work for the themes though
+            var r = document.querySelector(':root');
+
+            function getStyleColour() {
+                var rs = getComputedStyle(r);
+                return rs.getPropertyValue('--color-secondary');
+            }
+
+            kofiWidgetOverlay.draw('duzoo', {
+                'type': 'floating-chat',
+                'floating-chat.donateButton.text': 'Support me',
+                'floating-chat.donateButton.background-color': getStyleColour(),
+                'floating-chat.donateButton.text-color': '#1d2d44'
+            });
         </script>
         </body>
 </html>
