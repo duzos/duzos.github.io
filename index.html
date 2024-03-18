@@ -24,132 +24,15 @@
         <script defer data-domain="duzo.is-a.dev" src="https://analytics.is-a.dev/js/script.js"></script>
     </head>
     <body>
-        <div class="page">
-            <div class="main-content">
-                <main>
-                    <div id="title" class="anchor"></div>
-                    <div class="front-heading-container">
-                        <div class="header-container">
-                            <div class="theme-switcher">
-                                <input type="checkbox" onclick="checkboxClick()" autocomplete="off" id="theme-checkbox" checked class="checkbox" />
-                                <label for="theme-checkbox" class="toggle-theme">
-                                  <i class="fas fa-moon"></i>
-                                  <i class="fas fa-sun"></i>
-                                </label>                           
-                             </div>
-                            <div class="container">
-                                <h1 class="header"><a style="text-decoration: none; color: #fff;" href="./blog/remake.html">duzo</a></h1>
-                            </div>
-                            <div class="head-logo">
-                                <img id="logo">
-                            </div>
-                        </div>
-                        <div class="whitespace"></div>
-                    </div>
-                    <div id="about-me" class="anchor"></div>
-                    <div class="about-me-container">
-                        <div class="sidebar">
-                            <script src="scripts/discord_sync.js"></script>
-                            <div class="spotify">
-                                <div class="album-cover">
-                                    <img src="./img/spotify.png" class="albumart" id="albumart">
-                                </div>
-                                <div class="song-info">
-                                    <br>
-                                    <h1><a id ="spotifysong" ></a></h1>
-                                    <h1><a id ="spotifyartistalbum"></a></h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header-container">
-                            <h1>
-                                About
-                                <span>Me</span>
-                            </h1>
-                            <span class="line"></span>
-                        </div>
-                        <div class="content">
-                            <p>My name is <b>duzo</b><br><br>
-                                I like code, cats, nature and piano.<br><br>
-                                I've been coding for many years, <br> I know multiple languages, <br> but mainly: <br>
-                                <br> - Java 
-                                <br> - Python 
-                                <br> - C# 
-                                <br> - HTML <br><br>   
-                                <!-- I work well in team environments. <br> I have been in many group projects before, <br> such as <a href="https://m-d-team.github.io">MDTeam</a> and <a href="https://github.com/Suff99/TardisRefined/">Tardis Refined</a><br><br> -->
-                            </p>
-                        </div>
-                    </div>
-                    <div id="projects" class="anchor"></div>
-                    <div class="projects-container">
-                        <div class="sidebar">
-                            <img src="https://github-readme-stats.vercel.app/api?username=duzos&count_private=true&show_icons=true&theme=prussian&width=350"/>
-                            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duzos&count_private=true&show_icons=true&theme=prussian&layout=compact"/>
-                        </div>
-                        <div class="header-container">
-                            <span class="before-line"></span>
-                            <h1>Projects</h1>
-                            <span class="after-line"></span>
-                        </div>
-                        <div class="content">
-                            <p>
-                                <b>All of my projects are on <a href="https://github.com/duzos">my GitHub</a></b><br><br>
-                                The majority are Minecraft mods. <br><br> Some Solo projects:
-                                <br> - <a href="https://github.com/Duzos/persona-mc">Persona</a>
-                                <br> - <a href="https://github.com/Duzos/fakeplayer">Fake Players</a>
-                                <br> - <a href="https://github.com/Duzos/classcharts-api-java">ClassCharts API for Java</a>
-                                <br> - <a href="https://github.com/Duzos/duzos.github.io">This website!</a>
-
-                                <br><br>
-
-                                Some Team Projects:
-                                <br> - <a href="https://github.com/Suff99/TardisRefined">Tardis Refined</a>
-                                <br> - <a href="https://github.com/Loqor/ait">Adventures in Time</a>
-                                <br> - <a href="https://m-d-team.github.io">MDTeam's Website</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div id="contact" class="anchor"></div>
-                    <div class="contact-container">
-                        <iframe src="https://discord.com/widget?id=1097149006079082516&theme=light" width="400" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                        <div class="header-container">
-                            <h1>Contact</h1>
-                        </div>
-                        <div class="content">
-                            <p>
-                                Thank you for visiting my website!<br><br>
-                                Credits:<br>
-                                <a href="https://loqor.github.io">Loqor</a> - for his discord sync code<br><br>
-                                If you wish to contact me, here are some links: <br><br>
-                                <b>|</b>
-                                <a href="mailto:duz.0@outlook.com"><i class="fa-solid fa-envelope"></i></a> <b>|</b>
-                                <a href="https://www.youtube.com/@duzo_"><i class="fa-brands fa-youtube"></i></a> <b>|</b>
-                                <a href="https://discord.com/invite/ybsUzvtG"><i class="fa-brands fa-discord"></i></a> <b>|</b>
-                                <a href="https://github.com/Duzos"><i class="fa-brands fa-github"></i></a> <b>|</b>
-                                <a href="https://open.spotify.com/user/jamestheproyt"><i class="fa-brands fa-spotify"></i></a> <b>|</b>
-                                <a href="https://steamcommunity.com/id/duzo_/"><i class="fa-brands fa-steam"></i></a> <b>|</b>
-                            </p>
-                        </div>
-                    </div>
-                </main>
-            </div>
+        <nav>
+            <a href="./pages/project.html">Projects</a>
+            <a class="current" href="#"><i class="fa-solid fa-house"></i></a>
+            <a href="./pages/album.html">Cat</a>
+          </nav>
+        <div class="title">
+            <h1>duzo</h1>
+            <h2>Software Developer</h2>
         </div>
-        <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-        <script>
-            // Doesn't work for the themes though
-            var r = document.querySelector(':root');
-
-            function getStyleColour() {
-                var rs = getComputedStyle(r);
-                return rs.getPropertyValue('--color-secondary');
-            }
-
-            kofiWidgetOverlay.draw('duzoo', {
-                'type': 'floating-chat',
-                'floating-chat.donateButton.text': 'Support me',
-                'floating-chat.donateButton.background-color': getStyleColour(),
-                'floating-chat.donateButton.text-color': '#1d2d44'
-            });
-        </script>
-        </body>
+        <div class="vertical-line"></div>
+    </body>
 </html>
