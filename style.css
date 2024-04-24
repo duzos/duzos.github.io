@@ -44,7 +44,7 @@ nav {
     text-align: center;
     font-size: 0px;
     display: flex;
-    justify-content: center;
+    vertical-align: middle;
 }
 
 nav a {
@@ -53,13 +53,14 @@ nav a {
     padding: 0 10px; 
     font-size: 20px;
     transition-duration: 0.25s;
+    vertical-align: middle;
 }
 nav a:hover {
     color: var(--primary-colour);
-    font-size: 22px;
+    /* font-size: 22px; */
 }
 nav a.current {
-    font-size: 22px;
+    /* font-size: 22px; */
 }
 
 nav a:not(:last-child) {
@@ -73,4 +74,16 @@ nav a:not(:last-child) {
     left: 50%;
     border-left: 1px solid #ccc;
     height: 100%;
+}
+
+ul.navbar {
+    background-color: yellowgreen; 
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+ul.navbar li {
+    background-color: #59a5d8;
+    margin: 4px;
+    list-style-type: none;
 }
