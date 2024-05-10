@@ -1,0 +1,38 @@
+:root {
+    --background-colour: #FFD1DC;
+    --heart-colour: #FF6961;
+    --heart-text-colour: #f03f36;
+}
+
+body {
+    background-color: var(--background-colour);
+}
+
+.heart-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#heart {
+    color: var(--heart-colour);
+    font-size: 24vw;
+    transition: all, 1s;
+    z-index: 1;
+}
+
+#heart:hover {
+    /* transform: scale(1.5); */
+}
+#heart.active {
+    transform: scale(1.5);
+    opacity: 0;
+}
+
+#heart-text {
+    z-index: 0;
+    text-align: center;
+    color: var(--heart-text-colour);
+    font-size: 2vw;
+}
