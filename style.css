@@ -51,7 +51,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: Poppins,Arial,sans-serif;
 }
-img {--drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
+img {
+    --drop-shadow: 0 0.1em 0.1em rgba(0,0,0,.125);
     height: auto;
     max-width: 100%;
 }
@@ -216,6 +217,11 @@ transform: scale(1.1);
     text-align: center;
     color: var(--color-4);
 }
+
+.about-me-container .sidebar .fiverr {
+    text-align: center;
+}
+
 .about-me-container .header-container {
     display: flex;
     gap: 1em;
