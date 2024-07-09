@@ -20,6 +20,8 @@ body {
     font-size: 24vw;
     transition: all, 1s;
     z-index: 1;
+
+    animation: heartbeat 1s infinite;
 }
 
 #heart:hover {
@@ -28,6 +30,7 @@ body {
 #heart.active {
     transform: scale(1.5);
     opacity: 0;
+    animation: none;
 }
 
 #heart-text {
@@ -35,4 +38,16 @@ body {
     text-align: center;
     color: var(--heart-text-colour);
     font-size: 2vw;
+}
+#countdown {
+    z-index: 0;
+    text-align: center;
+    color: var(--heart-text-colour);
+    font-size: 1vw;
+}
+
+@keyframes heartbeat {
+    0% { scale: 1 }
+    50% { scale: 1.05 }
+    100% { scale: 1 }
 }
