@@ -8,22 +8,39 @@ var interval = setInterval(function() {
 
   var distance = now - countDownDate;
 
-  let formatter = new Intl.NumberFormat();
+  let decimalFormatted = new Intl.NumberFormat("en", {
+    maximumFractionDigits : 1
+  });
+
+  let roundedFormat = new Intl.NumberFormat("en", {
+    maximumFractionDigits : 0,
+    roundingMode : "floor"
+  })
 
   // Time calculations for months, days, hours, minutes and seconds
-  var months = Math.floor(distance / (1000 * 60 * 60 * 24) / 30 );
+
+  // 1.0
+  // var months = Math.floor(distance / (1000 * 60 * 60 * 24) / 30 );
   // var days = Math.floor(distance / (1000 * 60 * 60 * 24) - (months * 30));
   // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  var days = months * 30;
-  var hours = days * 24;
-  var minutes = hours * 60;
+  // 2.0
+  // var days = months * 30;
+  // var hours = days * 24;
+  // var minutes = hours * 60;
+  // var seconds = Math.floor(distance / 1000);
+
+  // CURRENT
   var seconds = Math.floor(distance / 1000);
+  var minutes = seconds / 60;
+  var hours = minutes / 60;
+  var days = hours / 24;
+  var months = days / 30;
 
   let breakText = "<br>";
 
-  text.innerHTML = formatter.format(months) + " months" + breakText + formatter.format(days) + " days" + breakText + formatter.format(hours) + " hours" + breakText
-  + formatter.format(minutes) + " mins" + breakText + formatter.format(seconds) + " secs";
+  text.innerHTML = roundedFormat.format(months) + " months" + breakText + roundedFormat.format(days) + " days" + breakText + decimalFormatted.format(hours) + " hours" + breakText
+  + roundedFormat.format(minutes) + " mins" + breakText + decimalFormatted.format(seconds) + " secs";
 }, 1000);

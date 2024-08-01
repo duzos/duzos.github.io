@@ -2,21 +2,31 @@ function initialise() {
     let heart = document.getElementById('heart');
     heart.onclick = function(){
         heart.classList.toggle('active');
-        updateCountdown();
+        updateHidables();
     }
+
+    updateHidables();
 }
 
-function updateCountdown() {
-    var text = document.getElementById("countdown");
+function updateHidables() {
+    var hidables = document.getElementsByClassName("heart-hides");
 
     let heart = document.getElementById('heart');
     let active = heart.classList.contains("active");
   
-    if (!active) {
-      text.style.opacity = 0;
-      return;
+    
+    // what even is javascript
+    for (var key in hidables) {
+        if (isNaN(key)) continue;
+
+        let value = hidables[key];
+
+        if (!active) {
+            value.style.opacity = 0;
+            continue;
+        }
+        value.style.opacity = 1;
     }
-    text.style.opacity = 1;
 }
 
 document.addEventListener('DOMContentLoaded', function () {

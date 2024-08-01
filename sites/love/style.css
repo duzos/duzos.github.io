@@ -46,6 +46,10 @@ body {
     font-size: 1vw;
 }
 
+.heart-hides {
+    transition: opacity 0.5s;
+}
+
 @keyframes heartbeat {
     0% { scale: 1 }
     50% { scale: 1.05 }
