@@ -39,7 +39,7 @@ body {
     color: var(--heart-text-colour);
     font-size: 2vw;
 }
-#countdown {
+#countdown-anniversary {
     z-index: 0;
     text-align: center;
     color: var(--heart-text-colour);
@@ -54,4 +54,18 @@ body {
     0% { scale: 1 }
     50% { scale: 1.05 }
     100% { scale: 1 }
+}
+
+a {
+    color: inherit;
+}
+a:hover {
+    color: var(--heart-colour);
+}
+
+.subheart-container {
+    position: absolute;
+    left: 50%;
+    top: calc(80%);
+    transform: translate(-50%, -50%);
 }
