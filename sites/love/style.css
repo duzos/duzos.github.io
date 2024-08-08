@@ -1,4 +1,11 @@
-:root {
+:root{
+    /* Palette Colours */
+    --body-colour : #FADDE1;
+    --bg-colour: #FFC4D6 ;
+    --hover-colour : #F4ACB7;
+    --text-colour : #FF5D8F;
+    --important-colour : #FF87AB;
+
     --background-colour: #FFD1DC;
     --heart-colour: #FF6961;
     --heart-text-colour: #f03f36;
@@ -9,63 +16,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.heart-container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
 #heart {
     color: var(--heart-colour);
-    font-size: 24vw;
+    font-size: 96px;
     transition: all, 1s;
     z-index: 1;
     animation: heartbeat 1s infinite;
 }
-
-#heart:hover {
-    /* transform: scale(1.5); */
-}
-#heart.active {
-    transform: scale(1.5);
-    opacity: 0;
-    animation: none;
-}
-
-#heart-text {
-    z-index: 0;
-    text-align: center;
-    color: var(--heart-text-colour);
-    font-size: 2vw;
-}
-#countdown-anniversary {
-    z-index: 0;
-    text-align: center;
-    color: var(--heart-text-colour);
-    font-size: 1vw;
-}
-
-.heart-hides {
-    transition: opacity 0.5s;
-}
-
 @keyframes heartbeat {
     0% { scale: 1 }
-    50% { scale: 1.05 }
+    50% { scale: 1.1 }
     100% { scale: 1 }
-}
-
-a {
-    color: inherit;
-}
-a:hover {
-    color: var(--heart-colour);
-}
-
-.subheart-container {
-    position: absolute;
-    left: 50%;
-    top: calc(80%);
-    transform: translate(-50%, -50%);
 }
