@@ -1,5 +1,3 @@
-const MAX_WIDTH = 787;
-
 function initialise() {
     let sections = document.getElementsByClassName("section-window-container");
 
@@ -11,15 +9,19 @@ function initialise() {
 }
 
 function updateGrid(grid) {
-    if (window.outerWidth < MAX_WIDTH) {
-        grid.style.gridTemplateColumns = 'repeat(1, 1fr)';
-        return;
-    }
-
     let count = grid.childElementCount;
-
     grid.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+
+
+    while (isOverflowing(grid) && count > 1) {
+        grid.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+        count--;
+    }
 }
+
+function isOverflowing(element) {
+    return element.scrollWidth > element.offsetWidth;
+  }
 
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', () => {
