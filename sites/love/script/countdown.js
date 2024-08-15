@@ -1,7 +1,7 @@
 var dateMap = new Map();
 
 dateMap.set('countdown-anniversary', new Date("Apr 9, 2024 17:55:55").getTime());
-dateMap.set('countdown-anniversary-next', new Date("Aug 9, 2024 17:55:55").getTime());
+dateMap.set('countdown-anniversary-next', new Date("Sep 9, 2024 17:55:55").getTime());
 dateMap.set('countdown-first-hangout', new Date("Apr 4, 2024 17:55:55").getTime());
 dateMap.set('countdown-first-meet', new Date("Mar 13, 2024 17:55:55").getTime());
 dateMap.set('countdown-first-date', new Date("Mar 30, 2024 17:55:55").getTime());
