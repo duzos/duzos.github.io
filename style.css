@@ -74,7 +74,7 @@ b {
 .section-window img {
     width: 50%;
 
-    filter: grayscale(50%);
+    filter: grayscale(25%);
 }
 
 .section-window p {
