@@ -110,6 +110,15 @@ b {
     transform: translateY(0.15em);
 }
 
+.section-window .link-img {
+    padding-bottom: 6px;
+    transition: all 0.25s;
+    width: 256px;
+}
+.link-img:hover {
+    scale: 110%
+}
+
 .fiverr img {
     width: 50%;
 }

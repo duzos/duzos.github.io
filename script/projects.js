@@ -11,37 +11,15 @@ function createSVG(id) {
     return icon;
 }
 
+const wikiBadge = "https://img.shields.io/badge/wiki_available-grey?logo=gitbook&logoColor=white";
 class Project {
-    constructor(name, desc, logoPath, github_name, github_project, curseforge, cf_id, modrinth, wiki) {
+    constructor(name, desc, logoPath, github_name, github_project, wiki) {
         this.name = name;
         this.desc = desc;
         this.logoPath = logoPath;
 
         this.github = "https://github.com/" + github_name + "/" + github_project;
-        this.modrinth = modrinth;
-        this.curseforge = curseforge;
-        this.cf_id = cf_id;
         this.wiki = wiki;
-
-        this.id = "";
-        this.updateId();
-    }
-
-    updateId() {
-        if (this.modrinth != null) {
-            this.id = this.modrinth;
-            return;
-        }
-
-        if (this.github != null) {
-            this.id = /[^/]*$/.exec(this.github)[0];
-        }
-
-        if (this.curseforge != null) {
-            this.id = this.curseforge;
-        }
-
-        // aw shucks :(
     }
 
     toElement() {
@@ -77,53 +55,102 @@ class Project {
 
         // links
         let links = document.createElement("div");
-
         links.classList.add("links");
+        window.appendChild(links);
 
         let linksText = document.createElement("h3");
         links.appendChild(linksText);
 
-        if (this.github != null) {
-            let githubLink = document.createElement("a");
-            githubLink.href = this.github;
-            githubLink.appendChild(createIcon("fa-brands", "fa-github"));
-            linksText.appendChild(githubLink);
-        }
-
-        if (this.curseforge != null) {
-            let curseforgeLink = document.createElement("a");
-            curseforgeLink.href = "https://www.curseforge.com/minecraft/mc-mods/" + this.curseforge;
-            curseforgeLink.appendChild(createSVG("curseforge"));
-            linksText.appendChild(curseforgeLink);
-
-            if (this.cf_id != null) {
-                let cfDownloads = document.createElement("img");
-                cfDownloads.src = "https://img.shields.io/curseforge/dt/" + this.cf_id + "?logo=curseforge"; 
-                window.appendChild(cfDownloads);
-                window.appendChild(document.createElement("br"))
-            }
-        }
-
-        if (this.modrinth != null) {
-            let modrinthLink = document.createElement("a");
-            modrinthLink.href = "https://modrinth.com/mod/" + this.modrinth;
-            modrinthLink.appendChild(createSVG("modrinth"));
-            linksText.appendChild(modrinthLink);
-        
-            let mDownloads = document.createElement("img");
-            mDownloads.src = "https://img.shields.io/modrinth/dt/" + this.modrinth + "?logo=modrinth"; 
-            window.appendChild(mDownloads);
-            window.appendChild(document.createElement("br"))
-        }
-
         if (this.wiki != null) {
             let wikiLink = document.createElement("a");
             wikiLink.href = this.wiki;
-            wikiLink.appendChild(createIcon("fa-solid", "fa-book"));
-            linksText.appendChild(wikiLink);
-        }
-        window.appendChild(links);
 
+            let wikiImg = document.createElement("img");
+            wikiImg.src = wikiBadge;
+            wikiImg.classList.add("link-img")
+            wikiLink.appendChild(wikiImg);
+
+            window.appendChild(wikiLink);
+            window.appendChild(document.createElement("br"))
+        }
+
+        if (this.github != null) {
+            let githubLink = document.createElement("a");
+            githubLink.href = this.github;
+
+            let githubImg = document.createElement("img");
+            
+            let ids = this.github.split("/")
+            githubImg.src = "https://img.shields.io/github/last-commit/" + ids[3] + "/" + ids[4] + "?logo=github";
+            
+            githubImg.classList.add("link-img")
+            githubLink.appendChild(githubImg);
+
+            window.appendChild(githubLink);
+            window.appendChild(document.createElement("br"))
+        }
+
+        return window;
+    }
+}
+
+class MinecraftProject extends Project {
+    constructor(name, desc, logoPath, github_name, github_project, curseforge, cf_id, modrinth, wiki) {
+        super(name, desc, logoPath, github_name, github_project, wiki);
+        this.modrinth = modrinth;
+        this.curseforge = curseforge;
+        this.cf_id = cf_id;
+
+        this.id = "";
+        this.updateId();
+    }
+
+    updateId() {
+        if (this.modrinth != null) {
+            this.id = this.modrinth;
+            return;
+        }
+
+        if (this.github != null) {
+            this.id = /[^/]*$/.exec(this.github)[0];
+        }
+
+        if (this.curseforge != null) {
+            this.id = this.curseforge;
+        }
+
+        // aw shucks :(
+    }
+
+    toElement() {
+        let window = super.toElement();
+
+        if (this.curseforge != null && this.cf_id != null) {
+            let curseforgeLink = document.createElement("a");
+            curseforgeLink.href = "https://www.curseforge.com/minecraft/mc-mods/" + this.cf_id;
+
+            let cfDownloads = document.createElement("img");
+            cfDownloads.src = "https://img.shields.io/curseforge/dt/" + this.cf_id + "?logo=curseforge"; 
+            cfDownloads.classList.add("link-img");
+            curseforgeLink.appendChild(cfDownloads);
+
+
+            window.appendChild(curseforgeLink);
+            window.appendChild(document.createElement("br"))
+        }
+
+        if (this.modrinth != null) {
+            let mDownloads = document.createElement("a");
+            mDownloads.href = "https://modrinth.com/mod/" + this.modrinth;
+
+            let mDownloadsImg = document.createElement("img");
+            mDownloadsImg.src = "https://img.shields.io/modrinth/dt/" + this.modrinth + "?logo=modrinth"; 
+            mDownloadsImg.classList.add("link-img");
+            mDownloads.appendChild(mDownloadsImg);
+
+            window.appendChild(mDownloads);
+            window.appendChild(document.createElement("br"))
+        }
 
         // return finished window
         return window;
@@ -131,7 +158,7 @@ class Project {
 }
 
 const modrinth_api = "https://api.modrinth.com/v2";
-class ModrinthProject extends Project {
+class ModrinthProject extends MinecraftProject {
     constructor(slug, curseforge, cf_id) {
         super(null, null, null, null, null, curseforge, cf_id, slug, null);
         this.updateFromApi();
@@ -184,7 +211,7 @@ projects.push(new ModrinthProject("cheesy", "cheesy", 863972))
 projects.push(new ModrinthProject("vortex", "vortex", 973580))
 projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
-projects.push(new Project("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc"));
+projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc"));
 
 function updateProjects() {
     let element = document.getElementById("projects");
