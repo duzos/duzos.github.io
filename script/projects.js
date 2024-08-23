@@ -127,7 +127,7 @@ class MinecraftProject extends Project {
 
         if (this.curseforge != null && this.cf_id != null) {
             let curseforgeLink = document.createElement("a");
-            curseforgeLink.href = "https://www.curseforge.com/minecraft/mc-mods/" + this.cf_id;
+            curseforgeLink.href = "https://www.curseforge.com/minecraft/mc-mods/" + this.curseforge;
 
             let cfDownloads = document.createElement("img");
             cfDownloads.src = "https://img.shields.io/curseforge/dt/" + this.cf_id + "?logo=curseforge"; 
