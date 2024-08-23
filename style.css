@@ -113,7 +113,7 @@ b {
 .section-window .link-img {
     padding-bottom: 6px;
     transition: all 0.25s;
-    width: 256px;
+    width: 50%;
 }
 .link-img:hover {
     scale: 110%
