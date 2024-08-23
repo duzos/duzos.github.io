@@ -1,4 +1,4 @@
-function initialise() {
+function updateScreen() {
     let sections = document.getElementsByClassName("section-window-container");
 
     for (let i = 0; i < sections.length; i++) {
@@ -10,7 +10,12 @@ function initialise() {
 
 function updateGrid(grid) {
     let count = grid.childElementCount;
-    grid.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+    let attempted = 4;
+    if (attempted > count) {
+        attempted = count;
+    }
+    
+    grid.style.gridTemplateColumns = `repeat(${attempted}, 1fr)`;
 
 
     while (isOverflowing(grid) && count > 1) {
@@ -25,10 +30,10 @@ function isOverflowing(element) {
 
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', () => {
-        initialise();
+        updateScreen();
     });
 
     window.addEventListener('resize', () => {
-        initialise();
+        updateScreen();
     })
 });

@@ -12,6 +12,7 @@
         
         <script src="https://kit.fontawesome.com/2b1db366f1.js" crossorigin="anonymous"></script>
         <script defer data-domain="duzo.is-a.dev" src="https://analytics.is-a.dev/js/script.js"></script>
+        <script src="./script/projects.js"></script>
         <script src="./script/windows.js"></script>
         <script src="./script/spotify.js"></script>
     </head>
@@ -52,59 +53,12 @@
         </div>
         <br>
         <div class="section-window-container">
-            <div class="section-window">
-                <img class="project-logo" src="./img/project/tr.png">
-                <h1>Tardis Refined</h1>
-                <h3>Adds TARDIS to Minecraft</h3>
-                <div class="links">
-                    <h3>
-                        <a href="https://github.com/WhoCraft/TardisRefined"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.curseforge.com/minecraft/mc-mods/tardis-refined"><img src="img/project/curseforge.svg"></a>
-                        <a href="https://modrinth.com/mod/tardis-refined"><img src="img/project/modrinth.svg"></a>
-                        <a href="https://wiki.tardisrefined.net"><i class="fa-solid fa-book"></i></a>
-                    </h3>
-                </div>
-            </div>
-            <div class="section-window">
-                <img class="project-logo" src="./img/project/ait.png">
-                <h1>Adventures in Time</h1>
-                <h3>Adds TARDIS to Minecraft</h3>
-                <div class="links">
-                    <h3>
-                        <a href="https://github.com/loqor/ait"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://legacy.curseforge.com/minecraft/mc-mods/adventures-in-time"><img src="img/project/curseforge.svg"></a>
-                        <a href="https://modrinth.com/mod/ait"><img src="img/project/modrinth.svg"></a>
-                        <a href="https://theo.is-a.dev/ait-wiki/"><i class="fa-solid fa-book"></i></a>
-                    </h3>
-                </div>
-            </div>
-            <div class="section-window">
-                <h1>Information</h1>
-                <p>All of my projects are on my <a href="https://github.com/duzos">GitHub</a></p>
-            </div>
-            <div class="section-window">
-                <img class="project-logo" src="./img/project/fakeplayer.png">
-                <h1>Fake Players</h1>
-                <h3>Player-like entities which have skins and AI</h3>
-                <div class="links">
-                    <h3>
-                        <a href="https://github.com/duzos/fakeplayer"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.curseforge.com/minecraft/mc-mods/fake-player"><img src="img/project/curseforge.svg"></a>
-                        <a href="https://modrinth.com/mod/fake-players"><img src="img/project/modrinth.svg"></a>
-                    </h3>
-                </div>
-            </div>
-            <div class="section-window">
-                <img class="project-logo" src="./img/project/persona.png">
-                <h1>Persona</h1>
-                <h3>PERSONA but in Minecraft</h3>
-                <div class="links">
-                    <h3>
-                        <a href="https://github.com/Duzos/persona-mc/"><i class="fa-brands fa-github"></i></a>
-                    </h3>
-                </div>
+            <div class="section-window" style="background-color: transparent;">
+                <button style="scale: 125%" id="toggleProjects" onclick="toggleProjects(true)"></button>
             </div>
         </div>
+        <br>
+        <div class="section-window-container " id="projects"></div>
 
         <div class="section-container">
             <h1 class="section-title">Available for <b>Commission</b></h1>
