@@ -40,7 +40,7 @@ function updateUI(data) {
     return;
   }
 
-  song.textContent = 'spotify'
+  song.textContent = 'nothing rn'
   
   info.textContent = '';
   info.style.opacity = 0;
