@@ -45,6 +45,16 @@ function updateCountdown(textId, date) {
 
   let breakText = "<br>";
 
-  text.innerHTML = roundedFormat.format(months) + " months" + breakText + roundedFormat.format(days) + " days" + breakText + decimalFormatted.format(hours) + " hours" + breakText
-  + roundedFormat.format(minutes) + " mins" + breakText + decimalFormatted.format(seconds) + " secs";
+  if (months > 12) {
+    var years = months / 12;
+    text.innerHTML = decimalFormatted.format(years) + " years" + breakText;
+  } else {
+    text.innerHTML = "";
+  }
+
+  text.innerHTML = text.innerHTML + roundedFormat.format(months) + " months" + breakText;
+  text.innerHTML = text.innerHTML + roundedFormat.format(days) + " days" + breakText;
+  text.innerHTML = text.innerHTML + decimalFormatted.format(hours) + " hours" + breakText
+  text.innerHTML = text.innerHTML + roundedFormat.format(minutes) + " mins" + breakText
+  text.innerHTML = text.innerHTML + decimalFormatted.format(seconds) + " secs";
 }
