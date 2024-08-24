@@ -11,7 +11,7 @@ function createSVG(id) {
     return icon;
 }
 
-const wikiBadge = "https://img.shields.io/badge/wiki_available-grey?logo=gitbook&logoColor=white";
+const wikiBadge = "https://img.shields.io/badge/wiki_available-grey?logo=gitbook&logoColor=black&style=flat-square&labelColor=white&color=white";
 class Project {
     constructor(name, desc, logoPath, github_name, github_project, wiki) {
         this.name = name;
@@ -81,7 +81,7 @@ class Project {
             let githubImg = document.createElement("img");
             
             let ids = this.github.split("/")
-            githubImg.src = "https://img.shields.io/github/last-commit/" + ids[3] + "/" + ids[4] + "?logo=github";
+            githubImg.src = "https://img.shields.io/github/last-commit/" + ids[3] + "/" + ids[4] + "?logo=github&logoColor=black&style=flat-square&labelColor=white&color=white";
             
             githubImg.classList.add("link-img")
             githubLink.appendChild(githubImg);
@@ -130,7 +130,7 @@ class MinecraftProject extends Project {
             curseforgeLink.href = "https://www.curseforge.com/minecraft/mc-mods/" + this.curseforge;
 
             let cfDownloads = document.createElement("img");
-            cfDownloads.src = "https://img.shields.io/curseforge/dt/" + this.cf_id + "?logo=curseforge"; 
+            cfDownloads.src = "https://img.shields.io/curseforge/dt/" + this.cf_id + "?logo=curseforge&style=flat-square&labelColor=white&color=white"; 
             cfDownloads.classList.add("link-img");
             curseforgeLink.appendChild(cfDownloads);
 
@@ -144,7 +144,7 @@ class MinecraftProject extends Project {
             mDownloads.href = "https://modrinth.com/mod/" + this.modrinth;
 
             let mDownloadsImg = document.createElement("img");
-            mDownloadsImg.src = "https://img.shields.io/modrinth/dt/" + this.modrinth + "?logo=modrinth"; 
+            mDownloadsImg.src = "https://img.shields.io/modrinth/dt/" + this.modrinth + "?logo=modrinth&style=flat-square&labelColor=white&color=white"; 
             mDownloadsImg.classList.add("link-img");
             mDownloads.appendChild(mDownloadsImg);
 
