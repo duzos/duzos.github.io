@@ -61,19 +61,6 @@ class Project {
         let linksText = document.createElement("h3");
         links.appendChild(linksText);
 
-        if (this.wiki != null) {
-            let wikiLink = document.createElement("a");
-            wikiLink.href = this.wiki;
-
-            let wikiImg = document.createElement("img");
-            wikiImg.src = wikiBadge;
-            wikiImg.classList.add("link-img")
-            wikiLink.appendChild(wikiImg);
-
-            window.appendChild(wikiLink);
-            window.appendChild(document.createElement("br"))
-        }
-
         if (this.github != null) {
             let githubLink = document.createElement("a");
             githubLink.href = this.github;
@@ -87,6 +74,19 @@ class Project {
             githubLink.appendChild(githubImg);
 
             window.appendChild(githubLink);
+            window.appendChild(document.createElement("br"))
+        }
+
+        if (this.wiki != null) {
+            let wikiLink = document.createElement("a");
+            wikiLink.href = this.wiki;
+
+            let wikiImg = document.createElement("img");
+            wikiImg.src = wikiBadge;
+            wikiImg.classList.add("link-img")
+            wikiLink.appendChild(wikiImg);
+
+            window.appendChild(wikiLink);
             window.appendChild(document.createElement("br"))
         }
 
