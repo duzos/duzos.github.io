@@ -11,6 +11,7 @@ function updateScreen() {
 function updateGrid(grid) {
     let count = grid.childElementCount;
     let attempted = 4;
+    
     if (attempted > count) {
         attempted = count;
     }

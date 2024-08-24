@@ -292,6 +292,11 @@ function toggleProjects(shouldScroll) {
 
     if (shouldScroll)
         button.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
+
+    let dice = document.getElementById("rerollProjects");
+    let text = !isRandom ? "none" : "inline";
+    dice.style.display = text;
+    
 }
 
 function selectRandom() {
