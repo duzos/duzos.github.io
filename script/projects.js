@@ -94,12 +94,14 @@ class Project {
     }
 }
 
+const discordBadge = "https://img.shields.io/badge/discord_invite-7289DA?style=flat-square&logo=discord&labelColor=white&color=white";
 class MinecraftProject extends Project {
-    constructor(name, desc, logoPath, github_name, github_project, curseforge, cf_id, modrinth, wiki) {
+    constructor(name, desc, logoPath, github_name, github_project, curseforge, cf_id, modrinth, wiki, discord) {
         super(name, desc, logoPath, github_name, github_project, wiki);
         this.modrinth = modrinth;
         this.curseforge = curseforge;
         this.cf_id = cf_id;
+        this.discord = discord;
 
         this.id = "";
         this.updateId();
@@ -124,6 +126,19 @@ class MinecraftProject extends Project {
 
     toElement() {
         let window = super.toElement();
+
+        if (this.discord != null) {
+            let invite = document.createElement("a");
+            invite.href = this.discord;
+
+            let inviteImg = document.createElement("img");
+            inviteImg.src = discordBadge;
+            inviteImg.classList.add("link-img");
+            invite.appendChild(inviteImg);
+
+            window.appendChild(invite);
+            window.appendChild(document.createElement("br"))
+        }
 
         if (this.curseforge != null && this.cf_id != null) {
             let curseforgeLink = document.createElement("a");
@@ -160,7 +175,7 @@ class MinecraftProject extends Project {
 const modrinth_api = "https://api.modrinth.com/v2";
 class ModrinthProject extends MinecraftProject {
     constructor(slug, curseforge, cf_id) {
-        super(null, null, null, null, null, curseforge, cf_id, slug, null);
+        super(null, null, null, null, null, curseforge, cf_id, slug);
         this.updateFromApi();
     }
 
@@ -183,6 +198,7 @@ class ModrinthProject extends MinecraftProject {
         this.logoPath = data["icon_url"];
         this.wiki = data["wiki_url"];
         this.github = data["source_url"];
+        this.discord = data["discord_url"];
 
         this.updateWindow();
     }
@@ -211,7 +227,7 @@ projects.push(new ModrinthProject("cheesy", "cheesy", 863972))
 projects.push(new ModrinthProject("vortex", "vortex", 973580))
 projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
-projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc"));
+projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, "https://discord.gg/ZgssqpUMHS"));
 
 function updateModrinthProjects(user, array) {
     fetch(modrinth_api + "/user/" + user + "/projects")
