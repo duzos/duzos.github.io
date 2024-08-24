@@ -200,7 +200,7 @@ class ModrinthProject extends MinecraftProject {
     }
 }
 
-const projects = new Array();
+let projects = new Array();
 projects.push(new ModrinthProject("tardis-refined", "tardis-refined", 782697))
 projects.push(new ModrinthProject("ait", "adventures-in-time", 856138))
 projects.push(new ModrinthProject("fake-players", "fake-player", 845992))
@@ -213,7 +213,27 @@ projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
 projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc"));
 
-function updateProjects() {
+function updateModrinthProjects(user, array) {
+    fetch(modrinth_api + "/user/" + user + "/projects")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Modrinth API Response was not OK" + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {parseModrinthProjects(array, data)})
+    .catch(error => {
+        console.error("Modrinth Error:", error);
+    })
+}
+function parseModrinthProjects(array, data) {
+    for (var i = 0; i < data.length; i++) {
+        let created = new ModrinthProject(data[i]["slug"]);
+        array.push(created);
+    }
+}
+
+function updateProjectsWindow() {
     let element = document.getElementById("projects");
     element.replaceChildren();
 
@@ -249,7 +269,7 @@ function updateProjectsRandom(element) {
 function toggleProjects(shouldScroll) {
     let element = document.getElementById("projects");
     let isRandom = element.classList.toggle("random");
-    updateProjects();
+    updateProjectsWindow();
 
     let button = document.getElementById("toggleProjects");
     button.textContent = (isRandom) ? "Show All" : "Hide All";
