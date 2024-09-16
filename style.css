@@ -1,10 +1,11 @@
 :root {
     /* Palette Colours */
     --body-colour : #E9ECEF;
-    --bg-colour: #CED4DA ;
+    --bg-colour: rgba(172, 234, 220, 0.55);
+    --border-colour: rgba(172, 234, 220, 0.85);
     --hover-colour : #343A40;
-    --text-colour : #495057;
-    --important-colour : #212529;
+    --text-colour : rgb(2, 87, 69);
+    --important-colour : rgb(0, 37, 29);
 
     /* SVG Link Filters */
     --svg-filter-1: invert(28%) sepia(8%) saturate(689%) hue-rotate(169deg) brightness(96%) contrast(86%);
@@ -12,12 +13,17 @@
 }
 
 body {
-    background-color: var(--body-colour);
     color: var(--text-colour);
-    font-family: Arial, Helvetica, sans-serif;
 
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.125rem;
     line-height: 1.6;
+
+    margin: 0;
+}
+
+body, html {
+    height: 100%
 }
 
 a {
@@ -39,6 +45,47 @@ main {
     width: min(130ch, 100% - 4rem);
     margin-inline: auto;
 }
+
+.parallax {
+    perspective: 1px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.parallax__layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.parallax__layer--base {
+    transform: translateZ(0);
+}
+.parallax__layer--back {
+    transform: translateZ(-10px) scale(11);
+}
+.gradient {
+    overflow-y: hidden;
+
+    /* The image used */
+    background-image: url("https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?cs=srgb&dl=pexels-stywo-1054218.jpg&fm=jpg");
+
+    /* Full height */
+    height: 100vh;
+    width: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background: linear-gradient(135deg, #82bbb455 25%, transparent 25%) -14px 0/ 28px 28px, linear-gradient(225deg, #82bbb4 25%, transparent 25%) -14px 0/ 28px 28px, linear-gradient(315deg, #82bbb455 25%, transparent 25%) 0px 0/ 28px 28px, linear-gradient(45deg, #82bbb4 25%, #e5e5f7 25%) 0px 0/ 28px 28px;
+}
+
 
 .title-border {
     display: flex; 
@@ -77,6 +124,7 @@ main {
     text-align: center;
 
     border-radius: 1.25em;
+    border: solid var(--border-colour);
 
     background-color: var(--bg-colour);
 }

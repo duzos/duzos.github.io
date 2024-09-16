@@ -18,134 +18,170 @@
         <script src="./sites/love/script/countdown.js"></script>
     </head>
     <body>
-        <main>
-            <div class="title-border">
-                <h1 class="title-text">duzo</h1>
-            </div>
+    <div class="parallax">
+        <div class="parallax__layer parallax__layer--back">
+            <div class="gradient" style="height: 140%"></div>
+        </div>
+        <div class="parallax__layer parallax__layer--base">
+            <main>
+                <div class="title-border">
+                    <h1 class="title-text">duzo</h1>
+                </div>
 
-            <div class="section-container">
-                <h1 class="section-title">About Me</h1>
-            </div>
-            <div class="section-window-container">
-                <div class="section-window">
-                    <h1>im listening to..</h1>
-                    <p id="spotify-song"></p>
-                    <img id="spotify-album-cover" src="./img/spotify.png">
-                    <p id="spotify-album-info"></p>
+                <div class="section-container">
+                    <h1 class="section-title">About Me</h1>
                 </div>
-                <div class="section-window">
-                    <h1>info</h1>
-                    <p>todo</p>
-                    <img class="rounded" src="./img/me.gif">
-                </div>
-                <div class="section-window">
-                    <h1>my cat</h1>
-                    <img class="rounded" src="./img/cat.jpg">
-                </div>
-            </div>
-
-            <div class="section-container">
-                <h1 class="section-title">Projects</h1>
-            </div>
-            <div class="section-window-container">
-                <div class="section-window">
-                    <p>My projects are sponsored by BisectHosting!</p>
-                    <a href="https://www.bisecthosting.com/duzo"><img class="rounded" src="https://www.bisecthosting.com/partners/custom-banners/1a01a738-f0fc-4895-a797-af97b11651a9.webp"></a>
-                    <p>Use code <a href="https://www.bisecthosting.com/duzo">DUZO</a> for <strong>25%</strong> OFF!</p>
-                </div>
-            </div>
-            <br>
-            <div class="section-window-container">
-                <div class="section-window" style="background-color: transparent;">
-                    <button id="toggleProjects" onclick="toggleProjects(true)"></button>
-                    <button id="rerollProjects" onclick="updateProjectsWindow()"><i class="fa-solid fa-dice"></i></button>
-                </div>
-            </div>
-            <br>
-            <div class="section-window-container " id="projects"></div>
-
-            <div class="section-container">
-                <h1 class="section-title">Available for <b>Commission</b></h1>
-            </div>
-            <div class="section-window-container">
-                <div class="section-window">
-                    <h1>Info</h1>
-                    <p>I can be found on <a href="https://www.fiverr.com/neverthink?up_rollout=true">Fiverr</a> or contacted on discord (below). <br>
-                        On Fiverr, you can purchase my service for <a href="https://www.fiverr.com/neverthink/create-your-ideal-minecraft-mod">Minecraft Mods</a> only, and I will create your idea and bring it to reality.</p>
-                </div>
-                <div class="section-window">
-                    <h1>card</h1>
-                    <div class="fiverr">
-                        <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
-                            <a itemprop='url' href=https://www.fiverr.com/neverthink rel="nofollow" target="_blank" style='display: inline-block;'>
-                                <div class='fiverr-seller-content' id='fiverr-seller-widget-content-a09c0005-196b-45f3-a800-ec7b64101687' itemprop='contentURL' style='display: none;'></div>
-                                <div id='fiverr-widget-seller-data' style='display: none;'>
-                                    <div itemprop='name' >neverthink</div>
-                                    <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
-                                    <div itemprop='jobtitle'>Seller</div>
-                                    <div itemprop='description'>I have been coding for years, I know many languages, but primarily Java and Python. I am on Fiverr to create Minecraft Mods for people. I can guarantee that I can deliver what you wish on time.</div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <script id='fiverr-seller-widget-script-a09c0005-196b-45f3-a800-ec7b64101687' src='https://widgets.fiverr.com/api/v1/seller/neverthink?widget_id=a09c0005-196b-45f3-a800-ec7b64101687' data-config='{"category_name":"\n                                    Programming \u0026 Tech\n\n                            "}' async='true' defer='true'></script>
+                <div class="section-window-container">
+                    <div class="section-window">
+                        <h1>im listening to..</h1>
+                        <p id="spotify-song"></p>
+                        <img id="spotify-album-cover" src="./img/spotify.png">
+                        <p id="spotify-album-info"></p>
+                    </div>
+                    <div class="section-window">
+                        <h1>info</h1>
+                        <p>todo</p>
+                        <img class="rounded" src="./img/me.gif">
+                    </div>
+                    <div class="section-window">
+                        <h1>my cat</h1>
+                        <img class="rounded" src="./img/cat.jpg">
                     </div>
                 </div>
-            </div>
 
-            <div class="section-container">
-                <h1 class="section-title">Contact</h1>
-            </div>
-            <div class="section-window-container">
-                <!-- <div class="section-window">
-                    <h1>Discord</h1>
-                    <iframe src="https://discord.com/widget?id=1097149006079082516&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                </div> -->
-                <div class="section-window">
-                    <h1>Links</h1>
-                    <p>
-                        <b>|</b>
-                        <a href="mailto:duz.0@outlook.com"><i class="fa-solid fa-envelope"></i></a> <b>|</b>
-                        <a href="https://www.youtube.com/@duzo_"><i class="fa-brands fa-youtube"></i></a> <b>|</b>
-                        <a href=" https://discord.gg/ZgssqpUMHS"><i class="fa-brands fa-discord"></i></a> <b>|</b>
-                        <a href="https://github.com/Duzos"><i class="fa-brands fa-github"></i></a> <b>|</b>
-                        <a href="https://open.spotify.com/user/jamestheproyt"><i class="fa-brands fa-spotify"></i></a> <b>|</b>
-                        <a href="https://steamcommunity.com/id/duzo_/"><i class="fa-brands fa-steam"></i></a> <b>|</b>
-                        <br><br>
-                        persona cat lol
-                        <br>
-                        <img style="padding: 16px; width: 128px;" class="rounded" src="./img/personacat.png">
-                    </p>
+                <div class="section-container">
+                    <h1 class="section-title">Projects</h1>
                 </div>
-                <div class="section-window">
-                    <h1>Credits</h1>
-                    <p>
-                        Thank you for visiting my website!
-                        <br>
-                        If you wish to contact me, there are links on the left.
-                        <br>
-                        <br>
-                        <a href="https://loqor.dev/">Loqor</a> - Spotify sync
-                    </p>
+                <div class="section-window-container">
+                    <div class="section-window">
+                        <p>My projects are sponsored by BisectHosting!</p>
+                        <a href="https://www.bisecthosting.com/duzo"><img class="rounded" src="https://www.bisecthosting.com/partners/custom-banners/1a01a738-f0fc-4895-a797-af97b11651a9.webp"></a>
+                        <p>Use code <a href="https://www.bisecthosting.com/duzo">DUZO</a> for <strong>25%</strong> OFF!</p>
+                    </div>
                 </div>
-            </div>
+                <br>
+                <div class="section-window-container">
+                    <div class="section-window" style="background-color: transparent; border-color: transparent;">
+                        <button id="toggleProjects" onclick="toggleProjects(true)"></button>
+                        <button id="rerollProjects" onclick="updateProjectsWindow()"><i class="fa-solid fa-dice"></i></button>
+                    </div>
+                </div>
+                <br>
+                <div class="section-window-container " id="projects"></div>
 
-            <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-            <script>
-                var r = document.querySelector(':root');
+                <div class="section-container">
+                    <h1 class="section-title">Available for <b>Commission</b></h1>
+                </div>
+                <div class="section-window-container">
+                    <div class="section-window">
+                        <h1>Info</h1>
+                        <p>I can be found on <a href="https://www.fiverr.com/neverthink?up_rollout=true">Fiverr</a> or contacted on discord (below). <br>
+                            On Fiverr, you can purchase my service for <a href="https://www.fiverr.com/neverthink/create-your-ideal-minecraft-mod">Minecraft Mods</a> only, and I will create your idea and bring it to reality.</p>
+                    </div>
+                    <div class="section-window">
+                        <h1>card</h1>
+                        <div class="fiverr">
+                            <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+                                <a itemprop='url' href=https://www.fiverr.com/neverthink rel="nofollow" target="_blank" style='display: inline-block;'>
+                                    <div class='fiverr-seller-content' id='fiverr-seller-widget-content-a09c0005-196b-45f3-a800-ec7b64101687' itemprop='contentURL' style='display: none;'></div>
+                                    <div id='fiverr-widget-seller-data' style='display: none;'>
+                                        <div itemprop='name' >neverthink</div>
+                                        <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
+                                        <div itemprop='jobtitle'>Seller</div>
+                                        <div itemprop='description'>I have been coding for years, I know many languages, but primarily Java and Python. I am on Fiverr to create Minecraft Mods for people. I can guarantee that I can deliver what you wish on time.</div>
+                                    </div>
+                                </a>
+                            </div>
 
-                function getStyleColour() {
-                    var rs = getComputedStyle(r);
-                    return rs.getPropertyValue('--body-colour');
-                }
+                            <script id='fiverr-seller-widget-script-a09c0005-196b-45f3-a800-ec7b64101687' src='https://widgets.fiverr.com/api/v1/seller/neverthink?widget_id=a09c0005-196b-45f3-a800-ec7b64101687' data-config='{"category_name":"\n                                    Programming \u0026 Tech\n\n                            "}' async='true' defer='true'></script>
+                        </div>
+                    </div>
+                </div>
 
-                kofiWidgetOverlay.draw('duzoo', {
-                    'type': 'floating-chat',
-                    'floating-chat.donateButton.text': 'Support me',
-                    'floating-chat.donateButton.background-color': getStyleColour(),
-                    'floating-chat.donateButton.text-color': '#1d2d44'
-                });
-            </script>
-        </main>
+                <div class="section-container">
+                    <h1 class="section-title">Contact</h1>
+                </div>
+                <div class="section-window-container">
+                    <!-- <div class="section-window">
+                        <h1>Discord</h1>
+                        <iframe src="https://discord.com/widget?id=1097149006079082516&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                    </div> -->
+                    <div class="section-window">
+                        <h1>Links</h1>
+                        <p>
+                            <b>|</b>
+                            <a href="mailto:duz.0@outlook.com"><i class="fa-solid fa-envelope"></i></a> <b>|</b>
+                            <a href="https://www.youtube.com/@duzo_"><i class="fa-brands fa-youtube"></i></a> <b>|</b>
+                            <a href=" https://discord.gg/ZgssqpUMHS"><i class="fa-brands fa-discord"></i></a> <b>|</b>
+                            <a href="https://github.com/Duzos"><i class="fa-brands fa-github"></i></a> <b>|</b>
+                            <a href="https://open.spotify.com/user/jamestheproyt"><i class="fa-brands fa-spotify"></i></a> <b>|</b>
+                            <a href="https://steamcommunity.com/id/duzo_/"><i class="fa-brands fa-steam"></i></a> <b>|</b>
+                            <br><br>
+                            persona cat lol
+                            <br>
+                            <img style="padding: 16px; width: 128px;" class="rounded" src="./img/personacat.png">
+                        </p>
+                    </div>
+                    <div class="section-window">
+                        <h1>Credits</h1>
+                        <p>
+                            Thank you for visiting my website!
+                            <br>
+                            If you wish to contact me, there are links on the left.
+                            <br>
+                            <br>
+                            <a href="https://loqor.dev/">Loqor</a> - Spotify sync
+                        </p>
+                    </div>
+                </div>
+
+                <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+                <script>
+                    var r = document.querySelector(':root');
+
+                    function getStyleColour() {
+                        var rs = getComputedStyle(r);
+                        return rs.getPropertyValue('--body-colour');
+                    }
+
+                    kofiWidgetOverlay.draw('duzoo', {
+                        'type': 'floating-chat',
+                        'floating-chat.donateButton.text': 'Support me',
+                        'floating-chat.donateButton.background-color': getStyleColour(),
+                        'floating-chat.donateButton.text-color': '#1d2d44'
+                    });
+                </script>
+            </main>
+        </div>
+    </div>
     </body>
+
+    <script>
+        function updateHeight() {
+            var body = document.body,
+                html = document.documentElement;
+
+            var height = Math.max( body.scrollHeight, body.offsetHeight,
+                html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+            let sections = document.getElementsByClassName("full-height");
+
+            for (let i = 0; i < sections.length; i++) {
+                item = sections[i];
+                console.log(item);
+
+                item.style.height = height + "px";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            window.addEventListener('load', () => {
+                updateHeight();
+            });
+
+            window.addEventListener('resize', () => {
+                updateHeight();
+            })
+        });
+    </script>
 </html>
