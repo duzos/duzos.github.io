@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="chore: remove bg colour of title text">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="chore: green theme + parallax cube background">
+      <change beforePath="$PROJECT_DIR$/sites/love/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
       <workItem from="1726482438962" duration="407000" />
       <workItem from="1726483048398" duration="98000" />
       <workItem from="1726508077972" duration="121000" />
-      <workItem from="1726508211571" duration="5536000" />
+      <workItem from="1726508211571" duration="5643000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>
@@ -109,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726483135503</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="chore: green theme + parallax cube background">
+      <option name="closed" value="true" />
+      <created>1726513881657</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1726513881657</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +136,7 @@
     <MESSAGE value="redid the whole website again" />
     <MESSAGE value="chore: add padding to sides of context" />
     <MESSAGE value="chore: remove bg colour of title text" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: remove bg colour of title text" />
+    <MESSAGE value="chore: green theme + parallax cube background" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: green theme + parallax cube background" />
   </component>
 </project>
