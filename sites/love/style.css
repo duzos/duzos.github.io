@@ -1,14 +1,14 @@
 :root{
     /* Palette Colours */
     --body-colour : #FADDE1;
-    --bg-colour: #FFC4D6 ;
-    --border-colour: transparent;
+    --bg-colour: rgba(255, 196, 214, 0.75);
+    --border-colour: rgba(236, 143, 169, 0.85);
     --hover-colour : #F4ACB7;
     --text-colour : #FF5D8F;
     --important-colour : #FF87AB;
 
     --background-colour: #FFD1DC;
-    --heart-colour: #FF6961;
+    --heart-colour: rgba(255, 105, 97, 0.3);
     --heart-text-colour: #f03f36;
 }
 
@@ -19,7 +19,6 @@ body {
 
 #heart {
     color: var(--heart-colour);
-    font-size: 96px;
     transition: all, 1s;
     z-index: 1;
     animation: heartbeat 1s infinite;
@@ -28,4 +27,16 @@ body {
     0% { scale: 1 }
     50% { scale: 1.1 }
     100% { scale: 1 }
+}
+
+.gradient {
+}
+
+.love_background_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.love_background {
+    font-size: 50vw;
 }

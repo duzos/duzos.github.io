@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="chore: green theme + parallax cube background">
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="fix: love website">
+      <change afterPath="$PROJECT_DIR$/sites/love/img/ring2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/love/img/us3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/love/img/us4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/love/img/us5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/love/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/love/script/countdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/script/countdown.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/love/script/heart.js" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/script/heart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/love/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,9 +35,9 @@
     &quot;accountId&quot;: &quot;fa71288d-a218-4ea3-ae15-880e7cfe7b5f&quot;
   }
 }</component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2Y37RvbizbvlWDDfHrhnm1CsLjP" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -83,6 +91,8 @@
       <workItem from="1726483048398" duration="98000" />
       <workItem from="1726508077972" duration="121000" />
       <workItem from="1726508211571" duration="5643000" />
+      <workItem from="1726515907079" duration="360000" />
+      <workItem from="1729028378782" duration="4219000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>

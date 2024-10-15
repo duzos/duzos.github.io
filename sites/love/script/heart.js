@@ -29,8 +29,23 @@ function updateHidables() {
     }
 }
 
+function getScrollPercent() {
+    const h = document.documentElement,
+        b = document.body,
+        st = 'scrollTop',
+        sh = 'scrollHeight';
+    return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', () => {
         initialise();
     });
+});
+document.addEventListener('scroll', (event) => { // todo - doesnt want to work
+    let percent = getScrollPercent();
+    console.log(percent);
+    let heart = document.getElementById('heart');
+
+    heart.style.animation = "heartbeat " + (1 - (percent / 100)) + "s infinite";
 });
