@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="fix: love website">
-      <change afterPath="$PROJECT_DIR$/sites/love/img/ring2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/love/img/us3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/love/img/us4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/love/img/us5.jpg" afterDir="false" />
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/love/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/love/script/countdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/script/countdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/love/script/heart.js" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/script/heart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/love/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +84,8 @@
       <workItem from="1726508077972" duration="121000" />
       <workItem from="1726508211571" duration="5643000" />
       <workItem from="1726515907079" duration="360000" />
-      <workItem from="1729028378782" duration="4219000" />
+      <workItem from="1729028378782" duration="4381000" />
+      <workItem from="1729334655109" duration="30000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>
@@ -125,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726513881657</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date">
+      <option name="closed" value="true" />
+      <created>1729034124352</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729034124352</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +148,7 @@
     <MESSAGE value="chore: add padding to sides of context" />
     <MESSAGE value="chore: remove bg colour of title text" />
     <MESSAGE value="chore: green theme + parallax cube background" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: green theme + parallax cube background" />
+    <MESSAGE value="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date" />
   </component>
 </project>
