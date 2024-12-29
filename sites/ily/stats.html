@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Dates</title>
+    <link rel="stylesheet" href="css/stats.css">
+</head>
+<body>
+<h1 class="page-title">E+J IMPORTANT DATES</h1>
+<div id="countdown-container"></div>
+<a href="finish.html" id="one-more-button" class="hidden">one more..</a>
+<script src="../love/script/countdown.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.getElementById("countdown-container");
+        const dateMap = new Map([
+            ['countdown-anniversary', 'Anniversary'],
+            ['countdown-anniversary-next', 'Next Anniversary'],
+            ['countdown-first-hangout', 'First Hangout'],
+            ['countdown-next-hangout', 'Next Hangout'],
+            ['countdown-first-meet', 'First Meet'],
+            ['countdown-first-date', 'First Date']
+        ]);
+
+        dateMap.forEach((label, id) => {
+            const box = document.createElement("div");
+            box.className = "countdown-box";
+            box.innerHTML = `<h3>${label}</h3><p id="${id}">Loading...</p>`;
+            container.appendChild(box);
+        });
+
+        setTimeout(() => {
+            document.getElementById("one-more-button").classList.add("visible");
+        }, 2000);
+    });
+</script>
+</body>
+</html>

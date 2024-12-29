@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I love you El</title>
+    <link rel="stylesheet" href="css/valentine.css" />
+</head>
+<body>
+<div id="valentineQuestion"><b>I love you!</b></div>
+<button class="answerButton" onclick="location.href='yay.html'">
+    I love you too!
+</button>
+<button class="answerButton" id="noButton">ya, k.</button>
+<br />
+
+<script>
+    document
+        .getElementById("noButton")
+        .addEventListener("click", function () {
+            const yesButton = document.querySelector(
+                'button[onclick*="yay.html"]'
+            );
+            const currentFontSize = parseInt(
+                window.getComputedStyle(yesButton).fontSize
+            );
+            yesButton.style.fontSize = currentFontSize + 10 + "px";
+        });
+</script>
+</body>
+</html>

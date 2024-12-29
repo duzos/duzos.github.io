@@ -1,0 +1,75 @@
+body {
+    background-color: pink;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.continue-button {
+    position: absolute;
+    top: 5%;
+    font-size: 3.5vmin;
+    color: #ff69b4;
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeInButton 1s forwards 7.5s;
+}
+
+@keyframes fadeInButton {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+#love-text {
+    font-size: 5vmin;
+    color: #ff69b4;
+    font-family: 'Courier', monospace;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid pink;
+    animation: typing 6s steps(30, end), blink-caret .75s step-end infinite;
+    text-align: center;
+    width: 100%; /* Ensure the text container takes full width */
+    position: absolute;
+    top: 10%; /* Position the text higher up */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: pink; }
+}
+
+#heart {
+    color: #ff6961;
+    animation: fadeIn 1.25s forwards, grow 6s forwards 1.25s, heartbeat 1s infinite 8s;
+    font-size: 50vmin;
+    width: 50vmin;
+    height: 50vmin;
+    transform-origin: center;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes grow {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.5); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1.5); }
+    50% { transform: scale(1.6); }
+    100% { transform: scale(1.5); }
+}

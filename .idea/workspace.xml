@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date">
+      <change afterPath="$PROJECT_DIR$/sites/ily/css/finish.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/css/flower.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/css/heart.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/css/stats.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/css/valentine.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/finish.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/flower.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/heart.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/stats.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/ily/yay.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/love/script/countdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/script/countdown.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +65,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\james\IdeaProjects\duzos.github.io\sites\ily" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/duzos.github.io/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
@@ -66,8 +83,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
       </set>
     </attachedChunks>
   </component>
@@ -86,6 +103,8 @@
       <workItem from="1726515907079" duration="360000" />
       <workItem from="1729028378782" duration="4381000" />
       <workItem from="1729334655109" duration="30000" />
+      <workItem from="1734379889487" duration="2795000" />
+      <workItem from="1734541977461" duration="315000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>

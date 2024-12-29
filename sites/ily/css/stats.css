@@ -1,0 +1,62 @@
+body {
+    background-color: #fff5e4; /* Light cream background */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.page-title {
+    color: #ff69b4; /* Pink color for the title */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#countdown-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.countdown-box {
+    background-color: pink;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    transition: transform 0.3s;
+}
+
+.countdown-box:hover {
+    transform: scale(1.05);
+}
+
+.countdown-box h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #ff69b4; /* Pink/red color for text */
+}
+
+.countdown-box p {
+    margin: 10px 0 0;
+    font-size: 1.2em;
+    color: #ff69b4; /* Pink/red color for text */
+}
+
+#one-more-button {
+    color: #ff69b4; /* Pink color for the button text */
+    text-decoration: none;
+    font-size: 1.5em; /* Larger font size */
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 2s; /* Fade-in effect over 2 seconds */
+}
+
+#one-more-button.visible {
+    opacity: 1;
+}
