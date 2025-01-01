@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date">
-      <change afterPath="$PROJECT_DIR$/sites/ily/css/finish.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/css/flower.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/css/heart.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/css/stats.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/css/valentine.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/finish.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/flower.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/heart.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/stats.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sites/ily/yay.html" afterDir="false" />
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="feat: christmas present page for el">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/love/script/countdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/sites/love/script/countdown.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +93,8 @@
       <workItem from="1729334655109" duration="30000" />
       <workItem from="1734379889487" duration="2795000" />
       <workItem from="1734541977461" duration="315000" />
+      <workItem from="1735434139363" duration="96000" />
+      <workItem from="1735658346078" duration="2000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>
@@ -145,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729034124352</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: christmas present page for el">
+      <option name="closed" value="true" />
+      <created>1735434231661</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1735434231661</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,6 +166,7 @@
     <MESSAGE value="chore: remove bg colour of title text" />
     <MESSAGE value="chore: green theme + parallax cube background" />
     <MESSAGE value="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: bg parallax heart&#10;feat: next hangout date&#10;feat: more texts&#10;feat: more pics&#10;fix: next anniversary date" />
+    <MESSAGE value="feat: christmas present page for el" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: christmas present page for el" />
   </component>
 </project>
