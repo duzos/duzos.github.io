@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="feat: christmas present page for el">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/projects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +96,7 @@
       <workItem from="1734541977461" duration="315000" />
       <workItem from="1735434139363" duration="96000" />
       <workItem from="1735658346078" duration="2000" />
+      <workItem from="1740017177744" duration="332000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>

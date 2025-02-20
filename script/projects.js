@@ -216,9 +216,11 @@ class ModrinthProject extends MinecraftProject {
     }
 }
 
-let projects = new Array();
+let projects = [];
 projects.push(new ModrinthProject("tardis-refined", "tardis-refined", 782697))
 projects.push(new ModrinthProject("ait", "adventures-in-time", 856138))
+projects.push(new ModrinthProject("amblekit"))
+projects.push(new ModrinthProject("stargates"))
 projects.push(new ModrinthProject("fake-players", "fake-player", 845992))
 projects.push(new ModrinthProject("superhero", "timeless-heroes", 871545))
 projects.push(new ModrinthProject("animator"))
