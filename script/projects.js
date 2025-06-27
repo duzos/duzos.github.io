@@ -220,7 +220,7 @@ let projects = [];
 projects.push(new ModrinthProject("ait", "adventures-in-time", 856138))
 projects.push(new ModrinthProject("fake-players", "fake-player", 845992))
 projects.push(new ModrinthProject("amblekit"))
-projects.push(new ModrinthProject("stargates"))
+projects.push(new ModrinthProject("amble-stargate"))
 projects.push(new ModrinthProject("tardis-refined", "tardis-refined", 782697))
 projects.push(new ModrinthProject("superhero", "timeless-heroes", 871545))
 projects.push(new Project("Merseyrail", "Railway 200 Website - Click the Wiki button", "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/0f1d678990c8232d3214549cc18ed902", "duzos", "merseyrail-site", "https://duzo.is-a.dev/merseyrail-site/"))
