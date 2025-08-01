@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>What colour is this?</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      background-color: #fceff9;
+      color: #b46984;
+    }
+    h2, h3 {
+      color: #d185ad;
+    }
+    #colorBox {
+      width: 100px;
+      height: 100px;
+      margin: 10px auto;
+      border: 3px dashed #f4c4d6;
+      border-radius: 20px;
+      background-color: white;
+    }
+    video {
+      display: block;
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 5px solid #f4c4d6;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.5);
+    }
+    canvas { display: none; }
+    #controls {
+      margin: 10px;
+    }
+    button {
+      background-color: #f4c4d6;
+      color: #6e3b4d;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #efb0cb;
+    }
+  </style>
+</head>
+<body>
+
+<h2>What colour is this?</h2>
+<video id="video" width="320" height="240" autoplay></video>
+<canvas id="canvas" width="320" height="240"></canvas>
+
+<div id="controls">
+  <button id="toggle">Pause</button>
+</div>
+
+<h3>Detected Color:</h3>
+<div id="colorBox"></div>
+<p id="colorName">No color yet</p>
+<p id="colorValue">RGB: ---,---,--- | HEX: #------</p>
+
+<script>
+let detecting = true;
+const toggleBtn = document.getElementById('toggle');
+
+toggleBtn.addEventListener('click', () => {
+  detecting = !detecting;
+  toggleBtn.innerText = detecting ? 'Pause' : 'Resume';
+});
+
+// Access camera
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => {
+    document.getElementById('video').srcObject = stream;
+  });
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+function getAverageColor(data) {
+  let r = 0, g = 0, b = 0;
+  for (let i = 0; i < data.length; i += 4) {
+    r += data[i];
+    g += data[i + 1];
+    b += data[i + 2];
+  }
+  const count = data.length / 4;
+  return {
+    r: Math.round(r / count),
+    g: Math.round(g / count),
+    b: Math.round(b / count)
+  };
+}
+
+const cssColors = {
+  "Red": [255, 0, 0],
+  "Dark Red": [139, 0, 0],
+  "Orange": [255, 165, 0],
+  "Dark Orange": [255, 140, 0],
+  "Yellow": [255, 255, 0],
+  "Light Yellow": [255, 255, 224],
+  "Light Green": [144, 238, 144],
+  "Green": [0, 128, 0],
+  "Dark Green": [0, 100, 0],
+  "Teal": [0, 128, 128],
+  "Blue": [0, 0, 255],
+  "Sky Blue": [135, 206, 235],
+  "Navy": [0, 0, 128],
+  "Purple": [128, 0, 128],
+  "Violet": [238, 130, 238],
+  "Pink": [255, 192, 203],
+  "Magenta": [255, 0, 255],
+  "Hot Pink": [255, 105, 180],
+  "Peach": [255, 218, 185],
+  "Lavender": [230, 230, 250],
+  "Brown": [165, 42, 42],
+  "Tan": [210, 180, 140],
+  "White": [255, 255, 255],
+  "Black": [0, 0, 0],
+  "Grey": [128, 128, 128],
+  "Light Grey": [211, 211, 211],
+  "Crème": [255, 253, 208]
+};
+
+function getClosestColorName({ r, g, b }) {
+  let minDist = Infinity;
+  let closestName = "Unknown";
+
+  for (const [name, [cr, cg, cb]] of Object.entries(cssColors)) {
+    const dist = Math.sqrt((r - cr) ** 2 + (g - cg) ** 2 + (b - cb) ** 2);
+    if (dist < minDist) {
+      minDist = dist;
+      closestName = name;
+    }
+  }
+
+  return closestName;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join("");
+}
+
+function detectColor() {
+  if (!detecting) return;
+
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const centerSize = 40;
+  const x = (canvas.width - centerSize) / 2;
+  const y = (canvas.height - centerSize) / 2;
+  const imgData = ctx.getImageData(x, y, centerSize, centerSize);
+  const rgb = getAverageColor(imgData.data);
+
+  const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+  const name = getClosestColorName(rgb);
+
+  document.getElementById('colorBox').style.backgroundColor = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  document.getElementById('colorName').innerText = name;
+  document.getElementById('colorValue').innerText = `RGB: ${rgb.r}, ${rgb.g}, ${rgb.b} | HEX: ${hex}`;
+}
+
+setInterval(detectColor, 1000);
+</script>
+
+</body>
+</html>
