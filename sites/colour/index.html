@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>What colour is this?</title>
+  <title>Live Camera Color Detector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="./manifest.json">
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      background-color: #fceff9;
-      color: #b46984;
+      background-color: #fff6fa;
+      color: #d471a3;
+      margin: 0;
+      padding: 0;
     }
     h2, h3 {
-      color: #d185ad;
+      color: #d471a3;
+      margin: 10px 0;
     }
     #colorBox {
       width: 100px;
       height: 100px;
       margin: 10px auto;
-      border: 3px dashed #f4c4d6;
+      border: 3px dashed #f8bad4;
       border-radius: 20px;
       background-color: white;
     }
     video {
       display: block;
-      margin: 0 auto;
+      margin: 10px auto;
+      width: 80vw;
+      height: auto;
+      max-width: 320px;
       border-radius: 50%;
-      border: 5px solid #f4c4d6;
-      box-shadow: 0 0 15px rgba(255, 182, 193, 0.5);
+      border: 5px solid #f8bad4;
+      box-shadow: 0 0 20px 10px rgba(248, 186, 212, 0.3); 
     }
-    canvas { display: none; }
+    canvas {
+      display: none;
+    }
     #controls {
       margin: 10px;
     }
     button {
-      background-color: #f4c4d6;
-      color: #6e3b4d;
+      background-color: #f8bad4;
+      color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 20px;
       font-size: 16px;
       cursor: pointer;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
       transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #efb0cb;
+      background-color: #f49abc;
+    }
+    p {
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
 
-<h2>What colour is this?</h2>
-<video id="video" width="320" height="240" autoplay></video>
+<h2>Live Colour Detection from Camera</h2>
+<video id="video" autoplay playsinline></video>
 <canvas id="canvas" width="320" height="240"></canvas>
 
 <div id="controls">
@@ -71,10 +83,12 @@ toggleBtn.addEventListener('click', () => {
   toggleBtn.innerText = detecting ? 'Pause' : 'Resume';
 });
 
-// Access camera
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
   .then(stream => {
     document.getElementById('video').srcObject = stream;
+  })
+  .catch(error => {
+    alert("Unable to access the camera: " + error);
   });
 
 const canvas = document.getElementById('canvas');
@@ -163,6 +177,12 @@ function detectColor() {
 }
 
 setInterval(detectColor, 1000);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js')
+    .then(reg => console.log("Service worker registered!"))
+    .catch(err => console.error("Service worker registration failed:", err));
+}
 </script>
 
 </body>
