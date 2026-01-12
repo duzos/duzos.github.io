@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="fix: amblelabs stargate project">
-      <change afterPath="$PROJECT_DIR$/script/animations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/carousel.js" afterDir="false" />
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="fix spotify">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/projects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/spotify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/windows.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/windows.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +104,7 @@
       <workItem from="1751021975522" duration="40000" />
       <workItem from="1751022259936" duration="13000" />
       <workItem from="1757018153200" duration="560000" />
-      <workItem from="1768254129700" duration="1945000" />
+      <workItem from="1768254129700" duration="2338000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>
@@ -182,7 +177,23 @@
       <option name="project" value="LOCAL" />
       <updated>1751022009381</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="redesign">
+      <option name="closed" value="true" />
+      <created>1768256197220</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1768256197220</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix spotify">
+      <option name="closed" value="true" />
+      <created>1768256293111</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1768256293111</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,7 +220,9 @@
     <MESSAGE value="rfgvh" />
     <MESSAGE value="feat: merseyrail on projects page" />
     <MESSAGE value="fix: amblelabs stargate project" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: amblelabs stargate project" />
+    <MESSAGE value="redesign" />
+    <MESSAGE value="fix spotify" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix spotify" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
