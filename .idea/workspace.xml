@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="add github stats">
+    <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="moor projects">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/script/projects.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +103,7 @@
       <workItem from="1751021975522" duration="40000" />
       <workItem from="1751022259936" duration="13000" />
       <workItem from="1757018153200" duration="560000" />
-      <workItem from="1768254129700" duration="2670000" />
+      <workItem from="1768254129700" duration="2808000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>
@@ -201,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768256501985</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="moor projects">
+      <option name="closed" value="true" />
+      <created>1768256886040</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1768256886040</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +238,8 @@
     <MESSAGE value="redesign" />
     <MESSAGE value="fix spotify" />
     <MESSAGE value="add github stats" />
-    <option name="LAST_COMMIT_MESSAGE" value="add github stats" />
+    <MESSAGE value="moor projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="moor projects" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
