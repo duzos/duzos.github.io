@@ -206,13 +206,41 @@ class ModrinthProject extends MinecraftProject {
     updateWindow() {
         this.updateId();
 
-        let window = document.getElementById(this.id);
-        if (window == null) {
+        // Find all instances (original + clones) and update them
+        const windows = document.querySelectorAll(`#${CSS.escape(this.id)}`);
+        if (windows.length === 0) {
             console.log("Could not update window for " + this.id);
             return;
         }
 
-        window.replaceWith(this.toElement());
+        windows.forEach(window => {
+            const newElement = this.toElement();
+            window.replaceWith(newElement);
+        });
+
+        // Also update any clones by class matching
+        const track = document.getElementById('carouselTrack');
+        if (track) {
+            // Find the original slide and its clones by matching the section-window id
+            const slides = track.querySelectorAll('.carousel-slide');
+            slides.forEach(slide => {
+                const sectionWindow = slide.querySelector('.section-window');
+                if (sectionWindow && sectionWindow.id === this.id) {
+                    const newSlide = document.createElement('div');
+                    newSlide.classList.add('carousel-slide');
+                    if (slide.classList.contains('clone')) {
+                        newSlide.classList.add('clone');
+                    }
+                    newSlide.appendChild(this.toElement());
+                    slide.replaceWith(newSlide);
+                }
+            });
+
+            // Re-setup hover listeners after update
+            if (typeof setupSlideHoverListeners === 'function') {
+                setupSlideHoverListeners();
+            }
+        }
     }
 }
 
@@ -254,62 +282,34 @@ function parseModrinthProjects(array, data) {
 }
 
 function updateProjectsWindow() {
-    let element = document.getElementById("projects");
+    let element = document.getElementById("carouselTrack");
+    if (!element) return;
+
     element.replaceChildren();
 
-    if (element.classList.contains("random")) {
-        updateProjectsRandom(element);
-        return;
+    // Shuffle projects for random order
+    let shuffled = [...projects].sort(() => Math.random() - 0.5);
+
+    for (let i = 0; i < shuffled.length; i++) {
+        let item = shuffled[i];
+        let created = item.toElement();
+
+        // Wrap in carousel slide
+        let slide = document.createElement("div");
+        slide.classList.add("carousel-slide");
+        slide.appendChild(created);
+
+        element.appendChild(slide);
     }
 
-    for (let i = 0; i < projects.length; i++) {
-        item = projects[i];
-
-        let created = item.toElement();
-        element.appendChild(created);
-    };
-}
-function updateProjectsRandom(element) {
-    let selected = new Array();
-    let max = 4;
-
-    while (selected.length < max) {
-        let found = selectRandom();
-        if (selected.includes(found)) continue;
-        selected.push(found);
-    }
-
-    for (let i = 0; i < selected.length; i++) {
-        item = selected[i];
-
-        let created = item.toElement();
-        element.appendChild(created);
-    };
-}
-function toggleProjects(shouldScroll) {
-    let element = document.getElementById("projects");
-    let isRandom = element.classList.toggle("random");
-    updateProjectsWindow();
-
-    let button = document.getElementById("toggleProjects");
-    button.textContent = (isRandom) ? "Show All" : "Hide All";
-
-    if (shouldScroll)
-        button.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
-
-    let dice = document.getElementById("rerollProjects");
-    let text = !isRandom ? "none" : "inline";
-    dice.style.display = text;
-    
-}
-
-function selectRandom() {
-    let random = Math.floor(Math.random() * projects.length);
-    return projects[random];
+    // Initialize carousel after projects are loaded
+    setTimeout(() => {
+        initCarousel();
+    }, 100);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', () => {
-        toggleProjects(false);
+        updateProjectsWindow();
     });
 });

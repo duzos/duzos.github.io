@@ -1,136 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>duzo</title>
+        <title>duzo | Java Developer</title>
 
-        <meta name="description" content="">
+        <meta name="description" content="duzo - Java Developer, Minecraft Modder, and Creator">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
         
         <script src="https://kit.fontawesome.com/2b1db366f1.js" crossorigin="anonymous"></script>
         <script defer data-domain="duzo.is-a.dev" src="https://analytics.is-a.dev/js/script.js"></script>
-        <script src="./script/projects.js"></script>
-        <script src="./script/windows.js"></script>
-        <script src="./script/spotify.js"></script>
-        <script src="./sites/love/script/countdown.js"></script>
+        <script src="./script/carousel.js" defer></script>
+        <script src="./script/projects.js" defer></script>
+        <script src="./script/windows.js" defer></script>
+        <script src="./script/spotify.js" defer></script>
+        <script src="./script/animations.js" defer></script>
     </head>
     <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-brand">duzo</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
     <div class="parallax">
         <div class="parallax__layer parallax__layer--back">
-            <div class="gradient" style="height: 140%"></div>
+            <div class="gradient"></div>
         </div>
         <div class="parallax__layer parallax__layer--base">
             <main>
                 <div class="title-border">
                     <h1 class="title-text">duzo</h1>
-                </div>
-
-                <div class="section-container">
-                    <h1 class="section-title">About Me</h1>
-                </div>
-                <div class="section-window-container">
-                    <div class="section-window">
-                        <h1>im listening to..</h1>
-                        <p id="spotify-song"></p>
-                        <img id="spotify-album-cover" src="./img/spotify.png">
-                        <p id="spotify-album-info"></p>
-                    </div>
-                    <div class="section-window">
-                        <h1>info</h1>
-                        <p>todo</p>
-                        <img class="rounded" src="./img/me.gif">
-                    </div>
-                    <div class="section-window">
-                        <h1>my cat</h1>
-                        <img class="rounded" src="./img/cat.jpg">
+                    <p class="title-tagline">
+                        <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank">Java Developer</a> • Minecraft Modder • Creator
+                    </p>
+                    <div class="scroll-indicator">
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                 </div>
 
-                <div class="section-container">
-                    <h1 class="section-title">Projects</h1>
-                </div>
-                <div class="section-window-container">
-                    <div class="section-window">
-                        <p>My projects are sponsored by BisectHosting!</p>
-                        <a href="https://www.bisecthosting.com/duzo"><img class="rounded" src="https://www.bisecthosting.com/partners/custom-banners/1a01a738-f0fc-4895-a797-af97b11651a9.webp"></a>
-                        <p>Use code <a href="https://www.bisecthosting.com/duzo">DUZO</a> for <strong>25%</strong> OFF!</p>
+                <section id="about">
+                    <div class="section-container">
+                        <h1 class="section-title">About Me</h1>
                     </div>
-                </div>
-                <br>
-                <div class="section-window-container">
-                    <div class="section-window" style="background-color: transparent; border-color: transparent;">
-                        <button id="toggleProjects" onclick="toggleProjects(true)"></button>
-                        <button id="rerollProjects" onclick="updateProjectsWindow()"><i class="fa-solid fa-dice"></i></button>
+                    <div class="section-window-container">
+                        <div class="section-window spotify-widget animate-on-scroll" id="spotifyWidget">
+                            <div class="now-playing-badge" id="nowPlayingBadge" style="display: none;">
+                                <div class="equalizer">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                Now Playing
+                            </div>
+                            <h1>im listening to..</h1>
+                            <p id="spotify-song"></p>
+                            <img id="spotify-album-cover" src="./img/spotify.png" alt="Album cover">
+                            <p id="spotify-album-info"></p>
+                        </div>
+                        <div class="section-window animate-on-scroll">
+                            <h1>info</h1>
+                            <p>Hey! I'm James, a Java Developer passionate about creating Minecraft mods and bringing ideas to life through code.</p>
+                            <img class="rounded" src="./img/me.gif" alt="Profile picture">
+                        </div>
+                        <div class="section-window animate-on-scroll">
+                            <h1>my cat</h1>
+                            <img class="rounded" src="./img/cat.jpg" alt="My cat">
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="section-window-container " id="projects"></div>
-<!-- 
-                <div class="section-container">
-                    <h1 class="section-title">Available for <b>Commission</b></h1>
-                </div>
-                <div class="section-window-container">
-                    <div class="section-window">
-                        <h1>Info</h1>
-                        <p>I can be found on <a href="https://www.fiverr.com/duzohall">Fiverr</a> <br> or contacted on discord (below). <br>
-                            On Fiverr, you can purchase my service for <a href="https://www.fiverr.com/duzohall">Minecraft Mods</a> only, and I will create your idea and bring it to reality.</p>
-                    </div>
-                </div> -->
+                </section>
 
-                <div class="section-container">
-                    <h1 class="section-title">Contact</h1>
-                </div>
-                <div class="section-window-container">
-                    <!-- <div class="section-window">
-                        <h1>Discord</h1>
-                        <iframe src="https://discord.com/widget?id=1097149006079082516&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                    </div> -->
-                    <div class="section-window">
-                        <h1>Links</h1>
-                        <p>
-                            <b>|</b>
-                            <a href="mailto:duz.0@outlook.com"><i class="fa-solid fa-envelope"></i></a> <b>|</b>
-                            <a href="https://www.youtube.com/@duzo_"><i class="fa-brands fa-youtube"></i></a> <b>|</b>
-                            <a href=" https://discord.gg/ZgssqpUMHS"><i class="fa-brands fa-discord"></i></a> <b>|</b>
-                            <a href="https://github.com/Duzos"><i class="fa-brands fa-github"></i></a> <b>|</b>
-                            <a href="https://open.spotify.com/user/jamestheproyt"><i class="fa-brands fa-spotify"></i></a> <b>|</b>
-                            <a href="https://steamcommunity.com/id/duzo_/"><i class="fa-brands fa-steam"></i></a> <b>|</b>
-                            <br><br>
-                            persona cat lol
-                            <br>
-                            <img style="padding: 16px; width: 128px;" class="rounded" src="./img/personacat.png">
-                        </p>
+                <section id="projects">
+                    <div class="section-container">
+                        <h1 class="section-title">Projects</h1>
                     </div>
-                    <div class="section-window">
-                        <h1>Credits</h1>
-                        <p>
-                            Thank you for visiting my website!
-                            <br>
-                            If you wish to contact me, there are links on the left.
-                            <br>
-                            <br>
-                            <a href="https://loqor.dev/">Loqor</a> - Spotify sync
-                        </p>
+
+                    <!-- BisectHosting Sponsor - Side by Side -->
+                    <div class="sponsor-banner animate-on-scroll">
+                        <div class="sponsor-text">
+                            <h2>My projects are sponsored by <span class="sponsor-name">BisectHosting</span></h2>
+                            <p>Use code <a href="https://www.bisecthosting.com/duzo">DUZO</a> for <strong>25% OFF!</strong></p>
+                        </div>
+                        <a href="https://www.bisecthosting.com/duzo" class="sponsor-image">
+                            <img src="https://www.bisecthosting.com/partners/custom-banners/1a01a738-f0fc-4895-a797-af97b11651a9.webp" alt="BisectHosting Banner">
+                        </a>
                     </div>
-                </div>
+                    <br>
+
+                    <!-- Project Carousel - Continuous Auto-scroll -->
+                    <div class="carousel-container animate-on-scroll" id="projectCarousel">
+                        <div class="carousel-track" id="carouselTrack"></div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button id="toggleProjects" onclick="toggleCarouselExpand()">Show All</button>
+                    </div>
+                </section>
+                <section id="contact">
+                    <div class="section-container">
+                        <h1 class="section-title">Contact</h1>
+                    </div>
+                    <div class="section-window-container">
+                        <div class="section-window animate-on-scroll">
+                            <h1>Get in Touch</h1>
+                            <div class="contact-links">
+                                <a href="mailto:duz.0@outlook.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://www.youtube.com/@duzo_" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="https://discord.gg/ZgssqpUMHS" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                                <a href="https://github.com/Duzos" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://open.spotify.com/user/jamestheproyt" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                                <a href="https://steamcommunity.com/id/duzo_/" target="_blank" title="Steam"><i class="fa-brands fa-steam"></i></a>
+                            </div>
+                            <br>
+                            <img style="width: 100px;" class="rounded" src="./img/personacat.png" alt="Persona cat">
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">persona cat lol</p>
+                        </div>
+                        <div class="section-window animate-on-scroll">
+                            <h1>Credits</h1>
+                            <p>
+                                Thank you for visiting my website!
+                                <br><br>
+                                <a href="https://loqor.dev/">Loqor</a> - Spotify sync inspiration
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
                 <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
                 <script>
-                    var r = document.querySelector(':root');
-
-                    function getStyleColour() {
-                        var rs = getComputedStyle(r);
-                        return rs.getPropertyValue('--body-colour');
-                    }
-
                     kofiWidgetOverlay.draw('duzoo', {
                         'type': 'floating-chat',
                         'floating-chat.donateButton.text': 'Support me',
-                        'floating-chat.donateButton.background-color': getStyleColour(),
-                        'floating-chat.donateButton.text-color': '#1d2d44'
+                        'floating-chat.donateButton.background-color': '#101c16',
+                        'floating-chat.donateButton.text-color': '#4ade80'
                     });
                 </script>
             </main>
@@ -139,31 +153,28 @@
     </body>
 
     <script>
-        function updateHeight() {
-            var body = document.body,
-                html = document.documentElement;
-
-            var height = Math.max( body.scrollHeight, body.offsetHeight,
-                html.clientHeight, html.scrollHeight, html.offsetHeight );
-
-            let sections = document.getElementsByClassName("full-height");
-
-            for (let i = 0; i < sections.length; i++) {
-                item = sections[i];
-                console.log(item);
-
-                item.style.height = height + "px";
-            }
+        // Navigation toggle for mobile
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById('navToggle').classList.toggle('active');
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            window.addEventListener('load', () => {
-                updateHeight();
+        // Close nav when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.getElementById('navToggle').classList.remove('active');
             });
+        });
 
-            window.addEventListener('resize', () => {
-                updateHeight();
-            })
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
     </script>
 </html>

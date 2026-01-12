@@ -27,6 +27,8 @@ function updateUI(data) {
   let song = document.getElementById('spotify-song');
   let info = document.getElementById('spotify-album-info');
   let art = document.getElementById('spotify-album-cover');
+  let widget = document.getElementById('spotifyWidget');
+  let badge = document.getElementById('nowPlayingBadge');
 
   if (data.listening_to_spotify) {
     song.textContent = spotify.song || 'No Song'
@@ -36,7 +38,10 @@ function updateUI(data) {
 
     art.src = spotify.album_art_url;
     art.style.opacity = 1;
-    art.style.boxShadow = '2px 2px 20px black';
+
+    // Add playing state for animation
+    if (widget) widget.classList.add('playing');
+    if (badge) badge.style.display = 'inline-flex';
     return;
   }
 
@@ -46,7 +51,10 @@ function updateUI(data) {
   info.style.opacity = 0;
 
   art.src = './img/spotify.png';
-  art.style.boxShadow = 'none';
+
+  // Remove playing state
+  if (widget) widget.classList.remove('playing');
+  if (badge) badge.style.display = 'none';
 }
 
 
