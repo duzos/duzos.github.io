@@ -18,7 +18,9 @@ class Project {
         this.desc = desc;
         this.logoPath = logoPath;
 
-        this.github = "https://github.com/" + github_name + "/" + github_project;
+        if (github_name != null && github_project != null) {
+            this.github = "https://github.com/" + github_name + "/" + github_project;
+        }
         this.wiki = wiki;
     }
 
@@ -260,8 +262,9 @@ projects.push(new ModrinthProject("vortex", "vortex", 973580))
 projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
 projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, "https://discord.gg/ZgssqpUMHS"));
-projects.push(new Project("Summit", "A climbing/parkour game project", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "duzos", "Summit", null));
+projects.push(new Project("Summit", "A mathematical card game", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "duzos", "Summit", null));
 projects.push(new Project("Regeneration", "Timelord Regeneration Mod", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "amblelabs", "regeneration", null));
+projects.push(new Project("Jam Studios", "YouTube Content", "./img/project/jam_studio_inc_logo.jpg", null, null, "https://www.jam.studio/"))
 
 function updateModrinthProjects(user, array) {
     fetch(modrinth_api + "/user/" + user + "/projects")
