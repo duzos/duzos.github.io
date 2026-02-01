@@ -261,6 +261,7 @@ projects.push(new ModrinthProject("cheesy", "cheesy", 863972))
 projects.push(new ModrinthProject("vortex", "vortex", 973580))
 projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
+projects.push(new Project("AIT Generator", "Create custom AIT datapacks & resource packs", "./img/project/ait.png", "duzos", "desktop-online", "https://duzos.github.io/desktop-online/"))
 projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, "https://discord.gg/ZgssqpUMHS"));
 projects.push(new Project("Summit", "A mathematical card game", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "duzos", "Summit", null));
 projects.push(new Project("Regeneration", "Timelord Regeneration Mod", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "amblelabs", "regeneration", null));
