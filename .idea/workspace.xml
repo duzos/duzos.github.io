@@ -5,6 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d67c1ef5-13f0-483f-b77d-46e05b214416" name="Changes" comment="add Jam Studios project and update Summit project description">
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/america.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/beach.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/date.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/first.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/fish.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/forever.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/valentines26/together.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,26 +44,27 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/IdeaProjects/duzos.github.io/img/project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.index.html.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.restore.workspace.module": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/IdeaProjects/duzos.github.io/sites",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\IdeaProjects\duzos.github.io\img\project" />
@@ -110,6 +121,8 @@
       <workItem from="1768321718300" duration="22000" />
       <workItem from="1768321889438" duration="19000" />
       <workItem from="1769966540491" duration="36000" />
+      <workItem from="1770990537239" duration="479000" />
+      <workItem from="1770991690520" duration="1870000" />
     </task>
     <task id="LOCAL-00001" summary="redid the whole website again">
       <created>1699742482859</created>
