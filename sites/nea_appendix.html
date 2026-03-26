@@ -406,7 +406,7 @@
 <div class="container">
   <header>
     <h1>Source Code Appendix Builder</h1>
-    <p>Seamlessly inject your codebase into an existing Word document. Select your project folder and target <code>.docx</code>, and we'll handle the formatting locally in your browser.</p>
+    <p>Seamlessly inject your codebase into an existing document. Select your project folder and target <code>.docx</code> or <code>.odt</code>, and we'll handle the formatting locally in your browser.</p>
   </header>
 
   <div class="main-grid">
@@ -424,12 +424,12 @@
       </div>
 
       <div class="file-area" id="dropzoneDocx">
-        <input id="docxFile" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        <input id="docxFile" type="file" accept=".docx,.odt,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text" />
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <div class="title" id="docxTitle">Select Target .docx</div>
-        <div class="subtitle" id="docxSubtitle">Click to browse Word files</div>
+        <div class="title" id="docxTitle">Select Target .docx / .odt</div>
+        <div class="subtitle" id="docxSubtitle">Click to browse document files</div>
       </div>
 
       <div class="actions">
@@ -535,7 +535,6 @@
     span.className = `log-${cls}`;
     span.textContent = `> ${line}\n`;
     
-    // Clear initial text if it's the first log
     if (els.statusLog.textContent.includes("Awaiting file inputs")) {
       els.statusLog.textContent = "";
     }
@@ -548,14 +547,23 @@
     els.statusLog.textContent = text + "\n";
   }
 
+  function getDocFormat() {
+    const files = Array.from(els.docxFile.files || []);
+    if (files.length !== 1) return null;
+    const name = files[0].name.toLowerCase();
+    if (name.endsWith(".odt")) return "odt";
+    if (name.endsWith(".docx")) return "docx";
+    return null;
+  }
+
   function updateUIState(){
     const folderFiles = Array.from(els.projectFolder.files || []);
     const docxFiles = Array.from(els.docxFile.files || []);
     
     const hasFolder = folderFiles.length > 0;
-    const hasDocx = docxFiles.length === 1;
+    const hasDoc = docxFiles.length === 1;
+    const fmt = getDocFormat();
 
-    // Update Folder Dropzone
     if (hasFolder) {
       els.dropzoneFolder.classList.add('has-file');
       els.folderTitle.textContent = "Folder Selected";
@@ -566,20 +574,22 @@
       els.folderSubtitle.textContent = "Click to browse directories";
     }
 
-    // Update Docx Dropzone
-    if (hasDocx) {
+    if (hasDoc && fmt) {
       els.dropzoneDocx.classList.add('has-file');
       els.docxTitle.textContent = docxFiles[0].name;
-      els.docxSubtitle.textContent = `${(docxFiles[0].size / 1024).toFixed(1)} KB`;
+      els.docxSubtitle.textContent = `${(docxFiles[0].size / 1024).toFixed(1)} KB — ${fmt.toUpperCase()} format`;
+    } else if (hasDoc && !fmt) {
+      els.dropzoneDocx.classList.remove('has-file');
+      els.docxTitle.textContent = "Unsupported format";
+      els.docxSubtitle.textContent = "Please use .docx or .odt";
     } else {
       els.dropzoneDocx.classList.remove('has-file');
-      els.docxTitle.textContent = "Select Target .docx";
-      els.docxSubtitle.textContent = "Click to browse Word files";
+      els.docxTitle.textContent = "Select Target .docx / .odt";
+      els.docxSubtitle.textContent = "Click to browse document files";
     }
 
-    els.buildBtn.disabled = !(hasFolder && hasDocx);
+    els.buildBtn.disabled = !(hasFolder && hasDoc && fmt);
 
-    // Filter and show preview if toggled
     if (hasFolder) parseCandidates();
   }
 
@@ -601,7 +611,6 @@
       
       if (!allowedExt.has(ext)) continue;
       
-      // Check exclusions
       const lowerRel = rel.toLowerCase().replaceAll("\\","/");
       const isExcluded = excludeDirs.some(d => {
         const token = `/${d.toLowerCase().replaceAll("\\","/").replaceAll(/^\/+|\/+$/g,"")}/`;
@@ -627,7 +636,7 @@
     }
   }
 
-  // XML Generators (Unchanged logic)
+  // ── DOCX XML helpers ──────────────────────────────────────
   function escapeXml(s){
     return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&apos;");
   }
@@ -650,7 +659,7 @@
     return out.join("");
   }
 
-  function makeAppendixXml(appendHeader, fileEntries){
+  function makeDocxAppendixXml(appendHeader, fileEntries){
     let xml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>`;
     xml += wP(appendHeader, "Heading1") + wP("", null);
     for (const entry of fileEntries){
@@ -659,6 +668,49 @@
     return xml;
   }
 
+  // ── ODT XML helpers ───────────────────────────────────────
+  function odtHeading(text, level){
+    const t = escapeXml(text);
+    return `<text:h text:style-name="Heading_20_${level}" text:outline-level="${level}">${t}</text:h>`;
+  }
+
+  function odtCodeLines(code){
+    const lines = code.replaceAll("\r\n","\n").replaceAll("\r","\n").split("\n");
+    const out = [];
+    for (const line of lines){
+      const t = escapeXml(line.replaceAll("\t","    "));
+      out.push(`<text:p text:style-name="Code"><text:span text:style-name="CodeSpan">${t}</text:span></text:p>`);
+    }
+    return out.join("");
+  }
+
+  function makeOdtAppendixXml(appendHeader, fileEntries){
+    let xml = `<text:p text:style-name="Standard"/>`;
+    xml += odtHeading(appendHeader, 1);
+    xml += `<text:p text:style-name="Standard"/>`;
+    for (const entry of fileEntries){
+      xml += odtHeading(entry.label, 2);
+      xml += odtCodeLines(entry.code);
+      xml += `<text:p text:style-name="Standard"/>`;
+    }
+    return xml;
+  }
+
+  function ensureOdtCodeStyles(stylesXml) {
+    const codeParaStyle = `<style:style style:name="Code" style:family="paragraph" style:parent-style-name="Standard"><style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0cm"/><style:text-properties style:font-name="Consolas" fo:font-size="9pt"/></style:style>`;
+    const codeSpanStyle = `<style:style style:name="CodeSpan" style:family="text"><style:text-properties style:font-name="Consolas" fo:font-size="9pt"/></style:style>`;
+    const fontDecl = `<style:font-face style:name="Consolas" svg:font-family="Consolas" style:font-family-generic="modern" style:font-pitch="fixed"/>`;
+
+    if (!stylesXml.includes('style:name="Code"')) {
+      stylesXml = stylesXml.replace("</office:automatic-styles>", codeParaStyle + codeSpanStyle + "</office:automatic-styles>");
+    }
+    if (!stylesXml.includes('style:name="Consolas"')) {
+      stylesXml = stylesXml.replace("</office:font-face-decls>", fontDecl + "</office:font-face-decls>");
+    }
+    return stylesXml;
+  }
+
+  // ── Build (format-agnostic) ───────────────────────────────
   async function build(){
     setStatusLog("> Build process initiated...");
     
@@ -667,18 +719,16 @@
       return;
     }
 
+    const fmt = getDocFormat();
+    log(`Detected format: ${fmt.toUpperCase()}`);
     log(`Appending ${candidatesCache.length} source files...`);
 
-    const docx = els.docxFile.files[0];
+    const docFile = els.docxFile.files[0];
     const appendHeader = (els.appendHeader.value || "Appendix - Source Code").trim();
     const includeRel = !!els.includeRelativePath.checked;
 
-    log("Loading .docx package...");
-    const zip = await JSZip.loadAsync(await docx.arrayBuffer());
-    
-    const documentXmlFile = zip.file("word/document.xml");
-    if (!documentXmlFile) throw new Error("Missing word/document.xml inside docx");
-    let documentXml = await documentXmlFile.async("string");
+    log(`Loading .${fmt} package...`);
+    const zip = await JSZip.loadAsync(await docFile.arrayBuffer());
 
     log("Reading code contents...");
     const fileEntries = [];
@@ -692,20 +742,48 @@
     }
 
     log("Injecting XML structure...");
-    const appendixXml = makeAppendixXml(appendHeader, fileEntries);
-    
-    const idx = documentXml.lastIndexOf("</w:body>");
-    if (idx < 0) throw new Error("Could not find </w:body> in document.xml");
-    documentXml = documentXml.slice(0, idx) + appendixXml + documentXml.slice(idx);
-    
-    zip.file("word/document.xml", documentXml);
 
-    log("Packaging new .docx file (this may take a moment)...");
+    if (fmt === "docx") {
+      const documentXmlFile = zip.file("word/document.xml");
+      if (!documentXmlFile) throw new Error("Missing word/document.xml inside docx");
+      let documentXml = await documentXmlFile.async("string");
+
+      const appendixXml = makeDocxAppendixXml(appendHeader, fileEntries);
+      const idx = documentXml.lastIndexOf("</w:body>");
+      if (idx < 0) throw new Error("Could not find </w:body> in document.xml");
+      documentXml = documentXml.slice(0, idx) + appendixXml + documentXml.slice(idx);
+      zip.file("word/document.xml", documentXml);
+
+    } else if (fmt === "odt") {
+      const contentXmlFile = zip.file("content.xml");
+      if (!contentXmlFile) throw new Error("Missing content.xml inside odt");
+      let contentXml = await contentXmlFile.async("string");
+
+      // Inject code styles into content.xml automatic styles
+      contentXml = ensureOdtCodeStyles(contentXml);
+
+      // Also inject into styles.xml if it exists
+      const stylesXmlFile = zip.file("styles.xml");
+      if (stylesXmlFile) {
+        let stylesXml = await stylesXmlFile.async("string");
+        stylesXml = ensureOdtCodeStyles(stylesXml);
+        zip.file("styles.xml", stylesXml);
+      }
+
+      const appendixXml = makeOdtAppendixXml(appendHeader, fileEntries);
+      const idx = contentXml.lastIndexOf("</office:text>");
+      if (idx < 0) throw new Error("Could not find </office:text> in content.xml");
+      contentXml = contentXml.slice(0, idx) + appendixXml + contentXml.slice(idx);
+      zip.file("content.xml", contentXml);
+    }
+
+    log(`Packaging new .${fmt} file (this may take a moment)...`);
     const outBlob = await zip.generateAsync({ type: "blob" });
 
-    const originalName = docx.name;
-    const base = originalName.toLowerCase().endsWith(".docx") ? originalName.slice(0, -5) : originalName;
-    const outName = `${base}_WITH_CODE.docx`;
+    const originalName = docFile.name;
+    const extLen = fmt.length + 1;
+    const base = originalName.slice(0, -extLen);
+    const outName = `${base}_WITH_CODE.${fmt}`;
     
     saveAs(outBlob, outName);
     log(`Success! Downloaded as: ${outName}`, "good");
@@ -713,7 +791,7 @@
 
   // Event Listeners
   els.projectFolder.addEventListener("change", () => { updateUIState(); log("Project folder loaded.", "info"); });
-  els.docxFile.addEventListener("change", () => { updateUIState(); log("Word document loaded.", "info"); });
+  els.docxFile.addEventListener("change", () => { updateUIState(); log("Document loaded.", "info"); });
   els.includeShaders.addEventListener("change", updateUIState);
   els.excludeDirs.addEventListener("input", updateUIState);
   els.showFileList.addEventListener("change", updateUIState);
@@ -754,12 +832,10 @@
     updateUIState();
   });
 
-  // Adding simple CSS animation for the loading spinner
   const style = document.createElement('style');
   style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
   document.head.appendChild(style);
 
-  // Init
   updateUIState();
 })();
 </script>
