@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Append Source Code to Word</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #09090b;
+      --bg-panel: #18181b;
+      --bg-panel-hover: #27272a;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --text-main: #f8fafc;
+      --text-muted: #a1a1aa;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-focus: rgba(59, 130, 246, 0.5);
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --glow: 0 0 20px rgba(59, 130, 246, 0.15);
+      
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.05), transparent 25%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 16px;
+      background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 968px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .panel-title span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.875rem;
+    }
+
+    /* File Uploaders */
+    .file-area {
+      position: relative;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .file-area:hover {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .file-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .file-area svg {
+      width: 40px;
+      height: 40px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+
+    .file-area .title {
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .file-area .subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .file-area.has-file {
+      border-style: solid;
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    .file-area.has-file svg {
+      color: var(--success);
+    }
+
+    /* Form Controls */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-group label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    input[type="text"] {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--border-focus);
+    }
+
+    /* Toggles */
+    .toggles-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle-label {
+      font-size: 0.875rem;
+      color: var(--text-main);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #3f3f46;
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px var(--primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Buttons */
+    .actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 24px;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-md), var(--glow);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      background: #3f3f46;
+      color: #71717a;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      flex: 0 0 auto;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Terminal Console */
+    .terminal {
+      background: #000;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 250px;
+    }
+
+    .terminal-header {
+      background: #1e1e1e;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot.r { background: #ff5f56; }
+    .dot.y { background: #ffbd2e; }
+    .dot.g { background: #27c93f; }
+
+    .terminal-body {
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: #a9b3dd;
+      overflow-y: auto;
+      max-height: 400px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .log-info { color: #a9b3dd; }
+    .log-warn { color: var(--warning); }
+    .log-bad { color: var(--error); }
+    .log-good { color: var(--success); }
+
+    /* File List Preview */
+    .file-list-preview {
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.1);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Source Code Appendix Builder</h1>
+    <p>Seamlessly inject your codebase into an existing document. Select your project folder and target <code>.docx</code> or <code>.odt</code>, and we'll handle the formatting locally in your browser.</p>
+  </header>
+
+  <div class="main-grid">
+    <!-- Left Column: Inputs -->
+    <div class="panel">
+      <h2 class="panel-title"><span>1</span> Input Sources</h2>
+
+      <div class="file-area" id="dropzoneFolder">
+        <input id="projectFolder" type="file" webkitdirectory directory multiple />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+        </svg>
+        <div class="title" id="folderTitle">Select Project Folder</div>
+        <div class="subtitle" id="folderSubtitle">Click to browse directories</div>
+      </div>
+
+      <div class="file-area" id="dropzoneDocx">
+        <input id="docxFile" type="file" accept=".docx,.odt,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <div class="title" id="docxTitle">Select Target .docx / .odt</div>
+        <div class="subtitle" id="docxSubtitle">Click to browse document files</div>
+      </div>
+
+      <div class="actions">
+        <button id="buildBtn" class="btn-primary" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+          Generate Output Document
+        </button>
+        <button id="resetBtn" class="btn-secondary" type="button" title="Reset All">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: Settings & Status -->
+    <div class="panel">
+      <h2 class="panel-title"><span>2</span> Configuration</h2>
+
+      <div class="input-group">
+        <label for="appendHeader">Appendix Heading Text</label>
+        <input id="appendHeader" type="text" value="Appendix - Source Code" />
+      </div>
+
+      <div class="input-group">
+        <label for="excludeDirs">Exclude Folders <span class="badge">Comma-separated</span></label>
+        <input id="excludeDirs" type="text" value="bin,obj,.git,.vs,packages,.idea" />
+      </div>
+
+      <div class="toggles-grid">
+        <div class="toggle-row">
+          <span class="toggle-label" onclick="document.getElementById('includeShaders').click()">Include shaders (.hlsl, .fx)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="includeShaders" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label" onclick="document.getElementById('includeRelativePath').click()">Label files with relative paths</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="includeRelativePath" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label" onclick="document.getElementById('showFileList').click()">Show detected files preview</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="showFileList">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="fileListPreview" class="file-list-preview"></div>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="dot r"></div>
+          <div class="dot y"></div>
+          <div class="dot g"></div>
+        </div>
+        <div class="terminal-body" id="statusLog">System initialized. Awaiting file inputs...</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+
+  const els = {
+    projectFolder: $("projectFolder"),
+    docxFile: $("docxFile"),
+    dropzoneFolder: $("dropzoneFolder"),
+    dropzoneDocx: $("dropzoneDocx"),
+    folderTitle: $("folderTitle"),
+    folderSubtitle: $("folderSubtitle"),
+    docxTitle: $("docxTitle"),
+    docxSubtitle: $("docxSubtitle"),
+    appendHeader: $("appendHeader"),
+    includeShaders: $("includeShaders"),
+    includeRelativePath: $("includeRelativePath"),
+    excludeDirs: $("excludeDirs"),
+    showFileList: $("showFileList"),
+    fileListPreview: $("fileListPreview"),
+    buildBtn: $("buildBtn"),
+    resetBtn: $("resetBtn"),
+    statusLog: $("statusLog")
+  };
+
+  let candidatesCache = [];
+
+  function log(line, cls = "info"){
+    const span = document.createElement("span");
+    span.className = `log-${cls}`;
+    span.textContent = `> ${line}\n`;
+    
+    if (els.statusLog.textContent.includes("Awaiting file inputs")) {
+      els.statusLog.textContent = "";
+    }
+    
+    els.statusLog.appendChild(span);
+    els.statusLog.scrollTop = els.statusLog.scrollHeight;
+  }
+
+  function setStatusLog(text){
+    els.statusLog.textContent = text + "\n";
+  }
+
+  function getDocFormat() {
+    const files = Array.from(els.docxFile.files || []);
+    if (files.length !== 1) return null;
+    const name = files[0].name.toLowerCase();
+    if (name.endsWith(".odt")) return "odt";
+    if (name.endsWith(".docx")) return "docx";
+    return null;
+  }
+
+  function updateUIState(){
+    const folderFiles = Array.from(els.projectFolder.files || []);
+    const docxFiles = Array.from(els.docxFile.files || []);
+    
+    const hasFolder = folderFiles.length > 0;
+    const hasDoc = docxFiles.length === 1;
+    const fmt = getDocFormat();
+
+    if (hasFolder) {
+      els.dropzoneFolder.classList.add('has-file');
+      els.folderTitle.textContent = "Folder Selected";
+      els.folderSubtitle.textContent = `${folderFiles.length} items detected`;
+    } else {
+      els.dropzoneFolder.classList.remove('has-file');
+      els.folderTitle.textContent = "Select Project Folder";
+      els.folderSubtitle.textContent = "Click to browse directories";
+    }
+
+    if (hasDoc && fmt) {
+      els.dropzoneDocx.classList.add('has-file');
+      els.docxTitle.textContent = docxFiles[0].name;
+      els.docxSubtitle.textContent = `${(docxFiles[0].size / 1024).toFixed(1)} KB — ${fmt.toUpperCase()} format`;
+    } else if (hasDoc && !fmt) {
+      els.dropzoneDocx.classList.remove('has-file');
+      els.docxTitle.textContent = "Unsupported format";
+      els.docxSubtitle.textContent = "Please use .docx or .odt";
+    } else {
+      els.dropzoneDocx.classList.remove('has-file');
+      els.docxTitle.textContent = "Select Target .docx / .odt";
+      els.docxSubtitle.textContent = "Click to browse document files";
+    }
+
+    els.buildBtn.disabled = !(hasFolder && hasDoc && fmt);
+
+    if (hasFolder) parseCandidates();
+  }
+
+  function parseCandidates() {
+    const folderFiles = Array.from(els.projectFolder.files || []);
+    const includeShaders = !!els.includeShaders.checked;
+    const excludeDirs = els.excludeDirs.value.split(",").map(s => s.trim()).filter(Boolean);
+
+    const allowedExt = new Set([".cs"]);
+    if (includeShaders){
+      allowedExt.add(".hlsl");
+      allowedExt.add(".fx");
+    }
+
+    candidatesCache = [];
+    for (const f of folderFiles){
+      const rel = f.webkitRelativePath || f.name;
+      const ext = rel.lastIndexOf(".") >= 0 ? rel.substring(rel.lastIndexOf(".")).toLowerCase() : "";
+      
+      if (!allowedExt.has(ext)) continue;
+      
+      const lowerRel = rel.toLowerCase().replaceAll("\\","/");
+      const isExcluded = excludeDirs.some(d => {
+        const token = `/${d.toLowerCase().replaceAll("\\","/").replaceAll(/^\/+|\/+$/g,"")}/`;
+        return lowerRel.includes(token);
+      });
+
+      if (!isExcluded) {
+        candidatesCache.push({ file: f, rel });
+      }
+    }
+
+    candidatesCache.sort((a,b)=> a.rel.localeCompare(b.rel));
+
+    if (els.showFileList.checked) {
+      els.fileListPreview.style.display = "block";
+      if (candidatesCache.length > 0) {
+        els.fileListPreview.textContent = candidatesCache.map(x => x.rel).join("\n");
+      } else {
+        els.fileListPreview.textContent = "No valid code files found with current filters.";
+      }
+    } else {
+      els.fileListPreview.style.display = "none";
+    }
+  }
+
+  // ── DOCX XML helpers ──────────────────────────────────────
+  function escapeXml(s){
+    return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&apos;");
+  }
+
+  function wP(text, style){
+    const t = escapeXml(text);
+    const pPr = style ? `<w:pPr><w:pStyle w:val="${style}"/></w:pPr>` : "";
+    return `<w:p>${pPr}<w:r><w:t xml:space="preserve">${t}</w:t></w:r></w:p>`;
+  }
+
+  function wCodeLines(code){
+    const lines = code.replaceAll("\r\n","\n").replaceAll("\r","\n").split("\n");
+    const out = [];
+    for (const line of lines){
+      const t = escapeXml(line.replaceAll("\t","    "));
+      out.push(
+        `<w:p><w:pPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/><w:sz w:val="18"/><w:szCs w:val="18"/></w:rPr><w:t xml:space="preserve">${t}</w:t></w:r></w:p>`
+      );
+    }
+    return out.join("");
+  }
+
+  function makeDocxAppendixXml(appendHeader, fileEntries){
+    let xml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>`;
+    xml += wP(appendHeader, "Heading1") + wP("", null);
+    for (const entry of fileEntries){
+      xml += wP(entry.label, "Heading2") + wCodeLines(entry.code) + wP("", null) + wP("", null);
+    }
+    return xml;
+  }
+
+  // ── ODT XML helpers ───────────────────────────────────────
+  function odtHeading(text, level){
+    const t = escapeXml(text);
+    return `<text:h text:style-name="Heading_20_${level}" text:outline-level="${level}">${t}</text:h>`;
+  }
+
+  function odtCodeLines(code){
+    const lines = code.replaceAll("\r\n","\n").replaceAll("\r","\n").split("\n");
+    const out = [];
+    for (const line of lines){
+      const t = escapeXml(line.replaceAll("\t","    "));
+      out.push(`<text:p text:style-name="Code"><text:span text:style-name="CodeSpan">${t}</text:span></text:p>`);
+    }
+    return out.join("");
+  }
+
+  function makeOdtAppendixXml(appendHeader, fileEntries){
+    let xml = `<text:p text:style-name="Standard"/>`;
+    xml += odtHeading(appendHeader, 1);
+    xml += `<text:p text:style-name="Standard"/>`;
+    for (const entry of fileEntries){
+      xml += odtHeading(entry.label, 2);
+      xml += odtCodeLines(entry.code);
+      xml += `<text:p text:style-name="Standard"/>`;
+    }
+    return xml;
+  }
+
+  function ensureOdtCodeStyles(stylesXml) {
+    const codeParaStyle = `<style:style style:name="Code" style:family="paragraph" style:parent-style-name="Standard"><style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0cm"/><style:text-properties style:font-name="Consolas" fo:font-size="9pt"/></style:style>`;
+    const codeSpanStyle = `<style:style style:name="CodeSpan" style:family="text"><style:text-properties style:font-name="Consolas" fo:font-size="9pt"/></style:style>`;
+    const fontDecl = `<style:font-face style:name="Consolas" svg:font-family="Consolas" style:font-family-generic="modern" style:font-pitch="fixed"/>`;
+
+    if (!stylesXml.includes('style:name="Code"')) {
+      stylesXml = stylesXml.replace("</office:automatic-styles>", codeParaStyle + codeSpanStyle + "</office:automatic-styles>");
+    }
+    if (!stylesXml.includes('style:name="Consolas"')) {
+      stylesXml = stylesXml.replace("</office:font-face-decls>", fontDecl + "</office:font-face-decls>");
+    }
+    return stylesXml;
+  }
+
+  // ── Build (format-agnostic) ───────────────────────────────
+  async function build(){
+    setStatusLog("> Build process initiated...");
+    
+    if (candidatesCache.length === 0){
+      log("No source files found. Check your exclude list and folder selection.", "warn");
+      return;
+    }
+
+    const fmt = getDocFormat();
+    log(`Detected format: ${fmt.toUpperCase()}`);
+    log(`Appending ${candidatesCache.length} source files...`);
+
+    const docFile = els.docxFile.files[0];
+    const appendHeader = (els.appendHeader.value || "Appendix - Source Code").trim();
+    const includeRel = !!els.includeRelativePath.checked;
+
+    log(`Loading .${fmt} package...`);
+    const zip = await JSZip.loadAsync(await docFile.arrayBuffer());
+
+    log("Reading code contents...");
+    const fileEntries = [];
+    for (let i=0; i<candidatesCache.length; i++){
+      const {file, rel} = candidatesCache[i];
+      const label = includeRel ? rel.replaceAll("\\","/") : rel.split(/[\\/]/).pop();
+      const code = await file.text();
+      fileEntries.push({ label, code });
+      
+      if ((i+1) % 25 === 0) log(`Processed ${i+1}/${candidatesCache.length} files...`);
+    }
+
+    log("Injecting XML structure...");
+
+    if (fmt === "docx") {
+      const documentXmlFile = zip.file("word/document.xml");
+      if (!documentXmlFile) throw new Error("Missing word/document.xml inside docx");
+      let documentXml = await documentXmlFile.async("string");
+
+      const appendixXml = makeDocxAppendixXml(appendHeader, fileEntries);
+      const idx = documentXml.lastIndexOf("</w:body>");
+      if (idx < 0) throw new Error("Could not find </w:body> in document.xml");
+      documentXml = documentXml.slice(0, idx) + appendixXml + documentXml.slice(idx);
+      zip.file("word/document.xml", documentXml);
+
+    } else if (fmt === "odt") {
+      const contentXmlFile = zip.file("content.xml");
+      if (!contentXmlFile) throw new Error("Missing content.xml inside odt");
+      let contentXml = await contentXmlFile.async("string");
+
+      // Inject code styles into content.xml automatic styles
+      contentXml = ensureOdtCodeStyles(contentXml);
+
+      // Also inject into styles.xml if it exists
+      const stylesXmlFile = zip.file("styles.xml");
+      if (stylesXmlFile) {
+        let stylesXml = await stylesXmlFile.async("string");
+        stylesXml = ensureOdtCodeStyles(stylesXml);
+        zip.file("styles.xml", stylesXml);
+      }
+
+      const appendixXml = makeOdtAppendixXml(appendHeader, fileEntries);
+      const idx = contentXml.lastIndexOf("</office:text>");
+      if (idx < 0) throw new Error("Could not find </office:text> in content.xml");
+      contentXml = contentXml.slice(0, idx) + appendixXml + contentXml.slice(idx);
+      zip.file("content.xml", contentXml);
+    }
+
+    log(`Packaging new .${fmt} file (this may take a moment)...`);
+    const outBlob = await zip.generateAsync({ type: "blob" });
+
+    const originalName = docFile.name;
+    const extLen = fmt.length + 1;
+    const base = originalName.slice(0, -extLen);
+    const outName = `${base}_WITH_CODE.${fmt}`;
+    
+    saveAs(outBlob, outName);
+    log(`Success! Downloaded as: ${outName}`, "good");
+  }
+
+  // Event Listeners
+  els.projectFolder.addEventListener("change", () => { updateUIState(); log("Project folder loaded.", "info"); });
+  els.docxFile.addEventListener("change", () => { updateUIState(); log("Document loaded.", "info"); });
+  els.includeShaders.addEventListener("change", updateUIState);
+  els.excludeDirs.addEventListener("input", updateUIState);
+  els.showFileList.addEventListener("change", updateUIState);
+
+  els.buildBtn.addEventListener("click", async () => {
+    els.buildBtn.disabled = true;
+    els.buildBtn.innerHTML = `
+      <svg class="animate-spin" style="animation: spin 1s linear infinite;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg> Processing...
+    `;
+    try {
+      await build();
+    } catch (e) {
+      log(String(e.message || e), "bad");
+      console.error(e);
+    } finally {
+      els.buildBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg> Generate Output Document
+      `;
+      updateUIState();
+    }
+  });
+
+  els.resetBtn.addEventListener("click", () => {
+    els.projectFolder.value = "";
+    els.docxFile.value = "";
+    els.appendHeader.value = "Appendix - Source Code";
+    els.includeShaders.checked = true;
+    els.includeRelativePath.checked = true;
+    els.excludeDirs.value = "bin,obj,.git,.vs,packages,.idea";
+    els.showFileList.checked = false;
+    
+    setStatusLog("> System initialized. Awaiting file inputs...");
+    updateUIState();
+  });
+
+  const style = document.createElement('style');
+  style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
+  document.head.appendChild(style);
+
+  updateUIState();
+})();
+</script>
+</body>
+</html>
