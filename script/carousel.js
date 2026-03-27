@@ -1,11 +1,13 @@
-// Continuous Infinite Carousel
+// Continuous Infinite Carousel with Spotlight + Click-to-lock
 let isExpanded = false;
-let scrollSpeed = 0.5; // pixels per frame (slower for smooth effect)
+let scrollSpeed = 0.4;
 let animationId = null;
 let isPaused = false;
+let isLocked = false; // Click lock state
 let scrollPosition = 0;
 let originalContentWidth = 0;
-let setupDebounceTimer = null;
+let activeSlide = null;
+let lockedSlide = null;
 
 function initCarousel() {
     const track = document.getElementById('carouselTrack');
@@ -13,58 +15,219 @@ function initCarousel() {
 
     if (!track || !container) return;
 
-    // Stop any existing animation
     stopContinuousScroll();
     scrollPosition = 0;
 
-    // Clone items for infinite scroll effect
     setupInfiniteScroll();
-
-    // Start continuous scroll
     startContinuousScroll();
-
-    // Setup hover listeners on individual slides
     setupSlideHoverListeners();
 }
 
 function setupSlideHoverListeners() {
     const slides = document.querySelectorAll('.carousel-slide');
+
     slides.forEach(slide => {
-        slide.addEventListener('mouseenter', () => {
-            if (!isExpanded) isPaused = true;
+        // Remove old listeners by cloning
+        const newSlide = slide.cloneNode(true);
+        slide.parentNode.replaceChild(newSlide, slide);
+
+        newSlide.addEventListener('mouseenter', () => {
+            if (isExpanded) return;
+
+            // Always pause on hover
+            isPaused = true;
+
+            // If not locked, update active/spotlight
+            if (!isLocked) {
+                setActiveSlide(newSlide);
+                populateSpotlight(newSlide);
+            }
         });
-        slide.addEventListener('mouseleave', () => {
-            if (!isExpanded) isPaused = false;
+
+        newSlide.addEventListener('mouseleave', () => {
+            if (isExpanded) return;
+
+            // Only resume if not locked
+            if (!isLocked) {
+                isPaused = false;
+            }
+        });
+
+        // Click to lock/unlock
+        newSlide.addEventListener('click', (e) => {
+            if (isExpanded) return;
+
+            // Don't lock if clicking a link inside the card
+            if (e.target.closest('a')) return;
+
+            if (isLocked && lockedSlide === newSlide) {
+                // Unlock - clicking same card again
+                unlock();
+            } else {
+                // Lock on this card
+                lock(newSlide);
+            }
         });
     });
+
+    // Clicking outside the carousel area unlocks
+    document.addEventListener('click', (e) => {
+        if (!isLocked) return;
+        const carousel = document.getElementById('projectCarousel');
+        const spotlight = document.getElementById('projectSpotlight');
+        if (carousel && !carousel.contains(e.target) && spotlight && !spotlight.contains(e.target)) {
+            unlock();
+        }
+    });
+
+    // Leaving carousel when not locked clears spotlight
+    const container = document.getElementById('projectCarousel');
+    if (container) {
+        container.addEventListener('mouseleave', () => {
+            if (isLocked) return;
+            setTimeout(() => {
+                if (!container.matches(':hover') && !isLocked) {
+                    clearSpotlight();
+                    if (activeSlide) {
+                        activeSlide.classList.remove('active');
+                        activeSlide = null;
+                    }
+                }
+            }, 300);
+        });
+    }
+}
+
+function lock(slide) {
+    // Remove old lock
+    if (lockedSlide) {
+        lockedSlide.classList.remove('locked');
+    }
+
+    isLocked = true;
+    isPaused = true;
+    lockedSlide = slide;
+    slide.classList.add('locked');
+
+    setActiveSlide(slide);
+    populateSpotlight(slide);
+}
+
+function unlock() {
+    if (lockedSlide) {
+        lockedSlide.classList.remove('locked');
+    }
+    isLocked = false;
+    isPaused = false;
+    lockedSlide = null;
+    clearSpotlight();
+    if (activeSlide) {
+        activeSlide.classList.remove('active');
+        activeSlide = null;
+    }
+}
+
+function setActiveSlide(slide) {
+    if (activeSlide) activeSlide.classList.remove('active');
+    slide.classList.add('active');
+    activeSlide = slide;
+}
+
+function populateSpotlight(slide) {
+    const spotlight = document.getElementById('projectSpotlight');
+    if (!spotlight) return;
+
+    const card = slide.querySelector('.section-window');
+    if (!card) return;
+
+    const logo = card.querySelector('.project-logo');
+    const name = card.querySelector('h1');
+    const desc = card.querySelector('h3');
+    const linksContainer = card.querySelector('.links');
+    const linkImgs = card.querySelectorAll('a:has(.link-img), a:has(.svg)');
+
+    const spotLogo = document.getElementById('spotlightLogo');
+    if (logo && spotLogo) {
+        spotLogo.src = logo.src;
+        spotLogo.style.display = 'block';
+    } else if (spotLogo) {
+        spotLogo.style.display = 'none';
+    }
+
+    const spotName = document.getElementById('spotlightName');
+    if (name && spotName) {
+        spotName.textContent = name.textContent;
+    }
+
+    const spotDesc = document.getElementById('spotlightDesc');
+    if (desc && spotDesc) {
+        spotDesc.textContent = desc.textContent;
+    }
+
+    const spotLinks = document.getElementById('spotlightLinks');
+    if (spotLinks) {
+        spotLinks.innerHTML = '';
+
+        if (linksContainer) {
+            const iconLinks = linksContainer.querySelectorAll('a');
+            iconLinks.forEach(a => {
+                if (a.href) {
+                    const clone = a.cloneNode(true);
+                    clone.classList.add('spotlight-icon-link');
+                    spotLinks.appendChild(clone);
+                }
+            });
+        }
+
+        linkImgs.forEach(a => {
+            const clone = a.cloneNode(true);
+            clone.classList.add('spotlight-badge-link');
+            spotLinks.appendChild(clone);
+        });
+    }
+
+    spotlight.classList.add('visible');
+    spotlight.querySelector('.spotlight-hint').style.display = 'none';
+    spotlight.querySelector('.spotlight-inner').style.display = 'flex';
+}
+
+function clearSpotlight() {
+    const spotlight = document.getElementById('projectSpotlight');
+    if (!spotlight) return;
+
+    spotlight.classList.remove('visible');
+    setTimeout(() => {
+        if (!spotlight.classList.contains('visible')) {
+            spotlight.querySelector('.spotlight-hint').style.display = 'flex';
+            spotlight.querySelector('.spotlight-inner').style.display = 'none';
+        }
+    }, 300);
 }
 
 function setupInfiniteScroll() {
     const track = document.getElementById('carouselTrack');
     if (!track) return;
 
-    // Remove existing clones first
     const existingClones = track.querySelectorAll('.clone');
     existingClones.forEach(clone => clone.remove());
 
     const slides = Array.from(track.children).filter(s => !s.classList.contains('clone'));
 
-    // Calculate and store original content width before cloning
     originalContentWidth = slides.reduce((total, slide) => {
         const style = window.getComputedStyle(slide);
         const marginLeft = parseFloat(style.marginLeft) || 0;
         const marginRight = parseFloat(style.marginRight) || 0;
-        return total + slide.offsetWidth + marginLeft + marginRight + 16; // 16px for gap
+        return total + slide.offsetWidth + marginLeft + marginRight + 14;
     }, 0);
 
-    // Clone all slides and append for seamless loop
-    slides.forEach(slide => {
-        const clone = slide.cloneNode(true);
-        clone.classList.add('clone');
-        track.appendChild(clone);
-    });
+    for (let copy = 0; copy < 2; copy++) {
+        slides.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            clone.classList.add('clone');
+            track.appendChild(clone);
+        });
+    }
 
-    // Setup hover listeners on clones too
     setTimeout(setupSlideHoverListeners, 50);
 }
 
@@ -72,7 +235,6 @@ function startContinuousScroll() {
     const track = document.getElementById('carouselTrack');
     if (!track || isExpanded) return;
 
-    // Stop any existing animation first
     if (animationId) {
         cancelAnimationFrame(animationId);
         animationId = null;
@@ -82,10 +244,8 @@ function startContinuousScroll() {
         if (!isPaused && !isExpanded) {
             scrollPosition += scrollSpeed;
 
-            // Use pre-calculated original width, fallback to scrollWidth/2
-            const resetPoint = originalContentWidth > 0 ? originalContentWidth : track.scrollWidth / 2;
+            const resetPoint = originalContentWidth > 0 ? originalContentWidth : track.scrollWidth / 3;
 
-            // Reset position seamlessly when we've scrolled through original content
             if (scrollPosition >= resetPoint) {
                 scrollPosition = scrollPosition - resetPoint;
             }
@@ -109,30 +269,52 @@ function toggleCarouselExpand() {
     const track = document.getElementById('carouselTrack');
     const toggleBtn = document.getElementById('toggleProjects');
     const container = document.getElementById('projectCarousel');
+    const spotlight = document.getElementById('projectSpotlight');
 
     if (!track) return;
+
+    // Unlock if locked
+    if (isLocked) unlock();
 
     isExpanded = !isExpanded;
 
     if (isExpanded) {
-        // Expand to show all - remove clones first
         stopContinuousScroll();
 
-        // Remove cloned elements
         const clones = track.querySelectorAll('.clone');
         clones.forEach(clone => clone.remove());
 
         track.classList.add('expanded');
         track.style.transform = 'translateX(0)';
         container.classList.add('expanded');
-        toggleBtn.textContent = 'Collapse';
+        if (spotlight) spotlight.style.display = 'none';
+        toggleBtn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i> Carousel';
+
+        // Stagger animation
+        const slides = track.querySelectorAll('.carousel-slide');
+        slides.forEach((slide, i) => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateY(16px)';
+            setTimeout(() => {
+                slide.style.opacity = '1';
+                slide.style.transform = 'translateY(0)';
+            }, 40 + i * 30);
+        });
     } else {
-        // Collapse back to carousel
         track.classList.remove('expanded');
         container.classList.remove('expanded');
-        toggleBtn.textContent = 'Show All';
+        if (spotlight) {
+            spotlight.style.display = '';
+            clearSpotlight();
+        }
+        toggleBtn.innerHTML = '<i class="fa-solid fa-grip"></i> Show All';
 
-        // Re-setup infinite scroll
+        const slides = track.querySelectorAll('.carousel-slide');
+        slides.forEach(slide => {
+            slide.style.opacity = '';
+            slide.style.transform = '';
+        });
+
         scrollPosition = 0;
         setupInfiniteScroll();
         startContinuousScroll();
@@ -143,8 +325,6 @@ function toggleCarouselExpand() {
 function carouselNext() {}
 function carouselPrev() {}
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     // Carousel will be initialized after projects are loaded
 });
-
