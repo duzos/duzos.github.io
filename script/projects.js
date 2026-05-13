@@ -475,8 +475,12 @@ function updateProjectsWindow() {
     }, 100);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    window.addEventListener('load', () => {
-        updateProjectsWindow();
-    });
-});
+// Build the carousel as soon as the DOM is parsed. Previously this waited on
+// `window.load`, which waits for every <img> — including all the remote shield
+// badges — so the Modrinth fetches almost always resolved first and tried to
+// patch DOM nodes that didn't exist yet.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateProjectsWindow);
+} else {
+    updateProjectsWindow();
+}
