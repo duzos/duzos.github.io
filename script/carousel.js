@@ -15,6 +15,9 @@ function initCarousel() {
 
     if (!track || !container) return;
 
+    // Keep the carousel static for users who prefer reduced motion
+    scrollSpeed = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.4;
+
     stopContinuousScroll();
     scrollPosition = 0;
 
@@ -143,8 +146,6 @@ function populateSpotlight(slide) {
     const logo = card.querySelector('.project-logo');
     const name = card.querySelector('h1');
     const desc = card.querySelector('h3');
-    const linksContainer = card.querySelector('.links');
-    const linkImgs = card.querySelectorAll('a:has(.link-img), a:has(.svg)');
 
     const spotLogo = document.getElementById('spotlightLogo');
     if (logo && spotLogo) {
@@ -168,18 +169,7 @@ function populateSpotlight(slide) {
     if (spotLinks) {
         spotLinks.innerHTML = '';
 
-        if (linksContainer) {
-            const iconLinks = linksContainer.querySelectorAll('a');
-            iconLinks.forEach(a => {
-                if (a.href) {
-                    const clone = a.cloneNode(true);
-                    clone.classList.add('spotlight-icon-link');
-                    spotLinks.appendChild(clone);
-                }
-            });
-        }
-
-        linkImgs.forEach(a => {
+        card.querySelectorAll('a.chip').forEach(a => {
             const clone = a.cloneNode(true);
             clone.classList.add('spotlight-badge-link');
             spotLinks.appendChild(clone);

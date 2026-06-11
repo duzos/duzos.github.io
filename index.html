@@ -8,10 +8,26 @@
 
         <meta name="description" content="duzo - Java Developer, Minecraft Modder, and Creator">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#0b0b0d">
+
+        <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+        <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://duzo.is-a.dev/">
+        <meta property="og:title" content="duzo | Java Developer">
+        <meta property="og:description" content="duzo - Java Developer, Minecraft Modder, and Creator">
+        <meta property="og:image" content="https://duzo.is-a.dev/img/og-banner.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="duzo | Java Developer">
+        <meta name="twitter:description" content="duzo - Java Developer, Minecraft Modder, and Creator">
+        <meta name="twitter:image" content="https://duzo.is-a.dev/img/og-banner.png">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="style.css">
 
@@ -19,20 +35,17 @@
         <script defer data-domain="duzo.is-a.dev" src="https://analytics.is-a.dev/js/script.js"></script>
         <script src="./script/carousel.js" defer></script>
         <script src="./script/projects.js" defer></script>
-        <script src="./script/windows.js" defer></script>
         <script src="./script/spotify.js" defer></script>
         <script src="./script/animations.js" defer></script>
     </head>
     <body>
 
     <!-- Noise texture overlay -->
-    <div class="noise-overlay"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
-        <a href="#" class="nav-brand">
-            <span class="nav-brand-bracket">[</span>duzo<span class="nav-brand-bracket">]</span>
-        </a>
+        <a href="#" class="nav-brand">DUZO<span class="nav-brand-star">★</span></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#about"><span class="nav-index">01</span>About</a></li>
             <li><a href="#skills"><span class="nav-index">02</span>Skills</a></li>
@@ -52,292 +65,313 @@
         </div>
     </nav>
 
-    <div class="parallax">
-        <div class="parallax__layer parallax__layer--back">
-            <div class="gradient"></div>
+    <main>
+        <!-- Hero -->
+        <header class="hero">
+            <div class="hero-halftone" aria-hidden="true"></div>
+            <div class="hero-slash" aria-hidden="true"></div>
+            <div class="hero-slash hero-slash-2" aria-hidden="true"></div>
+            <p class="hero-prefix animate-hero">// hello world</p>
+            <h1 class="title-text animate-hero">DUZO</h1>
+            <p class="title-tagline animate-hero">
+                <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank">Java Developer</a>
+                <span class="tagline-sep">★</span>
+                Minecraft Modder
+                <span class="tagline-sep">★</span>
+                Creator
+            </p>
+            <div class="hero-cta animate-hero">
+                <a href="#projects" class="hero-btn"><span>View Projects</span></a>
+                <a href="#contact" class="hero-btn hero-btn-ghost"><span>Get in Touch</span></a>
+            </div>
+            <div class="scroll-indicator" aria-hidden="true">
+                <span class="chevron"></span>
+                <span class="chevron"></span>
+            </div>
+        </header>
+
+        <!-- Marquee strip -->
+        <div class="marquee marquee-tilt" aria-hidden="true">
+            <div class="marquee-track">
+                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
+                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
+                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
+                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
+            </div>
         </div>
-        <div class="parallax__layer parallax__layer--base">
-            <main>
-                <!-- Hero -->
-                <div class="title-border">
-                    <div class="hero-grid-lines"></div>
-                    <p class="hero-prefix animate-hero">// hello world</p>
-                    <h1 class="title-text animate-hero">duzo</h1>
-                    <p class="title-tagline animate-hero">
-                        <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank">Java Developer</a>
-                        <span class="tagline-sep">/</span>
-                        Minecraft Modder
-                        <span class="tagline-sep">/</span>
-                        Creator
-                    </p>
-                    <div class="hero-cta animate-hero">
-                        <a href="#projects" class="hero-btn">View Projects</a>
-                        <a href="#contact" class="hero-btn hero-btn-ghost">Get in Touch</a>
+
+        <!-- About -->
+        <section id="about">
+            <div class="section-header">
+                <span class="section-ghost" aria-hidden="true">ABOUT</span>
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-layout">
+                <div class="about-left">
+                    <div class="about-main animate-on-scroll">
+                        <div class="about-text">
+                            <p class="about-greeting">hello, my name is <span class="greeting-name">James</span>.</p>
+                            <p>I make Minecraft mods, mostly in <strong>Java</strong> — 20+ of them, sitting at over half a million downloads.</p>
+                            <p>when I'm not modding I help run the <a href="https://minebounds.com/" target="_blank">MineBounds</a> server network, and build whatever else sounds fun — websites, card games, the occasional cursed experiment.</p>
+                            <div class="a-levels">
+                                <span class="a-level-tag"><strong>A*</strong> Computer Science</span>
+                                <span class="a-level-tag"><strong>B</strong> Mathematics</span>
+                                <span class="a-level-tag"><strong>B</strong> Physics</span>
+                            </div>
+                        </div>
+                        <div class="about-avatar">
+                            <div class="avatar-frame">
+                                <img class="avatar-img" src="./img/hollybolly.png" alt="duzo's avatar">
+                            </div>
+                            <div class="avatar-status">
+                                <span class="status-dot"></span>
+                                <span class="status-text">Online</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="scroll-indicator">
-                        <div class="scroll-line"></div>
+                    <div class="section-window spotify-widget animate-on-scroll" id="spotifyWidget">
+                        <div class="now-playing-badge" id="nowPlayingBadge" style="display: none;">
+                            <div class="equalizer">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            Now Playing
+                        </div>
+                        <div class="spotify-content">
+                            <h3 class="spotify-label">now spinning..</h3>
+                            <p id="spotify-song"></p>
+                            <div class="vinyl-wrap">
+                                <img id="spotify-album-cover" src="./img/spotify.png" alt="Album cover">
+                            </div>
+                            <p id="spotify-album-info"></p>
+                        </div>
                     </div>
                 </div>
+                <div class="about-right">
+                    <div class="section-window cat-card polaroid animate-on-scroll">
+                        <img class="rounded" src="./img/cat.jpg" alt="My cat" loading="lazy">
+                        <h3>my cat</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <!-- About -->
-                <section id="about">
-                    <div class="section-header">
-                        <span class="section-number">01</span>
-                        <h2 class="section-title">About Me</h2>
-                        <div class="section-line"></div>
-                    </div>
-                    <div class="about-layout">
-                        <div class="about-left">
-                            <div class="about-main animate-on-scroll">
-                                <div class="about-text">
-                                    <p class="about-greeting">hello, my name is <strong>james</strong>.</p>
-                                    <p>I am an experienced developer but I primarily use Java to develop Minecraft Mods.</p>
-                                    <div class="a-levels">
-                                        <span class="a-level-tag"><strong>A*</strong> Computer Science</span>
-                                        <span class="a-level-tag"><strong>B</strong> Mathematics</span>
-                                        <span class="a-level-tag"><strong>B</strong> Physics</span>
-                                    </div>
-                                </div>
-                                <div class="about-avatar">
-                                    <img class="avatar-img" src="https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=256" alt="Profile picture">
-                                    <div class="avatar-status">
-                                        <span class="status-dot"></span>
-                                        <span class="status-text">Online</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section-window spotify-widget animate-on-scroll" id="spotifyWidget">
-                                <div class="now-playing-badge" id="nowPlayingBadge" style="display: none;">
-                                    <div class="equalizer">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    Now Playing
-                                </div>
-                                <div class="spotify-content">
-                                    <h3 class="spotify-label">listening to..</h3>
-                                    <p id="spotify-song"></p>
-                                    <img id="spotify-album-cover" src="./img/spotify.png" alt="Album cover">
-                                    <p id="spotify-album-info"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="about-right">
-                            <div class="section-window cat-card animate-on-scroll">
-                                <h3>my cat</h3>
-                                <img class="rounded" src="./img/cat.jpg" alt="My cat">
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <!-- Skills -->
+        <section id="skills">
+            <div class="section-header">
+                <span class="section-ghost" aria-hidden="true">SKILLS</span>
+                <span class="section-number">02</span>
+                <h2 class="section-title">Tech Stack</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid animate-on-scroll">
+                <a href="https://www.java.com/" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-java"></i>
+                    <span>Java</span>
+                </a>
+                <a href="https://www.python.org/" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-python"></i>
+                    <span>Python</span>
+                </a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-js"></i>
+                    <span>JavaScript</span>
+                </a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-html5"></i>
+                    <span>HTML/CSS</span>
+                </a>
+                <a href="https://git-scm.com/" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-git-alt"></i>
+                    <span>Git</span>
+                </a>
+                <a href="https://fabricmc.net/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>Fabric</span>
+                </a>
+                <a href="https://neoforged.net/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>Forge</span>
+                </a>
+                <a href="https://www.linux.org/" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-linux"></i>
+                    <span>Linux</span>
+                </a>
+                <a href="https://www.mysql.com/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-database"></i>
+                    <span>SQL</span>
+                </a>
+                <a href="https://www.docker.com/" target="_blank" class="skill-item">
+                    <i class="fa-brands fa-docker"></i>
+                    <span>Docker</span>
+                </a>
+                <a href="https://gradle.org/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>Gradle</span>
+                </a>
+                <a href="https://www.gnu.org/software/bash/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span>Bash</span>
+                </a>
+                <a href="https://claude.ai/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Claude</span>
+                </a>
+                <a href="https://www.cursor.com/" target="_blank" class="skill-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Cursor</span>
+                </a>
+            </div>
+        </section>
 
-                <!-- Skills -->
-                <section id="skills">
-                    <div class="section-header">
-                        <span class="section-number">02</span>
-                        <h2 class="section-title">Tech Stack</h2>
-                        <div class="section-line"></div>
+        <!-- Projects -->
+        <section id="projects">
+            <div class="section-header">
+                <span class="section-ghost" aria-hidden="true">WORK</span>
+                <span class="section-number">03</span>
+                <h2 class="section-title">Projects</h2>
+                <div class="section-line"></div>
+                <div class="project-stats" id="projectStats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="statProjects">0</span>
+                        <span class="stat-label">projects</span>
                     </div>
-                    <div class="skills-grid animate-on-scroll">
-                        <a href="https://www.java.com/" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-java"></i>
-                            <span>Java</span>
-                        </a>
-                        <a href="https://www.python.org/" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-python"></i>
-                            <span>Python</span>
-                        </a>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-js"></i>
-                            <span>JavaScript</span>
-                        </a>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-html5"></i>
-                            <span>HTML/CSS</span>
-                        </a>
-                        <a href="https://git-scm.com/" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-git-alt"></i>
-                            <span>Git</span>
-                        </a>
-                        <a href="https://fabricmc.net/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-cube"></i>
-                            <span>Fabric</span>
-                        </a>
-                        <a href="https://neoforged.net/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-fire"></i>
-                            <span>Forge</span>
-                        </a>
-                        <a href="https://www.linux.org/" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-linux"></i>
-                            <span>Linux</span>
-                        </a>
-                        <a href="https://www.mysql.com/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-database"></i>
-                            <span>SQL</span>
-                        </a>
-                        <a href="https://www.docker.com/" target="_blank" class="skill-item">
-                            <i class="fa-brands fa-docker"></i>
-                            <span>Docker</span>
-                        </a>
-                        <a href="https://gradle.org/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-gears"></i>
-                            <span>Gradle</span>
-                        </a>
-                        <a href="https://www.gnu.org/software/bash/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-terminal"></i>
-                            <span>Bash</span>
-                        </a>
-                        <a href="https://claude.ai/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-robot"></i>
-                            <span>Claude</span>
-                        </a>
-                        <a href="https://www.cursor.com/" target="_blank" class="skill-item">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>Cursor</span>
-                        </a>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="statDownloads">0</span>
+                        <span class="stat-label">downloads</span>
                     </div>
-                </section>
+                </div>
+            </div>
 
-                <!-- Projects -->
-                <section id="projects">
-                    <div class="section-header">
-                        <span class="section-number">03</span>
-                        <h2 class="section-title">Projects</h2>
-                        <div class="section-line"></div>
-                        <div class="project-stats" id="projectStats">
-                            <div class="stat-item">
-                                <span class="stat-number" id="statProjects">0</span>
-                                <span class="stat-label">projects</span>
-                            </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-item">
-                                <span class="stat-number" id="statDownloads">0</span>
-                                <span class="stat-label">downloads</span>
-                            </div>
+            <!-- GitHub Stats -->
+            <div class="github-stats animate-on-scroll">
+                <a href="https://github.com/duzos" target="_blank">
+                    <img src="https://github-readme-stats-ashy-one-11.vercel.app/api?username=duzos&show_icons=true&theme=transparent&title_color=e1062c&text_color=f7f3e8&icon_color=e1062c&border_color=2a2a2e&custom_title=Stats&bg_color=0b0b0d" alt="GitHub Stats" loading="lazy">
+                </a>
+                <a href="https://github.com/duzos" target="_blank">
+                    <img src="https://github-readme-stats-ashy-one-11.vercel.app/api/top-langs/?username=duzos&show_icons=true&layout=compact&theme=transparent&title_color=e1062c&text_color=f7f3e8&border_color=2a2a2e&bg_color=0b0b0d" alt="Top Languages" loading="lazy">
+                </a>
+            </div>
+
+            <!-- Featured Project -->
+            <div class="featured-project animate-on-scroll" id="featuredProject">
+                <div class="featured-badge"><i class="fa-solid fa-star"></i> Featured</div>
+                <div class="featured-content" id="featuredContent">
+                    <div class="featured-skeleton">
+                        <div class="skeleton-circle"></div>
+                        <div class="skeleton-lines">
+                            <div class="skeleton-line skeleton-line-title"></div>
+                            <div class="skeleton-line skeleton-line-desc"></div>
+                            <div class="skeleton-line skeleton-line-short"></div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- GitHub Stats -->
-                    <div class="github-stats animate-on-scroll">
-                        <a href="https://github.com/duzos" target="_blank">
-                            <img src="https://github-readme-stats-ashy-one-11.vercel.app/api?username=duzos&show_icons=true&theme=transparent&title_color=3ddc84&text_color=c8d1dc&icon_color=3ddc84&border_color=1a2b22&custom_title=Stats&bg_color=0a100d" alt="GitHub Stats">
+            <!-- Project Spotlight (calling card) -->
+            <div class="project-spotlight" id="projectSpotlight">
+                <div class="spotlight-inner">
+                    <div class="spotlight-left">
+                        <img class="spotlight-logo" id="spotlightLogo" src="" alt="">
+                        <div class="spotlight-meta">
+                            <h3 class="spotlight-name" id="spotlightName"></h3>
+                            <p class="spotlight-desc" id="spotlightDesc"></p>
+                        </div>
+                    </div>
+                    <div class="spotlight-links" id="spotlightLinks"></div>
+                </div>
+                <div class="spotlight-hint">
+                    <span>hover or click a project below</span>
+                </div>
+            </div>
+
+            <!-- Project Carousel -->
+            <div class="carousel-container animate-on-scroll" id="projectCarousel">
+                <div class="carousel-fade carousel-fade-left"></div>
+                <div class="carousel-fade carousel-fade-right"></div>
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+            <div class="carousel-controls">
+                <button id="toggleProjects" onclick="toggleCarouselExpand()">
+                    <i class="fa-solid fa-grip"></i> Show All
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="section-header">
+                <span class="section-ghost" aria-hidden="true">HELLO</span>
+                <span class="section-number">04</span>
+                <h2 class="section-title">Contact</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-layout">
+                <div class="contact-main animate-on-scroll">
+                    <h3 class="contact-heading">Send a calling card.</h3>
+                    <p class="contact-subtext">Feel free to reach out for collaborations, questions, or just to say hi.</p>
+                    <div class="contact-links">
+                        <a href="mailto:duz.0@outlook.com" title="Email" class="contact-link-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>Email</span>
                         </a>
-                        <a href="https://github.com/duzos" target="_blank">
-                            <img src="https://github-readme-stats-ashy-one-11.vercel.app/api/top-langs/?username=duzos&show_icons=true&layout=compact&theme=transparent&title_color=3ddc84&text_color=c8d1dc&border_color=1a2b22&bg_color=0a100d" alt="Top Languages">
+                        <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank" title="LinkedIn" class="contact-link-item">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://www.youtube.com/@duzo_" target="_blank" title="YouTube" class="contact-link-item">
+                            <i class="fa-brands fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                        <a href="https://discord.gg/ZgssqpUMHS" target="_blank" title="Discord" class="contact-link-item">
+                            <i class="fa-brands fa-discord"></i>
+                            <span>Discord</span>
+                        </a>
+                        <a href="https://github.com/Duzos" target="_blank" title="GitHub" class="contact-link-item">
+                            <i class="fa-brands fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://open.spotify.com/user/jamestheproyt" target="_blank" title="Spotify" class="contact-link-item">
+                            <i class="fa-brands fa-spotify"></i>
+                            <span>Spotify</span>
+                        </a>
+                        <a href="https://steamcommunity.com/id/duzo_/" target="_blank" title="Steam" class="contact-link-item">
+                            <i class="fa-brands fa-steam"></i>
+                            <span>Steam</span>
                         </a>
                     </div>
+                </div>
+                <div class="contact-side animate-on-scroll">
+                    <img class="persona-cat" src="./img/personacat.png" alt="Persona cat" loading="lazy">
+                    <p class="cat-caption">persona cat lol</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-                    <!-- Featured Project -->
-                    <div class="featured-project animate-on-scroll" id="featuredProject">
-                        <div class="featured-badge"><i class="fa-solid fa-star"></i> Featured</div>
-                        <div class="featured-content" id="featuredContent">
-                            <div class="featured-skeleton">
-                                <div class="skeleton-circle"></div>
-                                <div class="skeleton-lines">
-                                    <div class="skeleton-line skeleton-line-title"></div>
-                                    <div class="skeleton-line skeleton-line-desc"></div>
-                                    <div class="skeleton-line skeleton-line-short"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Spotlight (detail panel on hover/click) -->
-                    <div class="project-spotlight" id="projectSpotlight">
-                        <div class="spotlight-inner">
-                            <div class="spotlight-left">
-                                <img class="spotlight-logo" id="spotlightLogo" src="" alt="">
-                                <div class="spotlight-meta">
-                                    <h3 class="spotlight-name" id="spotlightName"></h3>
-                                    <p class="spotlight-desc" id="spotlightDesc"></p>
-                                </div>
-                            </div>
-                            <div class="spotlight-links" id="spotlightLinks"></div>
-                        </div>
-                        <div class="spotlight-hint">
-                            <span>hover or click a project below</span>
-                        </div>
-                    </div>
-
-                    <!-- Project Carousel -->
-                    <div class="carousel-container animate-on-scroll" id="projectCarousel">
-                        <div class="carousel-fade carousel-fade-left"></div>
-                        <div class="carousel-fade carousel-fade-right"></div>
-                        <div class="carousel-track" id="carouselTrack"></div>
-                    </div>
-                    <div class="carousel-controls">
-                        <button id="toggleProjects" onclick="toggleCarouselExpand()">
-                            <i class="fa-solid fa-grip"></i> Show All
-                        </button>
-                    </div>
-                </section>
-
-                <!-- Contact -->
-                <section id="contact">
-                    <div class="section-header">
-                        <span class="section-number">04</span>
-                        <h2 class="section-title">Contact</h2>
-                        <div class="section-line"></div>
-                    </div>
-                    <div class="contact-layout">
-                        <div class="contact-main animate-on-scroll">
-                            <h3 class="contact-heading">Let's connect.</h3>
-                            <p class="contact-subtext">Feel free to reach out for collaborations, questions, or just to say hi.</p>
-                            <div class="contact-links">
-                                <a href="mailto:duz.0@outlook.com" title="Email" class="contact-link-item">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <span>Email</span>
-                                </a>
-                                <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank" title="LinkedIn" class="contact-link-item">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                    <span>LinkedIn</span>
-                                </a>
-                                <a href="https://www.youtube.com/@duzo_" target="_blank" title="YouTube" class="contact-link-item">
-                                    <i class="fa-brands fa-youtube"></i>
-                                    <span>YouTube</span>
-                                </a>
-                                <a href="https://discord.gg/ZgssqpUMHS" target="_blank" title="Discord" class="contact-link-item">
-                                    <i class="fa-brands fa-discord"></i>
-                                    <span>Discord</span>
-                                </a>
-                                <a href="https://github.com/Duzos" target="_blank" title="GitHub" class="contact-link-item">
-                                    <i class="fa-brands fa-github"></i>
-                                    <span>GitHub</span>
-                                </a>
-                                <a href="https://open.spotify.com/user/jamestheproyt" target="_blank" title="Spotify" class="contact-link-item">
-                                    <i class="fa-brands fa-spotify"></i>
-                                    <span>Spotify</span>
-                                </a>
-                                <a href="https://steamcommunity.com/id/duzo_/" target="_blank" title="Steam" class="contact-link-item">
-                                    <i class="fa-brands fa-steam"></i>
-                                    <span>Steam</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="contact-side animate-on-scroll">
-                            <img class="persona-cat" src="./img/personacat.png" alt="Persona cat">
-                            <p class="cat-caption">persona cat lol</p>
-                        </div>
-                    </div>
-                    <div class="credits animate-on-scroll">
-                        <p><a href="https://loqor.dev/">Loqor</a> - Spotify sync inspiration</p>
-                    </div>
-                </section>
-
-                <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-                <script>
-                    kofiWidgetOverlay.draw('duzoo', {
-                        'type': 'floating-chat',
-                        'floating-chat.donateButton.text': 'Support me',
-                        'floating-chat.donateButton.background-color': '#0a100d',
-                        'floating-chat.donateButton.text-color': '#3ddc84'
-                    });
-                </script>
-            </main>
+    <!-- Footer marquee -->
+    <footer class="marquee marquee-footer" aria-hidden="true">
+        <div class="marquee-track marquee-reverse">
+            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
+            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
+            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
+            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
         </div>
-    </div>
-    </body>
+    </footer>
+
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script>
+        kofiWidgetOverlay.draw('duzoo', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Support me',
+            'floating-chat.donateButton.background-color': '#0b0b0d',
+            'floating-chat.donateButton.text-color': '#e1062c'
+        });
+    </script>
 
     <script>
         // Navigation toggle for mobile
@@ -368,7 +402,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const heroElements = document.querySelectorAll('.animate-hero');
             heroElements.forEach((el, i) => {
-                el.style.animationDelay = `${0.2 + i * 0.15}s`;
+                el.style.animationDelay = `${0.15 + i * 0.12}s`;
             });
         });
 
@@ -388,11 +422,13 @@
             icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
 
-        // Load saved theme
+        // Load saved theme, falling back to the system preference
         (function() {
-            const saved = localStorage.getItem('theme') || 'dark';
+            const saved = localStorage.getItem('theme')
+                || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
             document.documentElement.setAttribute('data-theme', saved);
             document.addEventListener('DOMContentLoaded', () => updateThemeIcon(saved));
         })();
     </script>
+    </body>
 </html>

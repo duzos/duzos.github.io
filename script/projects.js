@@ -1,25 +1,68 @@
-function createIcon(type, id) {
-    let icon = document.createElement("i");
-    icon.classList.add(type);
-    icon.classList.add(id);
-    return icon;
+function formatCount(count) {
+    if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M';
+    if (count >= 1000) return (count / 1000).toFixed(count >= 10000 ? 0 : 1) + 'k';
+    return String(count);
 }
-function createSVG(id) {
-    let icon = document.createElement("img");
-    icon.classList.add("svg");
-    icon.src = "img/project/" + id + ".svg"
-    return icon;
+
+// Native link chips (replaces shields.io badge images)
+function createChip(href, iconClasses, label, title) {
+    let chip = document.createElement("a");
+    chip.classList.add("chip");
+    chip.href = href;
+    chip.target = "_blank";
+    if (title) chip.title = title;
+
+    let icon = document.createElement("i");
+    iconClasses.split(" ").forEach(c => icon.classList.add(c));
+    chip.appendChild(icon);
+
+    let text = document.createElement("span");
+    text.textContent = label;
+    chip.appendChild(text);
+
+    return chip;
+}
+
+function createDownloadChip(href, iconClasses, fallbackLabel, count, title) {
+    const value = Number(count) || 0;
+    const label = value > 0 ? formatCount(value) + " downloads" : fallbackLabel;
+    return createChip(href, iconClasses, label, title);
+}
+
+function createCurseForgeChip(project) {
+    return createDownloadChip(
+        "https://www.curseforge.com/minecraft/mc-mods/" + project.curseforge,
+        "fa-solid fa-fire",
+        "curseforge",
+        project.curseforgeDownloads,
+        "Downloads on CurseForge"
+    );
+}
+
+function createModrinthChip(project) {
+    return createDownloadChip(
+        "https://modrinth.com/mod/" + project.modrinth,
+        "fa-solid fa-download",
+        "modrinth",
+        project.downloads,
+        "Downloads on Modrinth"
+    );
 }
 
 // ─── Download tracking for animated counter ───
 let totalDownloads = 0;
-let downloadsFetched = 0;
 let modrinthProjectCount = 0;
+const downloadCounts = new Map();
 
-function addDownloads(count) {
-    totalDownloads += count;
-    downloadsFetched++;
-    // Update counter when all modrinth projects have reported
+function setDownloadCount(source, count) {
+    const value = Number(count) || 0;
+    if (value <= 0) return;
+
+    downloadCounts.set(source, value);
+    totalDownloads = 0;
+    downloadCounts.forEach(downloads => {
+        totalDownloads += downloads;
+    });
     updateStatsDisplay();
 }
 
@@ -72,7 +115,6 @@ function animateCounter(element, target, abbreviate) {
 
 // ─── Project Classes ───
 
-const wikiBadge = "https://img.shields.io/badge/wiki_available-grey?logo=gitbook&logoColor=black&style=flat-square&labelColor=white&color=white";
 class Project {
     constructor(name, desc, logoPath, github_name, github_project, wiki) {
         this.name = name;
@@ -113,41 +155,18 @@ class Project {
         links.classList.add("links");
         window.appendChild(links);
 
-        let linksText = document.createElement("h3");
-        links.appendChild(linksText);
-
         if (this.github != null) {
-            let githubLink = document.createElement("a");
-            githubLink.href = this.github;
-
-            let githubImg = document.createElement("img");
-            let ids = this.github.split("/")
-            githubImg.src = "https://img.shields.io/github/last-commit/" + ids[3] + "/" + ids[4] + "?logo=github&logoColor=black&style=flat-square&labelColor=white&color=white";
-            githubImg.classList.add("link-img")
-            githubLink.appendChild(githubImg);
-
-            window.appendChild(githubLink);
-            window.appendChild(document.createElement("br"))
+            links.appendChild(createChip(this.github, "fa-brands fa-github", "source"));
         }
 
         if (this.wiki != null) {
-            let wikiLink = document.createElement("a");
-            wikiLink.href = this.wiki;
-
-            let wikiImg = document.createElement("img");
-            wikiImg.src = wikiBadge;
-            wikiImg.classList.add("link-img")
-            wikiLink.appendChild(wikiImg);
-
-            window.appendChild(wikiLink);
-            window.appendChild(document.createElement("br"))
+            links.appendChild(createChip(this.wiki, "fa-solid fa-book-open", "wiki"));
         }
 
         return window;
     }
 }
 
-const discordBadge = "https://img.shields.io/badge/discord_invite-7289DA?style=flat-square&logo=discord&labelColor=white&color=white";
 class MinecraftProject extends Project {
     constructor(name, desc, logoPath, github_name, github_project, curseforge, cf_id, modrinth, wiki, discord) {
         super(name, desc, logoPath, github_name, github_project, wiki);
@@ -177,44 +196,18 @@ class MinecraftProject extends Project {
 
     toElement() {
         let window = super.toElement();
+        let links = window.querySelector(".links");
 
         if (this.discord != null) {
-            let invite = document.createElement("a");
-            invite.href = this.discord;
-
-            let inviteImg = document.createElement("img");
-            inviteImg.src = discordBadge;
-            inviteImg.classList.add("link-img");
-            invite.appendChild(inviteImg);
-
-            window.appendChild(invite);
-            window.appendChild(document.createElement("br"))
+            links.appendChild(createChip(this.discord, "fa-brands fa-discord", "discord"));
         }
 
         if (this.curseforge != null && this.cf_id != null) {
-            let curseforgeLink = document.createElement("a");
-            curseforgeLink.href = "https://www.curseforge.com/minecraft/mc-mods/" + this.curseforge;
-
-            let cfDownloads = document.createElement("img");
-            cfDownloads.src = "https://img.shields.io/curseforge/dt/" + this.cf_id + "?logo=curseforge&style=flat-square&labelColor=white&color=white";
-            cfDownloads.classList.add("link-img");
-            curseforgeLink.appendChild(cfDownloads);
-
-            window.appendChild(curseforgeLink);
-            window.appendChild(document.createElement("br"))
+            links.appendChild(createCurseForgeChip(this));
         }
 
         if (this.modrinth != null) {
-            let mDownloads = document.createElement("a");
-            mDownloads.href = "https://modrinth.com/mod/" + this.modrinth;
-
-            let mDownloadsImg = document.createElement("img");
-            mDownloadsImg.src = "https://img.shields.io/modrinth/dt/" + this.modrinth + "?logo=modrinth&style=flat-square&labelColor=white&color=white";
-            mDownloadsImg.classList.add("link-img");
-            mDownloads.appendChild(mDownloadsImg);
-
-            window.appendChild(mDownloads);
-            window.appendChild(document.createElement("br"))
+            links.appendChild(createModrinthChip(this));
         }
 
         return window;
@@ -222,13 +215,20 @@ class MinecraftProject extends Project {
 }
 
 const modrinth_api = "https://api.modrinth.com/v2";
+
+// Projects waiting on Modrinth data — fetched in one batched request by
+// loadModrinthProjects() instead of one request per project, which tripped
+// Modrinth's rate limiter (429s) and left blank tiles.
+let pendingModrinthProjects = [];
+
 class ModrinthProject extends MinecraftProject {
     constructor(slug, curseforge, cf_id) {
         super(null, null, null, null, null, curseforge, cf_id, slug);
         modrinthProjectCount++;
-        this.updateFromApi();
+        pendingModrinthProjects.push(this);
     }
 
+    // Per-project fallback for slugs missing from the batch response
     updateFromApi() {
         fetch(modrinth_api + "/project/" + this.modrinth)
             .then(response => {
@@ -251,8 +251,8 @@ class ModrinthProject extends MinecraftProject {
         this.discord = data["discord_url"];
         this.downloads = data["downloads"] || 0;
 
-        // Track downloads for counter
-        addDownloads(this.downloads);
+        // Track Modrinth downloads for the shared counter.
+        setDownloadCount("modrinth:" + this.modrinth, this.downloads);
 
         this.updateWindow();
         this.updateFeatured();
@@ -303,6 +303,111 @@ class ModrinthProject extends MinecraftProject {
 }
 
 
+// Fetch every pending Modrinth project in a single batched request, then
+// hand each project its slice of the response via parseData().
+function loadModrinthProjects() {
+    const pending = pendingModrinthProjects.splice(0);
+    if (pending.length === 0) return;
+
+    const ids = JSON.stringify(pending.map(project => project.modrinth));
+    fetch(modrinth_api + "/projects?ids=" + encodeURIComponent(ids))
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Modrinth API Response was not OK" + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const bySlug = new Map();
+            for (const entry of data) {
+                bySlug.set(entry["slug"], entry);
+                bySlug.set(entry["id"], entry);
+            }
+
+            for (const project of pending) {
+                const entry = bySlug.get(project.modrinth);
+                if (entry) {
+                    project.parseData(entry);
+                } else {
+                    project.updateFromApi();
+                }
+            }
+        })
+        .catch(error => {
+            console.error("Modrinth Error:", error);
+            pending.forEach(project => project.updateFromApi());
+        });
+}
+
+function getCurseForgeDownloadMap(data) {
+    if (!data) return {};
+
+    if (Array.isArray(data)) {
+        return data.reduce((map, entry) => {
+            if (entry && entry.id != null) map[String(entry.id)] = entry;
+            return map;
+        }, {});
+    }
+
+    return data.downloads || data.data || data;
+}
+
+function getDownloadCountFromEntry(entry) {
+    if (typeof entry === "number" || typeof entry === "string") {
+        return Number(entry) || 0;
+    }
+
+    if (entry && typeof entry === "object") {
+        return Number(entry.downloadCount || entry.downloads || entry.totalDownloads) || 0;
+    }
+
+    return 0;
+}
+
+function refreshProject(project) {
+    if (typeof project.updateWindow === "function") {
+        project.updateWindow();
+    }
+
+    if (project.name === featuredName) {
+        populateFeaturedCard(project);
+    }
+}
+
+function applyCurseForgeDownloads(data) {
+    const downloads = getCurseForgeDownloadMap(data);
+
+    projects.forEach(project => {
+        if (!project.cf_id) return;
+
+        const entry = downloads[String(project.cf_id)];
+        const count = getDownloadCountFromEntry(entry);
+        if (count <= 0) return;
+
+        project.curseforgeDownloads = count;
+        setDownloadCount("curseforge:" + project.cf_id, count);
+        refreshProject(project);
+    });
+}
+
+function loadCurseForgeDownloads() {
+    fetch("./data/curseforge-downloads.json")
+        .then(response => {
+            if (response.status === 404) return null;
+            if (!response.ok) {
+                throw new Error("CurseForge download data response was not OK " + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data) applyCurseForgeDownloads(data);
+        })
+        .catch(error => {
+            console.warn("CurseForge download data unavailable:", error);
+        });
+}
+
+
 // ─── Featured Project ───
 const featuredName = "MineBounds"; // Featured project matched by name
 
@@ -337,49 +442,23 @@ function populateFeaturedCard(project) {
     links.classList.add('featured-links');
 
     if (project.github) {
-        let a = document.createElement('a');
-        a.href = project.github;
-        let img = document.createElement('img');
-        let ids = project.github.split("/");
-        img.src = "https://img.shields.io/github/last-commit/" + ids[3] + "/" + ids[4] + "?logo=github&logoColor=black&style=flat-square&labelColor=white&color=white";
-        a.appendChild(img);
-        links.appendChild(a);
+        links.appendChild(createChip(project.github, "fa-brands fa-github", "source"));
     }
 
     if (project.modrinth) {
-        let a = document.createElement('a');
-        a.href = "https://modrinth.com/mod/" + project.modrinth;
-        let img = document.createElement('img');
-        img.src = "https://img.shields.io/modrinth/dt/" + project.modrinth + "?logo=modrinth&style=flat-square&labelColor=white&color=white";
-        a.appendChild(img);
-        links.appendChild(a);
+        links.appendChild(createModrinthChip(project));
     }
 
     if (project.curseforge && project.cf_id) {
-        let a = document.createElement('a');
-        a.href = "https://www.curseforge.com/minecraft/mc-mods/" + project.curseforge;
-        let img = document.createElement('img');
-        img.src = "https://img.shields.io/curseforge/dt/" + project.cf_id + "?logo=curseforge&style=flat-square&labelColor=white&color=white";
-        a.appendChild(img);
-        links.appendChild(a);
+        links.appendChild(createCurseForgeChip(project));
     }
 
     if (project.discord) {
-        let a = document.createElement('a');
-        a.href = project.discord;
-        let img = document.createElement('img');
-        img.src = discordBadge;
-        a.appendChild(img);
-        links.appendChild(a);
+        links.appendChild(createChip(project.discord, "fa-brands fa-discord", "discord"));
     }
 
     if (project.wiki) {
-        let a = document.createElement('a');
-        a.href = project.wiki;
-        let img = document.createElement('img');
-        img.src = wikiBadge;
-        a.appendChild(img);
-        links.appendChild(a);
+        links.appendChild(createChip(project.wiki, "fa-solid fa-book-open", "wiki"));
     }
 
     info.appendChild(links);
@@ -390,11 +469,13 @@ function populateFeaturedCard(project) {
 // ─── Project List ───
 
 let projects = [];
-projects.push(new ModrinthProject("space-program"))
+// Amble Space Program is still a draft on Modrinth (its "space-program" slug
+// 404s for anonymous API requests), so hardcode the tile until it's published.
+projects.push(new Project("Amble Space Program", "Space for 1.21.1 Fabric and Forge!", null, "duzos", "space", null))
 projects.push(new ModrinthProject("ait", "adventures-in-time", 856138))
 projects.push(new ModrinthProject("fake-players", "fake-player", 845992))
 projects.push(new ModrinthProject("amblekit"))
-projects.push(new ModrinthProject("amble-stargate"))
+projects.push(new ModrinthProject("stargate-sojourner"))
 projects.push(new ModrinthProject("tardis-refined", "tardis-refined", 782697))
 projects.push(new ModrinthProject("superhero", "timeless-heroes", 871545))
 projects.push(new Project("Merseyrail", "Railway 200 Website - Click the Wiki button", "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/0f1d678990c8232d3214549cc18ed902", "duzos", "merseyrail-site", "https://duzo.is-a.dev/merseyrail-site/"))
@@ -428,6 +509,10 @@ function updateModrinthProjects(user, array) {
 function parseModrinthProjects(array, data) {
     for (var i = 0; i < data.length; i++) {
         let created = new ModrinthProject(data[i]["slug"]);
+        // The user endpoint already returns full project data — use it
+        // directly instead of leaving the project queued for a batch fetch.
+        pendingModrinthProjects.splice(pendingModrinthProjects.indexOf(created), 1);
+        created.parseData(data[i]);
         array.push(created);
     }
 }
@@ -479,8 +564,16 @@ function updateProjectsWindow() {
 // `window.load`, which waits for every <img> — including all the remote shield
 // badges — so the Modrinth fetches almost always resolved first and tried to
 // patch DOM nodes that didn't exist yet.
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateProjectsWindow);
-} else {
+// The Modrinth batch fetch fires after the carousel exists so parseData()
+// always has tiles to update.
+function buildProjectsAndFetch() {
     updateProjectsWindow();
+    loadModrinthProjects();
+    loadCurseForgeDownloads();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildProjectsAndFetch);
+} else {
+    buildProjectsAndFetch();
 }
