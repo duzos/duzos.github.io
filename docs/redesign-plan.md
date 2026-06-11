@@ -136,8 +136,8 @@ both themes; only figure/ground flips.
   display contract used by `carousel.js`.
 - Carousel: mechanics untouched. Tiles re-skinned as tilted paper cutouts; `.active` ring
   becomes a red sketchy double-border; `.locked` gets a wax-seal star badge.
-- shields.io badges: restyle via URL params in `projects.js` (`labelColor=0b0b0d`,
-  `color=e1062c`, keep `flat-square`) so badges match the palette instead of white.
+- Native chips: generated as `.chip` anchors with Font Awesome icons and download counts
+  where local API data is available.
 
 ### Contact (`#contact`)
 - Heading: "SEND A CALLING CARD." in Anton with red underline slash.

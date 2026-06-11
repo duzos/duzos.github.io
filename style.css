@@ -1180,7 +1180,9 @@ main {
 .featured-project::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 38%;
     background: var(--crimson);
     clip-path: polygon(0 0, 78% 0, 52% 100%, 0 100%);
@@ -1212,7 +1214,10 @@ main {
     z-index: 1;
 }
 
-.featured-badge i { font-size: 0.8rem; color: #000; }
+.featured-badge i {
+    font-size: 0.8rem;
+    color: #000;
+}
 
 .featured-content {
     display: flex;
@@ -1261,7 +1266,6 @@ main {
     align-items: center;
 }
 
-/* Chips on the dark boss-card surface */
 .featured-links .chip {
     background: var(--paper);
     border-color: #000;
@@ -1279,11 +1283,6 @@ main {
     color: #fff !important;
 }
 
-
-/* ═══════════════════════════════════════════════════
-   SKELETON LOADING
-   ═══════════════════════════════════════════════════ */
-
 .featured-skeleton {
     display: flex;
     align-items: center;
@@ -1292,7 +1291,8 @@ main {
 }
 
 .skeleton-circle {
-    width: 104px; height: 104px;
+    width: 104px;
+    height: 104px;
     clip-path: var(--burst);
     background: var(--skeleton);
     flex-shrink: 0;
@@ -1312,7 +1312,11 @@ main {
     animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
 
-.skeleton-line-title { width: 40%; height: 22px; }
+.skeleton-line-title {
+    width: 40%;
+    height: 22px;
+}
+
 .skeleton-line-desc { width: 75%; }
 .skeleton-line-short { width: 50%; }
 
@@ -2048,6 +2052,7 @@ button {
 
     .featured-logo { width: 84px; height: 84px; }
     .featured-name { font-size: 1.4rem; }
+
 }
 
 

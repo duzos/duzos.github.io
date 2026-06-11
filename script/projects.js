@@ -408,8 +408,8 @@ function loadCurseForgeDownloads() {
 }
 
 
-// ─── Featured Project ───
-const featuredName = "MineBounds"; // Featured project matched by name
+// Featured Project
+const featuredName = "MineBounds";
 
 function populateFeaturedCard(project) {
     const container = document.getElementById('featuredContent');
@@ -471,11 +471,11 @@ function populateFeaturedCard(project) {
 let projects = [];
 // Amble Space Program is still a draft on Modrinth (its "space-program" slug
 // 404s for anonymous API requests), so hardcode the tile until it's published.
-projects.push(new Project("Amble Space Program", "Space for 1.21.1 Fabric and Forge!", null, "duzos", "space", null))
+projects.push(new Project("Amble Space Program", "Space for 1.21.1 Fabric and Forge!", "https://raw.githubusercontent.com/duzos/space/main/common/src/main/resources/assets/space/textures/block/rocket_nose.png", "duzos", "space", null))
 projects.push(new ModrinthProject("ait", "adventures-in-time", 856138))
 projects.push(new ModrinthProject("fake-players", "fake-player", 845992))
-projects.push(new ModrinthProject("amblekit"))
-projects.push(new ModrinthProject("stargate-sojourner"))
+projects.push(new ModrinthProject("amblekit", "amblekit", 1204806))
+projects.push(new ModrinthProject("stargate-sojourner", "stargate", 1204812))
 projects.push(new ModrinthProject("tardis-refined", "tardis-refined", 782697))
 projects.push(new ModrinthProject("superhero", "timeless-heroes", 871545))
 projects.push(new Project("Merseyrail", "Railway 200 Website - Click the Wiki button", "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/0f1d678990c8232d3214549cc18ed902", "duzos", "merseyrail-site", "https://duzo.is-a.dev/merseyrail-site/"))
@@ -488,8 +488,8 @@ projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
 projects.push(new Project("AIT Generator", "Create custom AIT datapacks & resource packs", "./img/project/ait.png", "duzos", "desktop-online", "https://duzos.github.io/desktop-online/"))
 projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, "https://discord.gg/ZgssqpUMHS"));
-projects.push(new Project("Summit", "A mathematical card game", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "duzos", "Summit", null));
-projects.push(new Project("Regeneration", "Timelord Regeneration Mod", "https://cdn.discordapp.com/avatars/327807253052653569/080ef343ab6390bfabcce74180d3eb1c.png?size=128", "amblelabs", "regeneration", null));
+projects.push(new Project("Summit", "A mathematical card game", "https://raw.githubusercontent.com/duzos/Summit/master/Summit/Icon.ico", "duzos", "Summit", null));
+projects.push(new Project("Regeneration", "Timelord Regeneration Mod", "https://raw.githubusercontent.com/amblelabs/regeneration/master/src/main/resources/assets/timelordregen/textures/item/pocket_watch.png", "amblelabs", "regeneration", null));
 projects.push(new Project("Jam Studios", "YouTube Content", "./img/project/jam_studio_inc_logo.jpg", null, null, "https://www.jam.studio/"))
 projects.push(new Project("MineBounds", "Minecraft Server Network", "https://minebounds.com/favicon.ico", null, null, "https://minebounds.com/"))
 
@@ -546,7 +546,7 @@ function updateProjectsWindow() {
     // Update project count immediately
     updateStatsDisplay();
 
-    // Populate featured card for non-Modrinth projects (already have data)
+    // Populate featured card for non-Modrinth projects.
     for (let i = 0; i < projects.length; i++) {
         if (projects[i].name === featuredName) {
             populateFeaturedCard(projects[i]);
