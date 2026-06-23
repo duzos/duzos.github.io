@@ -520,9 +520,19 @@ projects.push(new ModrinthProject("cheesy", "cheesy", 863972))
 projects.push(new ModrinthProject("vortex", "vortex", 973580))
 projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
+projects.push(new ModrinthProject("forcedspawner", "force-load-spawners", null))
 projects.push(new Project("AIT Generator", "Create custom AIT datapacks & resource packs", "./img/project/ait.png", "duzos", "desktop-online", "https://duzos.github.io/desktop-online/"))
 projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, "https://discord.gg/ZgssqpUMHS"));
 projects.push(new Project("Summit", "A mathematical card game", "https://raw.githubusercontent.com/duzos/Summit/master/Summit/Icon.ico", "duzos", "Summit", null));
+projects.push(new Project("ClassCharts API (Python)", "Unofficial Python client for the ClassCharts API", null, "duzos", "classcharts-api-python", null));
+projects.push(new Project("ClassCharts API (Java)", "Unofficial Java library for the ClassCharts API", null, "duzos", "classcharts-api-java", null));
+projects.push(new Project("ModSync", "Auto-download a server's missing mods on join", null, "duzos", "modsync", null));
+projects.push(new Project("Death Sound", "Set a custom sound that plays when you die", null, "duzos", "deathsound-mc", null));
+projects.push(new Project("Snowy Mobs", "Mobs that gather snow as they wander", null, "duzos", "snowymobs", null));
+projects.push(new Project("Town Campfire", "Coloured campfires that found & name villages", null, "duzos", "towncampfire", null));
+projects.push(new Project("Beyond the End", "New dimensions beyond the End", null, "duzos", "beyondtheend", null));
+projects.push(new Project("Tardis Hopper", "Teleport to your linked TARDIS interior (AIT addon)", null, "duzos", "ait-hopper", null));
+projects.push(new Project("Enchanting Overhaul", "A ground-up rework of enchanting & XP", null, "duzos", "xpoverhaul", null));
 projects.push(new Project("Regeneration", "Timelord Regeneration Mod", "https://raw.githubusercontent.com/amblelabs/regeneration/master/src/main/resources/assets/timelordregen/textures/item/pocket_watch.png", "amblelabs", "regeneration", null));
 projects.push(new Project("Jam Studios", "YouTube Content", "./img/project/jam_studio_inc_logo.jpg", null, null, "https://www.jam.studio/"))
 projects.push(new Project("MineBounds", "Minecraft Server Network", "https://minebounds.com/favicon.ico", null, null, "https://minebounds.com/"))
