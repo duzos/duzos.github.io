@@ -52,19 +52,39 @@ that fetched and rendered the real `Duzos/fakeplayer` README end-to-end.
 A new ESM Node script, consistent with `scripts/update-modrinth-downloads-badge.mjs`
 and `scripts/update-curseforge-downloads.mjs`.
 
-**Resolve the repo list:**
+**Resolve the repo list — single source of truth is `script/projects.js`.**
 
-- **Modrinth-backed projects:** `GET https://api.modrinth.com/v2/user/duzos/projects`.
-  For each project whose `source_url` is a `github.com` URL, take that repo.
-  (Enumerating via the user endpoint avoids hardcoding the Modrinth slug list.)
-- **Plain GitHub projects** (defined directly in `projects.js`, not on Modrinth):
-  a small hardcoded array in the script —
-  `duzos/space`, `amblelabs/regeneration`, `duzos/desktop-online`,
-  `duzos/Summit`, `duzos/merseyrail-site`, `duzos/persona-mc`.
-  > Maintenance note: adding a new plain-GitHub project means adding its repo
-  > here too. Accepted tradeoff for v1 over extracting a shared project manifest.
+No hardcoded repo list and no fragile regex. The script loads `script/projects.js`
+in a Node `vm` sandbox, lets its own constructors run, and reads the resulting
+`projects` array:
 
-Dedupe the combined list by `owner/repo` (case-insensitive).
+1. Read `script/projects.js`; run it in a `vm` context with the browser globals
+   it touches stubbed (`document` with `readyState: "loading"` so the load-time
+   `buildProjectsAndFetch()` bootstrap never fires — only a `DOMContentLoaded`
+   listener is registered, which we never dispatch — plus `window`, `console`).
+   The top-level `projects.push(new …())` calls run during evaluation with no DOM
+   or network access.
+2. `projects` is a top-level `let`, so it stays lexically scoped. Append a capture
+   line to the source before running it: `\nglobalThis.__projects = projects;`,
+   then read it back from the context.
+3. From each entry:
+   - `project.github` (set on `Project` / `MinecraftProject`) → a direct repo.
+   - `ModrinthProject` entries expose only `project.modrinth` (the slug); collect
+     these and resolve their `source_url` via the Modrinth batch endpoint
+     `GET /v2/projects?ids=[…]` (same call the front-end's `loadModrinthProjects`
+     already makes).
+
+Keep only `github.com` URLs; dedupe by `owner/repo` (case-insensitive).
+
+> Verified against the current `projects.js`: yields the 6 direct repos
+> (`duzos/space`, `duzos/merseyrail-site`, `duzos/desktop-online`,
+> `duzos/persona-mc`, `duzos/Summit`, `amblelabs/regeneration`) plus 13 Modrinth
+> slugs to resolve. Adding a project to `projects.js` updates the build with no
+> other change.
+
+> Robustness: if a future top-level addition to `projects.js` references an
+> unstubbed global, the `vm` run throws and the script fails loudly (easy to fix
+> by extending the stub) rather than silently dropping a project.
 
 **Fetch + process each repo:**
 
