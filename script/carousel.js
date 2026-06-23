@@ -35,12 +35,10 @@ function setupSlideHoverListeners() {
         slide.parentNode.replaceChild(newSlide, slide);
 
         newSlide.addEventListener('mouseenter', () => {
-            if (isExpanded) return;
+            // Pause only matters for the continuously-scrolling carousel.
+            if (!isExpanded) isPaused = true;
 
-            // Always pause on hover
-            isPaused = true;
-
-            // If not locked, update active/spotlight
+            // If not locked, update active/spotlight (works in carousel + grid)
             if (!isLocked) {
                 setActiveSlide(newSlide);
                 populateSpotlight(newSlide);
@@ -48,18 +46,14 @@ function setupSlideHoverListeners() {
         });
 
         newSlide.addEventListener('mouseleave', () => {
-            if (isExpanded) return;
-
-            // Only resume if not locked
-            if (!isLocked) {
+            // Only resume the carousel scroll if not locked
+            if (!isExpanded && !isLocked) {
                 isPaused = false;
             }
         });
 
-        // Click to lock/unlock
+        // Click to lock/unlock — works in both carousel and grid modes
         newSlide.addEventListener('click', (e) => {
-            if (isExpanded) return;
-
             // Don't lock if clicking a link inside the card
             if (e.target.closest('a')) return;
 
@@ -114,6 +108,7 @@ function lock(slide) {
 
     setActiveSlide(slide);
     populateSpotlight(slide);
+    showReadme(slide);
 }
 
 function unlock() {
@@ -124,6 +119,7 @@ function unlock() {
     isPaused = false;
     lockedSlide = null;
     clearSpotlight();
+    removeReadme();
     if (activeSlide) {
         activeSlide.classList.remove('active');
         activeSlide = null;
@@ -192,6 +188,65 @@ function clearSpotlight() {
             spotlight.querySelector('.spotlight-inner').style.display = 'none';
         }
     }, 300);
+}
+
+// ─── Spotlight README (data built by scripts/update-readmes.mjs) ───
+const readmeMemCache = new Map();
+
+function githubUrlFromCard(card) {
+    const link = card && card.querySelector('a.chip[href*="github.com"]');
+    return link ? link.getAttribute('href') : null;
+}
+
+function removeReadme() {
+    const existing = document.getElementById('spotlightReadme');
+    if (existing) existing.remove();
+}
+
+function renderReadmeBlock(block, html) {
+    block.innerHTML =
+        '<div class="spotlight-readme-head">' +
+            '<span class="label"><i class="fa-solid fa-book"></i> readme</span>' +
+            '<button class="spotlight-readme-collapse" type="button">collapse &#9650;</button>' +
+        '</div>' +
+        '<div class="spotlight-readme-body">' + html + '</div>';
+    block.querySelector('.spotlight-readme-collapse')
+        .addEventListener('click', e => { e.stopPropagation(); removeReadme(); });
+}
+
+function showReadme(slide) {
+    removeReadme();
+
+    const spotlight = document.getElementById('projectSpotlight');
+    const card = slide.querySelector('.section-window');
+    if (!spotlight || !card) return;
+
+    const url = githubUrlFromCard(card);
+    const key = (typeof readmeKeyForGithub === 'function') ? readmeKeyForGithub(url) : null;
+    if (!key || typeof readmeKeys === 'undefined' || !readmeKeys.has(key)) return;
+
+    const block = document.createElement('div');
+    block.className = 'spotlight-readme';
+    block.id = 'spotlightReadme';
+    block.innerHTML = '<div class="spotlight-readme-loading">loading readme…</div>';
+    spotlight.appendChild(block);
+
+    if (readmeMemCache.has(key)) { renderReadmeBlock(block, readmeMemCache.get(key)); return; }
+
+    let stored = null;
+    try { stored = sessionStorage.getItem('readme:' + key); } catch (e) { /* ignore */ }
+    if (stored) { readmeMemCache.set(key, stored); renderReadmeBlock(block, stored); return; }
+
+    fetch('./data/readme/' + key + '.html')
+        .then(response => { if (!response.ok) throw new Error(response.status); return response.text(); })
+        .then(html => {
+            readmeMemCache.set(key, html);
+            try { sessionStorage.setItem('readme:' + key, html); } catch (e) { /* quota — ignore */ }
+            if (lockedSlide === slide) renderReadmeBlock(block, html);
+        })
+        .catch(() => {
+            if (lockedSlide === slide) renderReadmeBlock(block, '<p class="spotlight-readme-loading">readme unavailable</p>');
+        });
 }
 
 function setupInfiniteScroll() {
@@ -277,7 +332,7 @@ function toggleCarouselExpand() {
         track.classList.add('expanded');
         track.style.transform = 'translateX(0)';
         container.classList.add('expanded');
-        if (spotlight) spotlight.style.display = 'none';
+        if (spotlight) spotlight.classList.add('sticky');
         toggleBtn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i> Carousel';
 
         // Stagger animation
@@ -294,7 +349,7 @@ function toggleCarouselExpand() {
         track.classList.remove('expanded');
         container.classList.remove('expanded');
         if (spotlight) {
-            spotlight.style.display = '';
+            spotlight.classList.remove('sticky');
             clearSpotlight();
         }
         toggleBtn.innerHTML = '<i class="fa-solid fa-grip"></i> Show All';
