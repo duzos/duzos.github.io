@@ -2109,10 +2109,11 @@ button {
     pointer-events: none;
 }
 
-/* Spotlight stays pinned while scrolling the tall "Show All" grid. */
+/* Spotlight stays pinned while scrolling the tall "Show All" grid. Offset by the
+   fixed navbar height (~67px) so it sits just below it instead of underneath. */
 .project-spotlight.sticky {
     position: sticky;
-    top: 0;
+    top: 4.25rem;
     z-index: 30;
 }
 
