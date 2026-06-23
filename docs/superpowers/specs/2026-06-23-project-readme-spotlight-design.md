@@ -44,6 +44,10 @@ that fetched and rendered the real `Duzos/fakeplayer` README end-to-end.
    `raw.githubusercontent.com` URLs and proxies badges through `camo.githubusercontent.com`.
 5. **Refresh — both manual and scheduled.** A manual script (matching the existing
    `scripts/*.mjs` flow) plus a scheduled GitHub Action.
+6. **Both browse modes.** The spotlight (and README reveal) works in the scrolling
+   carousel *and* in the expanded "Show All" grid — the same hover-preview /
+   click-lock machinery is shared. In grid mode the spotlight is **sticky** so it
+   stays visible as the visitor scrolls a tall grid.
 
 ## Architecture
 
@@ -129,7 +133,9 @@ The repo's first workflow.
 **`style.css`** — add the `.spotlight-readme` block styles (paper panel, gold
 `readme` header bar, `collapse` control, scrollable body with fade mask, GFM
 element styling themed to the site, and the `.section-window.has-readme` bookmark
-marker). Lifted from the validated prototype.
+marker). Lifted from the validated prototype. Add the grid-mode sticky state for
+the spotlight (e.g. `.project-spotlight.sticky { position: sticky; top: 0; }`,
+with the appropriate `z-index` to sit above the grid).
 
 **`script/projects.js`**
 
@@ -154,6 +160,22 @@ marker). Lifted from the validated prototype.
 - Remove the README block in `unlock()` and whenever the locked slide changes.
 - Hover (non-locked) path is unchanged — preview only.
 
+**Grid / "Show All" mode shares the same spotlight + README behavior.** Today
+`toggleCarouselExpand()` hides the spotlight (`display:none`) and the hover/click
+handlers bail with `if (isExpanded) return;`. Changes:
+
+- Keep the spotlight visible in grid mode (drop the `display:none`); restore the
+  hint state when nothing is selected.
+- Relax the `isExpanded` guards in the `mouseenter` / `mouseleave` / `click`
+  handlers (and the container/document handlers) so they still drive
+  `setActiveSlide` / `populateSpotlight` / `lock` / `unlock` in grid mode. Only
+  the auto-scroll *pause* logic (`isPaused`) is skipped in grid mode, since there
+  is no continuous scroll there.
+- Add a `sticky` class/state to the spotlight in grid mode (`position: sticky`)
+  so it follows the viewport while scrolling a tall grid; remove it on collapse.
+- The README block, fetch, cache, collapse, and `has-readme` marker are identical
+  in both modes — no second code path.
+
 ### 4. Cleanup
 
 Delete the throwaway `readme-prototype.html` before finishing.
@@ -176,9 +198,6 @@ Delete the throwaway `readme-prototype.html` before finishing.
 
 ## Out of scope (v1)
 
-- **Grid / "Show All" mode.** The spotlight is hidden when the carousel expands to
-  the full grid, and tile clicks are ignored there. README reveal is a
-  carousel/spotlight feature for v1; grid-mode support is a possible follow-up.
 - Live (runtime) GitHub API calls.
 - Markdown parsing in the browser.
 
@@ -191,6 +210,9 @@ Delete the throwaway `readme-prototype.html` before finishing.
   unlock remove the block; a no-README project (e.g. MineBounds) shows no block;
   the bookmark marker appears only on README-bearing tiles, including Modrinth
   projects after they resolve.
+- Grid mode: after "Show All", hover/click still drive the spotlight, the README
+  reveals the same way, and the spotlight stays visible (sticky) while scrolling a
+  tall grid; collapsing back to the carousel restores the original behavior.
 
 ## Files touched
 
