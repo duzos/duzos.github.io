@@ -1,0 +1,68 @@
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div align="center" dir="auto">
+<div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">ModSync</h1></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Join a modded server without hunting down a single mod. It syncs them for you.</h3></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/755094052425f92175451c2c9fa9b6ef848b3456b97541a8554f76bb3a7a0bc5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d696e6563726166742d312e32302e312d3632423437413f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/755094052425f92175451c2c9fa9b6ef848b3456b97541a8554f76bb3a7a0bc5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d696e6563726166742d312e32302e312d3632423437413f7374796c653d666f722d7468652d6261646765" alt="Minecraft" data-canonical-src="https://img.shields.io/badge/Minecraft-1.20.1-62B47A?style=for-the-badge" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/d4206488418ab5d7e9e5fd9ab869ac25f09d7e617386e7b2ef50de52212799d6/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f762f72656c656173652f64757a6f732f6d6f6473796e633f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/d4206488418ab5d7e9e5fd9ab869ac25f09d7e617386e7b2ef50de52212799d6/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f762f72656c656173652f64757a6f732f6d6f6473796e633f7374796c653d666f722d7468652d6261646765" alt="GitHub Release" data-canonical-src="https://img.shields.io/github/v/release/duzos/modsync?style=for-the-badge" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/1736263e7abccd5448e130c257555354792cbceae6b18535e86d6157f95b906f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d626c75653f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/1736263e7abccd5448e130c257555354792cbceae6b18535e86d6157f95b906f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d626c75653f7374796c653d666f722d7468652d6261646765" alt="License" data-canonical-src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://files.minecraftforge.net" rel="nofollow"><img alt="forge" height="52" src="https://camo.githubusercontent.com/c7cdd85cfcd56ba788bddcf0b28ce12c7ec237ef76213c03be6ef5aaf875fc83/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f6e706d2f40696e746572677261762f646576696e732d62616467657340332f6173736574732f636f7a792f737570706f727465642f666f7267655f766563746f722e737667" data-canonical-src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg" style="max-width: 100%; height: auto; max-height: 52px;"></a></p>
+<p dir="auto"><strong>by <a target="_blank" rel="noopener noreferrer" href="https://duzo.is-a.dev/" rel="nofollow">Duzo</a></strong></p>
+</div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">What is it?</h2></div>
+<p dir="auto">A Minecraft Forge mod that lets clients <strong>automatically download the mods a server is missing</strong> — so joining a modded server is one click instead of a manual mod hunt. Think "gmod addon share", but for Minecraft.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Features</h2></div>
+<ul dir="auto">
+<li>🔄 <strong>Automatic mod detection</strong> — a "Sync Mods" button appears on the mod-mismatch disconnect screen.</li>
+<li>🔒 <strong>SHA-256 verification</strong> — downloaded mods are checked against the server's checksums.</li>
+<li>🔁 <strong>Auto-reconnect</strong> — rejoins the server after the restart.</li>
+<li>🌐 <strong>IPv4 &amp; IPv6</strong> — works with all server address formats.</li>
+<li>✅ <strong>User consent</strong> — always asks before downloading anything.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">How it works</h2></div>
+<p dir="auto"><strong>Server side</strong> — running the mod starts a small HTTP server (default port <strong>25566</strong>, configurable) that serves the installed mod list with SHA-256 checksums and lets clients download the JARs.</p>
+<p dir="auto"><strong>Client side</strong></p>
+<ol dir="auto">
+<li>Try to connect to a modded server.</li>
+<li>If you're kicked for a mod mismatch, click <strong>Sync Mods</strong>.</li>
+<li>Review the missing mods and confirm the download.</li>
+<li>Mods drop into your <code>mods</code> folder.</li>
+<li>Click <strong>Restart Now</strong> — the game reconnects automatically.</li>
+</ol>
+<blockquote>
+<p dir="auto"><strong>Required on both the server and the client.</strong></p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Configuration</h2></div>
+<p dir="auto"><code>config/modsync-common.toml</code>:</p>
+<div class="highlight highlight-source-toml notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="[server]
+httpPort = 25566      # HTTP port for serving mod files
+serverSecret = &quot;&quot;     # shared secret for downloads (empty = no auth)
+
+[client]
+autoDownload = false  # start downloading missing mods automatically (still asks consent)
+autoRestart = false   # restart automatically after download"><pre>[<span class="pl-en">server</span>]
+<span class="pl-smi">httpPort</span> = <span class="pl-c1">25566</span>      <span class="pl-c"><span class="pl-c">#</span> HTTP port for serving mod files</span>
+<span class="pl-smi">serverSecret</span> = <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>     <span class="pl-c"><span class="pl-c">#</span> shared secret for downloads (empty = no auth)</span>
+
+[<span class="pl-en">client</span>]
+<span class="pl-smi">autoDownload</span> = <span class="pl-c1">false</span>  <span class="pl-c"><span class="pl-c">#</span> start downloading missing mods automatically (still asks consent)</span>
+<span class="pl-smi">autoRestart</span> = <span class="pl-c1">false</span>   <span class="pl-c"><span class="pl-c">#</span> restart automatically after download</span></pre></div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto"><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji> Security</h2></div>
+<p dir="auto"><strong>Only sync mods from servers you trust.</strong> Mods have full access to your computer — ModSync verifies file integrity, but it can't vouch for what a mod actually does.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Requirements</h2></div>
+<ul dir="auto">
+<li>Minecraft <strong>1.20.1</strong></li>
+<li>Forge <strong>47.4+</strong></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Building</h2></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="git clone https://github.com/duzos/modsync.git
+cd modsync
+./gradlew build      # output in build/libs/"><pre>git clone https://github.com/duzos/modsync.git
+<span class="pl-c1">cd</span> modsync
+./gradlew build      <span class="pl-c"><span class="pl-c">#</span> output in build/libs/</span></pre></div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Links</h2></div>
+<ul dir="auto">
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/modsync/releases">Releases</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/modsync">GitHub</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">License</h2></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="LICENSE">MIT</a>. Issues and PRs welcome.</p>
+</article></div>

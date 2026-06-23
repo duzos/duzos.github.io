@@ -1,4 +1,148 @@
-<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">SUMMIT!</h1></div>
-<p dir="auto"><strong>A mathematical deck-building rogue-like.</strong></p>
-<p dir="auto"><em>Just look at all those dashes..</em></p>
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">Summit</h1></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Make the maths work. Hit the target. Climb higher.</h3></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/8ff9aa6ec066ed977bc6551636f20b9e99c16fa7c231be5892ccd5017157c8d5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2e4e45542d392e302d3531324244343f7374796c653d666f722d7468652d6261646765266c6f676f3d646f746e6574266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/8ff9aa6ec066ed977bc6551636f20b9e99c16fa7c231be5892ccd5017157c8d5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2e4e45542d392e302d3531324244343f7374796c653d666f722d7468652d6261646765266c6f676f3d646f746e6574266c6f676f436f6c6f723d7768697465" alt=".NET" data-canonical-src="https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&amp;logo=dotnet&amp;logoColor=white" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/fcd411dfc403f7388472e06497736a46938c603af1e84a7999ccd5d605126378/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f432532332d47616d652d3233393132303f7374796c653d666f722d7468652d6261646765266c6f676f3d637368617270266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/fcd411dfc403f7388472e06497736a46938c603af1e84a7999ccd5d605126378/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f432532332d47616d652d3233393132303f7374796c653d666f722d7468652d6261646765266c6f676f3d637368617270266c6f676f436f6c6f723d7768697465" alt="C#" data-canonical-src="https://img.shields.io/badge/C%23-Game-239120?style=for-the-badge&amp;logo=csharp&amp;logoColor=white" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/722d9bf39c7e178353a54337e28ba74fc4fad1f3d7bc07ad4bca9e9e131d305b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d6f6e6f47616d652d332e382d4537334330303f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/722d9bf39c7e178353a54337e28ba74fc4fad1f3d7bc07ad4bca9e9e131d305b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d6f6e6f47616d652d332e382d4537334330303f7374796c653d666f722d7468652d6261646765" alt="MonoGame" data-canonical-src="https://img.shields.io/badge/MonoGame-3.8-E73C00?style=for-the-badge" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/855bf6d965407f0597639c5a4e958f9c30844ca52ee892cbc657aab999afd65d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374617475732d46696e616c2532305375626d697373696f6e2d737563636573733f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/855bf6d965407f0597639c5a4e958f9c30844ca52ee892cbc657aab999afd65d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374617475732d46696e616c2532305375626d697373696f6e2d737563636573733f7374796c653d666f722d7468652d6261646765" alt="Status" data-canonical-src="https://img.shields.io/badge/Status-Final%20Submission-success?style=for-the-badge" style="max-width: 100%;"></a></p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">What is it?</h2></div>
+<p dir="auto"><strong>Summit</strong> is a mathematical deck-building roguelike built in C# with MonoGame.</p>
+<p dir="auto">Instead of making poker hands, you build equations. Each card changes your running total, and your goal is to finish the round as close as possible to the target score before you run out of hands.</p>
+<p dir="auto">This repository represents the final submitted version of the project, as sent to examiners for the Computing NEA.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">The Cards</h2></div>
+<p dir="auto">Every suit is an operation:</p>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Suit</th>
+<th>Operation</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Clubs</strong></td>
+<td>Add</td>
+<td><code>+ value</code></td>
+</tr>
+<tr>
+<td><strong>Hearts</strong></td>
+<td>Subtract</td>
+<td><code>- value</code></td>
+</tr>
+<tr>
+<td><strong>Spades</strong></td>
+<td>Multiply</td>
+<td><code>× value</code></td>
+</tr>
+<tr>
+<td><strong>Diamonds</strong></td>
+<td>Divide</td>
+<td><code>÷ value</code></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p dir="auto">Number cards use their value. Face cards are treated as 10 when scored.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Gameplay</h2></div>
+<p dir="auto">You get a deck, a target score, a limited number of hands, and a few discards.</p>
+<ul dir="auto">
+<li>Pick up to <strong>5 cards</strong> to play.</li>
+<li>Reorder cards to control the calculation.</li>
+<li>Use discards to cycle bad cards.</li>
+<li>Hit the target score within the allowed range.</li>
+<li>Each round gets tighter as the allowed score range shrinks.</li>
+</ul>
+<p dir="auto">Miss the target when your hands run out, and it is game over.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Scoring Modes</h2></div>
+<p dir="auto">Summit supports different ways of resolving a hand:</p>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Left-to-Right</strong></td>
+<td>Resolves cards in the order they are played.</td>
+</tr>
+<tr>
+<td><strong>BIDMAS</strong></td>
+<td>Resolves multiply/divide before add/subtract.</td>
+</tr>
+<tr>
+<td><strong>Inverted</strong></td>
+<td>Resolves add/subtract before multiply/divide.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Features</h2></div>
+<ul dir="auto">
+<li>Drag-and-drop card play.</li>
+<li>Animated card movement, flipping, and scoring.</li>
+<li>Random target scores and seeded rounds.</li>
+<li>Save/load game state.</li>
+<li>Discards, hands, score limits, and round progression.</li>
+<li>Music, sound effects, shaders, texture atlases, and custom UI.</li>
+<li>Built on <strong>SummitKit</strong>, a small MonoGame framework for input, UI, audio, scenes, physics, and rendering.</li>
+<li>Developer console commands for testing cards, scores, seeds, rounds, and resolve profiles.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Project Structure</h2></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Summit/</code></td>
+<td>The actual game.</td>
+</tr>
+<tr>
+<td><code>Summit/Card/</code></td>
+<td>Cards, suits, deck, hand logic, and card entities.</td>
+</tr>
+<tr>
+<td><code>Summit/Maths/</code></td>
+<td>Expression resolving and scoring logic.</td>
+</tr>
+<tr>
+<td><code>Summit/State/</code></td>
+<td>Game state, rounds, saving, scoring, and win/loss checks.</td>
+</tr>
+<tr>
+<td><code>Summit/Scenes/</code></td>
+<td>Scene setup and game screens.</td>
+</tr>
+<tr>
+<td><code>SummitKit/</code></td>
+<td>Reusable MonoGame framework code.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Running from Source</h2></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Requirements</h3></div>
+<ul dir="auto">
+<li><a target="_blank" rel="noopener noreferrer" href="https://dotnet.microsoft.com/" rel="nofollow">.NET 9 SDK</a></li>
+<li>Git</li>
+<li>Visual Studio 2022, Rider, or another C# IDE</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Clone and run</h3></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="git clone https://github.com/duzos/Summit.git
+cd Summit
+dotnet restore
+dotnet run --project Summit/Summit.csproj"><pre>git clone https://github.com/duzos/Summit.git
+<span class="pl-c1">cd</span> Summit
+dotnet restore
+dotnet run --project Summit/Summit.csproj</pre></div>
+<p dir="auto">The first build may take longer because MonoGame tools and packages need to restore.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Building</h2></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="dotnet build Summit.sln"><pre>dotnet build Summit.sln</pre></div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Submission Note</h2></div>
+<p dir="auto">This is the final state of Summit as submitted for assessment. It is preserved as the completed NEA project rather than an actively developed prototype.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Credits</h2></div>
+<p dir="auto">Created by <strong>Duzo</strong>.</p>
+<p dir="auto">Built with C#, .NET, and MonoGame.</p>
 </article></div>

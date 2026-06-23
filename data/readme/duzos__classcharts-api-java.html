@@ -1,0 +1,68 @@
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div align="center" dir="auto">
+<div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">ClassCharts API · Java</h1></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">An unofficial Java library for the ClassCharts student API.</h3></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/06c649d5bf1d2091e54ccc632da290972b4fb60687ae20f9999b63384f4a421f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a6176612d31372b2d4544384230303f7374796c653d666f722d7468652d6261646765266c6f676f3d6f70656e6a646b266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/06c649d5bf1d2091e54ccc632da290972b4fb60687ae20f9999b63384f4a421f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a6176612d31372b2d4544384230303f7374796c653d666f722d7468652d6261646765266c6f676f3d6f70656e6a646b266c6f676f436f6c6f723d7768697465" alt="Java" data-canonical-src="https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&amp;logo=openjdk&amp;logoColor=white" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/83cbd8728889a5b5d5f619a1e86e12499a72c23f53b6e66318c6061875c314f7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f477261646c652d3032333033413f7374796c653d666f722d7468652d6261646765266c6f676f3d677261646c65266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/83cbd8728889a5b5d5f619a1e86e12499a72c23f53b6e66318c6061875c314f7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f477261646c652d3032333033413f7374796c653d666f722d7468652d6261646765266c6f676f3d677261646c65266c6f676f436f6c6f723d7768697465" alt="Gradle" data-canonical-src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&amp;logo=gradle&amp;logoColor=white" style="max-width: 100%;"></a></p>
+</div>
+<blockquote>
+<p dir="auto"><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji> <strong>Unofficial.</strong> Not affiliated with, endorsed by, or supported by ClassCharts / Edukey. It calls the same endpoints the website uses, which can change without notice. Use it for your own data only.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">What is it?</h2></div>
+<p dir="auto">A small Java library for logging into the ClassCharts student portal and pulling your data back as typed objects (homework, announcements, behaviour points, timetable, and more) using <a target="_blank" rel="noopener noreferrer" href="https://github.com/google/gson">Gson</a>.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Usage</h2></div>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="StudentClient client = new StudentClient(&quot;YOUR_STUDENT_CODE&quot;, &quot;01/01/2000&quot;);
+client.login();
+
+List&lt;Homework&gt; homeworks      = client.getHomeworks();
+List&lt;Announcement&gt; announcements = client.getAnnouncements();
+List&lt;BehaviourPoint&gt; behaviour = client.getBehaviour();
+DayTimetable today            = client.getTimetable(&quot;2024-01-01&quot;);
+StudentInformation info       = client.getStudentInfo();
+
+List&lt;Reward&gt; rewards          = client.getRewards();
+client.purchaseReward(rewards.get(0));"><pre><span class="pl-smi">StudentClient</span> <span class="pl-s1">client</span> = <span class="pl-k">new</span> <span class="pl-smi">StudentClient</span>(<span class="pl-s">"YOUR_STUDENT_CODE"</span>, <span class="pl-s">"01/01/2000"</span>);
+<span class="pl-s1">client</span>.<span class="pl-en">login</span>();
+
+<span class="pl-smi">List</span>&lt;<span class="pl-smi">Homework</span>&gt; <span class="pl-s1">homeworks</span>      = <span class="pl-s1">client</span>.<span class="pl-en">getHomeworks</span>();
+<span class="pl-smi">List</span>&lt;<span class="pl-smi">Announcement</span>&gt; <span class="pl-s1">announcements</span> = <span class="pl-s1">client</span>.<span class="pl-en">getAnnouncements</span>();
+<span class="pl-smi">List</span>&lt;<span class="pl-smi">BehaviourPoint</span>&gt; <span class="pl-s1">behaviour</span> = <span class="pl-s1">client</span>.<span class="pl-en">getBehaviour</span>();
+<span class="pl-smi">DayTimetable</span> <span class="pl-s1">today</span>            = <span class="pl-s1">client</span>.<span class="pl-en">getTimetable</span>(<span class="pl-s">"2024-01-01"</span>);
+<span class="pl-smi">StudentInformation</span> <span class="pl-s1">info</span>       = <span class="pl-s1">client</span>.<span class="pl-en">getStudentInfo</span>();
+
+<span class="pl-smi">List</span>&lt;<span class="pl-smi">Reward</span>&gt; <span class="pl-s1">rewards</span>          = <span class="pl-s1">client</span>.<span class="pl-en">getRewards</span>();
+<span class="pl-s1">client</span>.<span class="pl-en">purchaseReward</span>(<span class="pl-s1">rewards</span>.<span class="pl-en">get</span>(<span class="pl-c1">0</span>));</pre></div>
+<p dir="auto">The client signs in with the same <strong>student code + date of birth</strong> as the ClassCharts student site and refreshes its session automatically (every ~3 minutes).</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Building</h2></div>
+<p dir="auto">This is a standard Gradle <code>java-library</code> project:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="git clone https://github.com/duzos/classcharts-api-java.git
+cd classcharts-api-java
+./gradlew build"><pre>git clone https://github.com/duzos/classcharts-api-java.git
+<span class="pl-c1">cd</span> classcharts-api-java
+./gradlew build</pre></div>
+<p dir="auto">It's also set up with <code>maven-publish</code> if you want to publish it to a local/remote Maven repository.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Status</h2></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Clients</h3></div>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Student client</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Parent client</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Automatic re-login after session timeout</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Supported data</h3></div>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Announcements</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Homework &amp; homework statuses</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Behaviour points &amp; activity</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Rewards (and purchasing)</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Student information</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Timetable (lessons &amp; day timetable)</li>
+</ul>
+<blockquote>
+<p dir="auto">A Python version of this library also exists: <a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/classcharts-api-python">classcharts-api-python</a>.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Links</h2></div>
+<ul dir="auto">
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/classcharts-api-java">GitHub</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Credits</h2></div>
+<p dir="auto">By <a target="_blank" rel="noopener noreferrer" href="https://duzo.is-a.dev/" rel="nofollow">Duzo</a>.</p>
+</article></div>

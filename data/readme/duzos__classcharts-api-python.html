@@ -1,0 +1,55 @@
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div align="center" dir="auto">
+<div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">ClassCharts API · Python</h1></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">An unofficial Python client for the ClassCharts student API.</h3></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c04415cd7482c9361d712487ac3c5e98c890802f910d90b919f9fe8d3cf692de/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f507974686f6e2d332e382b2d3337373641423f7374796c653d666f722d7468652d6261646765266c6f676f3d707974686f6e266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/c04415cd7482c9361d712487ac3c5e98c890802f910d90b919f9fe8d3cf692de/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f507974686f6e2d332e382b2d3337373641423f7374796c653d666f722d7468652d6261646765266c6f676f3d707974686f6e266c6f676f436f6c6f723d7768697465" alt="Python" data-canonical-src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/08a20d23996118cc2b9c3c533182629112d0839afc6713587826244e9c9ef10d/68747470733a2f2f696d672e736869656c64732e696f2f707970692f762f636c6173736368617274733f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/08a20d23996118cc2b9c3c533182629112d0839afc6713587826244e9c9ef10d/68747470733a2f2f696d672e736869656c64732e696f2f707970692f762f636c6173736368617274733f7374796c653d666f722d7468652d6261646765" alt="PyPI" data-canonical-src="https://img.shields.io/pypi/v/classcharts?style=for-the-badge" style="max-width: 100%;"></a></p>
+</div>
+<blockquote>
+<p dir="auto"><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji> <strong>Unofficial.</strong> This project is not affiliated with, endorsed by, or supported by ClassCharts / Edukey. It talks to the same endpoints the website uses, which can change at any time. Use it for your own data only.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Install</h2></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="pip install classcharts"><pre>pip install classcharts</pre></div>
+<p dir="auto">It uses <a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/requests/" rel="nofollow"><code>requests</code></a>, but the package doesn't declare it as a dependency yet — install it alongside:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="pip install requests"><pre>pip install requests</pre></div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Usage</h2></div>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="from classcharts.clients import StudentClient
+
+client = StudentClient(&quot;YOUR_STUDENT_CODE&quot;, &quot;2000-01-01&quot;)  # date of birth: YYYY-MM-DD
+client.login()
+
+# the session keeps itself alive and refreshes automatically"><pre><span class="pl-k">from</span> <span class="pl-s1">classcharts</span>.<span class="pl-s1">clients</span> <span class="pl-k">import</span> <span class="pl-v">StudentClient</span>
+
+<span class="pl-s1">client</span> <span class="pl-c1">=</span> <span class="pl-en">StudentClient</span>(<span class="pl-s">"YOUR_STUDENT_CODE"</span>, <span class="pl-s">"2000-01-01"</span>)  <span class="pl-c"># date of birth: YYYY-MM-DD</span>
+<span class="pl-s1">client</span>.<span class="pl-c1">login</span>()
+
+<span class="pl-c"># the session keeps itself alive and refreshes automatically</span></pre></div>
+<p dir="auto"><code>StudentClient</code> logs in with the same <strong>student code + date of birth</strong> you'd use on the ClassCharts student site, and refreshes its session in the background.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Status</h2></div>
+<p dir="auto">This is an <strong>early (<code>0.0.1</code>)</strong> release — the student login flow works; higher-level helpers are still being built out.</p>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Clients</h3></div>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> Student client</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Parent client</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Automatic re-login after session timeout</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Data helpers</h3></div>
+<p dir="auto">Convenience wrappers for these are planned but not all implemented yet:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Announcements</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Homework &amp; homework statuses</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Behaviour points</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Rewards</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Student information</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> Timetable (lessons &amp; day timetable)</li>
+</ul>
+<blockquote>
+<p dir="auto">A Java version of this library also exists: <a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/classcharts-api-java">classcharts-api-java</a>.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Links</h2></div>
+<ul dir="auto">
+<li><a target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/classcharts/" rel="nofollow">PyPI</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/classcharts-api-python">GitHub</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Credits</h2></div>
+<p dir="auto">By <a target="_blank" rel="noopener noreferrer" href="https://duzo.is-a.dev/" rel="nofollow">Duzo</a>.</p>
+</article></div>
