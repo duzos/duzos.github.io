@@ -8,24 +8,24 @@
 <p dir="auto"><strong>by <a target="_blank" rel="noopener noreferrer" href="https://duzo.is-a.dev/" rel="nofollow">Duzo</a></strong></p>
 </div>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">What is it?</h2></div>
-<p dir="auto">A Minecraft Forge mod that lets clients <strong>automatically download the mods a server is missing</strong> — so joining a modded server is one click instead of a manual mod hunt. Think "gmod addon share", but for Minecraft.</p>
+<p dir="auto">A Minecraft Forge mod that lets clients <strong>automatically download the mods a server is missing</strong> - so joining a modded server is one click instead of a manual mod hunt. Think "gmod addon share", but for Minecraft.</p>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Features</h2></div>
 <ul dir="auto">
-<li>🔄 <strong>Automatic mod detection</strong> — a "Sync Mods" button appears on the mod-mismatch disconnect screen.</li>
-<li>🔒 <strong>SHA-256 verification</strong> — downloaded mods are checked against the server's checksums.</li>
-<li>🔁 <strong>Auto-reconnect</strong> — rejoins the server after the restart.</li>
-<li>🌐 <strong>IPv4 &amp; IPv6</strong> — works with all server address formats.</li>
-<li>✅ <strong>User consent</strong> — always asks before downloading anything.</li>
+<li>🔄 <strong>Automatic mod detection</strong> - a "Sync Mods" button appears on the mod-mismatch disconnect screen.</li>
+<li>🔒 <strong>SHA-256 verification</strong> - downloaded mods are checked against the server's checksums.</li>
+<li>🔁 <strong>Auto-reconnect</strong> - rejoins the server after the restart.</li>
+<li>🌐 <strong>IPv4 &amp; IPv6</strong> - works with all server address formats.</li>
+<li>✅ <strong>User consent</strong> - always asks before downloading anything.</li>
 </ul>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">How it works</h2></div>
-<p dir="auto"><strong>Server side</strong> — running the mod starts a small HTTP server (default port <strong>25566</strong>, configurable) that serves the installed mod list with SHA-256 checksums and lets clients download the JARs.</p>
+<p dir="auto"><strong>Server side</strong> - running the mod starts a small HTTP server (default port <strong>25566</strong>, configurable) that serves the installed mod list with SHA-256 checksums and lets clients download the JARs.</p>
 <p dir="auto"><strong>Client side</strong></p>
 <ol dir="auto">
 <li>Try to connect to a modded server.</li>
 <li>If you're kicked for a mod mismatch, click <strong>Sync Mods</strong>.</li>
 <li>Review the missing mods and confirm the download.</li>
 <li>Mods drop into your <code>mods</code> folder.</li>
-<li>Click <strong>Restart Now</strong> — the game reconnects automatically.</li>
+<li>Click <strong>Restart Now</strong> - the game reconnects automatically.</li>
 </ol>
 <blockquote>
 <p dir="auto"><strong>Required on both the server and the client.</strong></p>
@@ -46,7 +46,7 @@ autoRestart = false   # restart automatically after download"><pre>[<span class=
 <span class="pl-smi">autoDownload</span> = <span class="pl-c1">false</span>  <span class="pl-c"><span class="pl-c">#</span> start downloading missing mods automatically (still asks consent)</span>
 <span class="pl-smi">autoRestart</span> = <span class="pl-c1">false</span>   <span class="pl-c"><span class="pl-c">#</span> restart automatically after download</span></pre></div>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto"><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji> Security</h2></div>
-<p dir="auto"><strong>Only sync mods from servers you trust.</strong> Mods have full access to your computer — ModSync verifies file integrity, but it can't vouch for what a mod actually does.</p>
+<p dir="auto"><strong>Only sync mods from servers you trust.</strong> Mods have full access to your computer - ModSync verifies file integrity, but it can't vouch for what a mod actually does.</p>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Requirements</h2></div>
 <ul dir="auto">
 <li>Minecraft <strong>1.20.1</strong></li>
