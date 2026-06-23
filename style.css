@@ -2085,4 +2085,146 @@ button {
         opacity: 1;
         transform: rotate(var(--tilt));
     }
+
+    .spotlight-readme { animation: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   SPOTLIGHT README
+   ═══════════════════════════════════════════════════ */
+
+/* Bookmark marker on tiles that have a README. Uses ::before because the
+   locked-state star already owns .section-window::after. */
+.section-window.has-readme::before {
+    content: "\f02d"; /* fa-book */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.6rem;
+    font-size: 0.7rem;
+    color: var(--crimson);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+/* Spotlight stays pinned while scrolling the tall "Show All" grid. */
+.project-spotlight.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+}
+
+.spotlight-readme {
+    position: relative;
+    z-index: 1;
+    margin-top: 1.5rem;
+    background: var(--card-face);
+    color: var(--card-tx);
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+    animation: spotlight-in 0.3s var(--snap);
+}
+
+.spotlight-readme-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.85rem;
+    border-bottom: 2px solid #000;
+    background: var(--gold);
+}
+
+.spotlight-readme-head .label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #15151a;
+}
+
+.spotlight-readme-collapse {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.68rem;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    border: 2px solid #000;
+    background: var(--card-face);
+    color: #15151a;
+    padding: 0.18rem 0.55rem;
+    cursor: pointer;
+    transition: all var(--t-fast);
+}
+
+.spotlight-readme-collapse:hover { background: #000; color: var(--gold); }
+
+.spotlight-readme-body {
+    max-height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.1rem 1.4rem;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--card-tx-dim);
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+}
+
+.spotlight-readme-body::-webkit-scrollbar { width: 10px; }
+.spotlight-readme-body::-webkit-scrollbar-thumb { background: var(--crimson); border: 2px solid var(--card-face); }
+
+.spotlight-readme-body h1,
+.spotlight-readme-body h2,
+.spotlight-readme-body h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--card-tx);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 1.1rem 0 0.5rem;
+}
+
+.spotlight-readme-body h1 { font-size: 1.45rem; margin-top: 0; }
+.spotlight-readme-body h2 { font-size: 1.1rem; border-bottom: 2px solid var(--line); padding-bottom: 0.25rem; }
+.spotlight-readme-body h3 { font-size: 0.95rem; }
+.spotlight-readme-body p { margin: 0.6rem 0; }
+.spotlight-readme-body a { color: var(--crimson); font-weight: 600; }
+.spotlight-readme-body a:hover { color: var(--crimson-bright); }
+.spotlight-readme-body ul,
+.spotlight-readme-body ol { margin: 0.6rem 0; padding-left: 1.4rem; }
+.spotlight-readme-body li { margin: 0.25rem 0; }
+
+.spotlight-readme-body code {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    background: rgba(21, 21, 26, 0.07);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.05rem 0.35rem;
+}
+
+.spotlight-readme-body pre {
+    background: #15151a;
+    color: #f7f3e8;
+    border: 2px solid #000;
+    padding: 0.85rem 1rem;
+    overflow-x: auto;
+    margin: 0.7rem 0;
+}
+
+.spotlight-readme-body pre code { background: none; border: none; color: inherit; font-size: 0.8rem; padding: 0; }
+.spotlight-readme-body img { max-width: 100%; height: auto; }
+.spotlight-readme-body img[height="20"] { display: inline-block; vertical-align: middle; margin: 0 0.2rem 0.3rem 0; width: auto; }
+
+.spotlight-readme-loading {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--card-tx-mute);
+    padding: 1.1rem 1.4rem;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
 }
