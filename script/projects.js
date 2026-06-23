@@ -216,6 +216,39 @@ class MinecraftProject extends Project {
 
 const modrinth_api = "https://api.modrinth.com/v2";
 
+// ─── README manifest (built by scripts/update-readmes.mjs) ───
+let readmeKeys = new Set();
+
+function readmeKeyForGithub(url) {
+    if (!url) return null;
+    const m = /github\.com\/([^/]+)\/([^/?#]+)/.exec(url);
+    if (!m) return null;
+    return (m[1] + "__" + m[2].replace(/\.git$/, "")).toLowerCase();
+}
+
+function loadReadmeManifest() {
+    return fetch("./data/readme/index.json")
+        .then(response => (response.ok ? response.json() : null))
+        .then(data => {
+            if (data && data.readmes) {
+                readmeKeys = new Set(Object.keys(data.readmes));
+                applyReadmeMarkers();
+            }
+        })
+        .catch(() => { /* feature stays dormant if the manifest is missing */ });
+}
+
+// Toggle the .has-readme marker on every rendered card by reading the GitHub URL
+// from its source chip. Works for carousel clones and the grid alike, and re-runs
+// as Modrinth projects resolve their repo asynchronously.
+function applyReadmeMarkers() {
+    document.querySelectorAll(".section-window").forEach(card => {
+        const link = card.querySelector('a.chip[href*="github.com"]');
+        const key = link ? readmeKeyForGithub(link.getAttribute("href")) : null;
+        card.classList.toggle("has-readme", !!(key && readmeKeys.has(key)));
+    });
+}
+
 // Projects waiting on Modrinth data — fetched in one batched request by
 // loadModrinthProjects() instead of one request per project, which tripped
 // Modrinth's rate limiter (429s) and left blank tiles.
@@ -299,6 +332,7 @@ class ModrinthProject extends MinecraftProject {
             }
         }
 
+        applyReadmeMarkers();
     }
 }
 
@@ -545,6 +579,7 @@ function updateProjectsWindow() {
 
     // Update project count immediately
     updateStatsDisplay();
+    applyReadmeMarkers();
 
     // Populate featured card for non-Modrinth projects.
     for (let i = 0; i < projects.length; i++) {
@@ -570,6 +605,7 @@ function buildProjectsAndFetch() {
     updateProjectsWindow();
     loadModrinthProjects();
     loadCurseForgeDownloads();
+    loadReadmeManifest();
 }
 
 if (document.readyState === 'loading') {
