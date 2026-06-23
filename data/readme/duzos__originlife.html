@@ -1,20 +1,82 @@
-<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">In short, everyone gets 8 origin lives and each origin lasts 3 hours of time.</h3></div>
-<div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">Lives Mechanics</h1></div>
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div align="center" dir="auto">
+<div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">Timed Lives</h1></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Eight lives. A three-hour clock. And a boogeyman among you.</h3></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e53152a4593e02e7687bee92d0cb13731ee5ad226322d747a3f876032eaec375/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d696e6563726166742d312e31392d3632423437413f7374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/e53152a4593e02e7687bee92d0cb13731ee5ad226322d747a3f876032eaec375/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d696e6563726166742d312e31392d3632423437413f7374796c653d666f722d7468652d6261646765" alt="Minecraft" data-canonical-src="https://img.shields.io/badge/Minecraft-1.19-62B47A?style=for-the-badge" style="max-width: 100%;"></a>
+<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/3cb245e6817ca1f532ef556d8a181fe7fa3cc429a4086081ffd4aded339155e8/68747470733a2f2f696d672e736869656c64732e696f2f6d6f6472696e74682f64742f74696d65642d6c697665733f6c6f676f3d6d6f6472696e7468267374796c653d666f722d7468652d6261646765"><img src="https://camo.githubusercontent.com/3cb245e6817ca1f532ef556d8a181fe7fa3cc429a4086081ffd4aded339155e8/68747470733a2f2f696d672e736869656c64732e696f2f6d6f6472696e74682f64742f74696d65642d6c697665733f6c6f676f3d6d6f6472696e7468267374796c653d666f722d7468652d6261646765" alt="Modrinth Downloads" data-canonical-src="https://img.shields.io/modrinth/dt/timed-lives?logo=modrinth&amp;style=for-the-badge" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://modrinth.com/mod/timed-lives" rel="nofollow"><img alt="modrinth" height="52" src="https://camo.githubusercontent.com/c574505402638f56eeb29839973adcec83edb6066589fe18196efe1a518ff643/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f6e706d2f40696e746572677261762f646576696e732d62616467657340332f6173736574732f636f7a792f617661696c61626c652f6d6f6472696e74685f766563746f722e737667" data-canonical-src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg" style="max-width: 100%; height: auto; max-height: 52px;"></a>
+<a target="_blank" rel="noopener noreferrer" href="https://files.minecraftforge.net" rel="nofollow"><img alt="forge" height="52" src="https://camo.githubusercontent.com/c7cdd85cfcd56ba788bddcf0b28ce12c7ec237ef76213c03be6ef5aaf875fc83/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f6e706d2f40696e746572677261762f646576696e732d62616467657340332f6173736574732f636f7a792f737570706f727465642f666f7267655f766563746f722e737667" data-canonical-src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg" style="max-width: 100%; height: auto; max-height: 52px;"></a></p>
+<p dir="auto"><strong>by <a target="_blank" rel="noopener noreferrer" href="https://duzo.is-a.dev/" rel="nofollow">Duzo</a></strong></p>
+</div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">What is it?</h2></div>
+<p dir="auto">A multiplayer survival challenge that puts <strong>a time limit on your life</strong>, built on the <a target="_blank" rel="noopener noreferrer" href="https://modrinth.com/mod/origins" rel="nofollow">Origins</a> mod. Everyone gets <strong>8 lives</strong>, and each origin only lasts <strong>3 hours</strong> of play before it changes. Run out, and you're a spectator.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Lives</h2></div>
 <ul dir="auto">
-<li>Display 3-hour timer in bottom right of player's screen.</li>
-<li>If a player dies, they lose 1 hour of time. Display message for player: -1 hour.</li>
-<li>If the player dies with more than 1 hour remaining, their origin doesn't change.</li>
-<li>If the player dies with less than 1 hour remaining or their timer reaches 0, their origin changes and they lose one origin life.</li>
-<li>If a player loses an origin life, the color of their nametag changes depending on the number of origin lives left: 8 = White, 7 = Pink, 6 = Purple, 5 = Blue, 4 = Green, 3 = Yellow, 2 = Orange, 1 = Red</li>
-<li>If a player on their last origin dies with less than 1 hour left or their timer reaches 0, that player is put in spectator mode. Display message for all players: [playername] has run out of lives!</li>
+<li>
+<p dir="auto">A <strong>3-hour timer</strong> shows in the bottom-right of your screen.</p>
+</li>
+<li>
+<p dir="auto"><strong>Die</strong> and you lose <strong>1 hour</strong>.</p>
+</li>
+<li>
+<p dir="auto">Die with <strong>more than 1 hour</strong> left and your origin stays.</p>
+</li>
+<li>
+<p dir="auto">Die with <strong>under 1 hour</strong> left (or hit zero) and your origin changes — costing you a life.</p>
+</li>
+<li>
+<p dir="auto">Your nametag colour tracks your remaining lives:</p>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Lives</th>
+<th>8</th>
+<th>7</th>
+<th>6</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Colour</td>
+<td>White</td>
+<td>Pink</td>
+<td>Purple</td>
+<td>Blue</td>
+<td>Green</td>
+<td>Yellow</td>
+<td>Orange</td>
+<td>Red</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+</li>
+<li>
+<p dir="auto">Lose your <strong>last</strong> life and you're put into spectator mode — <em>"[player] has run out of lives!"</em></p>
+</li>
 </ul>
-<div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">Boogeyman Mechanics</h1></div>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">The Boogeyman</h2></div>
 <ul dir="auto">
-<li>A random player is chosen as the boogeyman.</li>
-<li>If a player is not chosen, display message for players: You are NOT the boogeyman.</li>
-<li>If a player is chosen, display message for that player: You are the boogeyman.</li>
-<li>If the boogeyman kills a player, display message for boogeyman: You are cured.</li>
-<li>The player killed loses 2 hours of time. Display message: -2 hours.</li>
-<li>If the boogeyman doesn't kill a player, display message for boogeyman: You have failed. That player is put on their last origin</li>
+<li>Each round, a random player is secretly chosen as the <strong>boogeyman</strong>.</li>
+<li>Kill a player and you're <strong>cured</strong>; the player you killed loses <strong>2 hours</strong>.</li>
+<li>Fail to get a kill and you fall to your <strong>last life</strong>.</li>
 </ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Requirements</h2></div>
+<ul dir="auto">
+<li>Minecraft <strong>1.19</strong> (Forge)</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://modrinth.com/mod/origins" rel="nofollow">Origins</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Links</h2></div>
+<ul dir="auto">
+<li><a target="_blank" rel="noopener noreferrer" href="https://modrinth.com/mod/timed-lives" rel="nofollow">Modrinth</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/originlife">GitHub</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Credits</h2></div>
+<p dir="auto">By <a target="_blank" rel="noopener noreferrer" href="https://duzo.is-a.dev/" rel="nofollow">Duzo</a>.</p>
+<blockquote>
+<p dir="auto">No longer actively updated, but available on Modrinth.</p>
+</blockquote>
 </article></div>
