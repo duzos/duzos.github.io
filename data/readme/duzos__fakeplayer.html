@@ -21,7 +21,7 @@
 <li><strong>Carries an inventory</strong> - managed through its GUI.</li>
 </ul>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">🧠 AI Jobs</h2></div>
-<p dir="auto">Shift + right-click a fake → <strong>AI</strong> → <strong>Bond</strong>, then pick a job. The GUI hands you markers (waypoint, region, chests); right-click to place them - the fake follows you while you do.</p>
+<p dir="auto">Shift + right-click a fake → <strong>AI</strong> → <strong>Bond</strong>, then pick a job. The GUI hands you markers (waypoint, region, chests); right-click to place them - the fake follows you while you do. Each job's menu shows only the markers it needs, and fakes visibly open the chests and barrels they work from.</p>
 <markdown-accessiblity-table><table>
 <thead>
 <tr>
@@ -61,9 +61,24 @@
 <td>source + deposit</td>
 <td>Hauls matching items from one chest to another.</td>
 </tr>
+<tr>
+<td><strong>Fisherman</strong></td>
+<td>waypoint + deposit</td>
+<td>Sits at the water and casts a real bobber; banks the catch, swaps a fresh rod when one breaks, and uses your rod's enchantments.</td>
+</tr>
+<tr>
+<td><strong>Farmer</strong></td>
+<td>region + deposit</td>
+<td>Tills a plot, waters it, plants any seed (modded too), bonemeals, then harvests and replants on a loop.</td>
+</tr>
+<tr>
+<td><strong>Crafter</strong></td>
+<td>table + source + deposit</td>
+<td>Walks to a crafting table and lays out a recipe you teach it by hand; chain it onto another job's chest for a pipeline.</td>
+</tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto">Tuning lives in <code>players.json</code> (<code>guardRadius</code>, <code>minerMaxBlocksPerSecond</code>, <code>minerBailY</code>, <code>minerLavaCobbleSafety</code>, <code>minerNeverMineBlockUnderFeet</code>).</p>
+<p dir="auto">Tuning lives in <code>players.json</code> (<code>guardRadius</code>, <code>minerMaxBlocksPerSecond</code>, <code>minerBailY</code>).</p>
 <div align="center" dir="auto">
 <markdown-accessiblity-table><table>
   <tbody><tr>
@@ -73,6 +88,13 @@
   <tr>
     <td align="center" valign="top"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/miner-quarry.png"><img src="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/miner-quarry.png" width="330" alt="Miner quarry" style="max-width: 100%;"></a><br><sub><b>Miner</b> clearing a quarry</sub></td>
     <td align="center" valign="top"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/lumberjack.png"><img src="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/lumberjack.png" width="330" alt="Lumberjack" style="max-width: 100%;"></a><br><sub><b>Lumberjack</b> after felling a tree</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/farmer.png"><img src="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/farmer.png" width="330" alt="Farmer" style="max-width: 100%;"></a><br><sub><b>Farmer</b> tending a watered plot</sub></td>
+    <td align="center" valign="top"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/fisherman.png"><img src="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/fisherman.png" width="330" alt="Fisherman" style="max-width: 100%;"></a><br><sub><b>Fisherman</b> casting at the water's edge</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top"><a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/crafter.png"><img src="https://raw.githubusercontent.com/Duzos/fakeplayer/master/docs/img/crafter.png" width="330" alt="Crafter" style="max-width: 100%;"></a><br><sub><b>Crafter</b> crafting by hand at its table</sub></td>
   </tr>
 </tbody></table></markdown-accessiblity-table>
 </div>
