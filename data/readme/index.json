@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T07:26:31.459Z",
+  "generatedAt": "2026-07-19T07:57:57.072Z",
   "readmes": {
     "duzos__space": {
       "repo": "duzos/space"
@@ -43,47 +43,47 @@
     "amblelabs__regeneration": {
       "repo": "amblelabs/regeneration"
     },
-    "amblelabs__stargate": {
-      "repo": "amblelabs/stargate"
-    },
-    "duzos__mobspawners": {
-      "repo": "duzos/mobspawners"
-    },
-    "pavatus__sakitus": {
-      "repo": "pavatus/sakitus"
-    },
-    "duzos__cheesy": {
-      "repo": "Duzos/cheesy"
-    },
-    "duzos__vortex-manipulator": {
-      "repo": "Duzos/vortex-manipulator"
-    },
-    "whocraft__tardisrefined": {
-      "repo": "Whocraft/TardisRefined"
-    },
-    "duzos__superhero": {
-      "repo": "duzos/superhero"
-    },
-    "amblelabs__k9-mod": {
-      "repo": "amblelabs/k9-mod"
-    },
-    "duzos__animation-mc": {
-      "repo": "Duzos/animation-mc"
-    },
-    "duzos__mobeditor": {
-      "repo": "Duzos/mobeditor"
+    "duzos__fakeplayer": {
+      "repo": "Duzos/fakeplayer"
     },
     "amblelabs__ait": {
       "repo": "amblelabs/ait"
     },
+    "amblelabs__k9-mod": {
+      "repo": "amblelabs/k9-mod"
+    },
+    "duzos__cheesy": {
+      "repo": "Duzos/cheesy"
+    },
+    "duzos__animation-mc": {
+      "repo": "Duzos/animation-mc"
+    },
+    "duzos__vortex-manipulator": {
+      "repo": "Duzos/vortex-manipulator"
+    },
+    "pavatus__sakitus": {
+      "repo": "pavatus/sakitus"
+    },
     "duzos__originlife": {
       "repo": "Duzos/originlife"
     },
+    "duzos__mobspawners": {
+      "repo": "duzos/mobspawners"
+    },
+    "duzos__superhero": {
+      "repo": "duzos/superhero"
+    },
+    "duzos__mobeditor": {
+      "repo": "Duzos/mobeditor"
+    },
+    "amblelabs__stargate": {
+      "repo": "amblelabs/stargate"
+    },
+    "whocraft__tardisrefined": {
+      "repo": "Whocraft/TardisRefined"
+    },
     "duzos__origin-regen": {
       "repo": "Duzos/origin-regen"
-    },
-    "duzos__fakeplayer": {
-      "repo": "Duzos/fakeplayer"
     }
   }
 }
