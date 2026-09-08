@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Alan Hall — Counselling, Southport
+   Alan Hall - Counselling, Southport
    Self-contained stylesheet. Deliberately does NOT import the root
    duzos.github.io style.css, so portfolio styling cannot leak in.
    ========================================================================== */
@@ -33,15 +33,15 @@
    ------------------------------------------------------------------------- */
 :root {
   /* Sage */
-  --sage: #71906c;           /* 3.55 on white / 3.16 on blush — display >=24px, decoration */
-  --sage-deep: #5f7c5c;      /* 4.64 with white text — button fills */
-  --sage-deeper: #4a6347;    /* 6.63 with white text — button hover */
-  --sage-text: #4f6a4b;      /* 6.01 on white / 5.34 on blush — small text, links */
+  --sage: #71906c;           /* 3.55 on white / 3.16 on blush - display >=24px, decoration */
+  --sage-deep: #5f7c5c;      /* 4.64 with white text - button fills */
+  --sage-deeper: #4a6347;    /* 6.63 with white text - button hover */
+  --sage-text: #4f6a4b;      /* 6.01 on white / 5.34 on blush - small text, links */
 
   /* Terracotta */
-  --terracotta: #cf8d7e;     /* 2.70 on white — decorative rules only, never text, never UI */
-  --terracotta-deep: #9e6153;/* 4.90 with white text — secondary button fill */
-  --terracotta-deeper: #8a5348; /* 6.16 with white text — hover, accent text */
+  --terracotta: #cf8d7e;     /* 2.70 on white - decorative rules only, never text, never UI */
+  --terracotta-deep: #9e6153;/* 4.90 with white text - secondary button fill */
+  --terracotta-deeper: #8a5348; /* 6.16 with white text - hover, accent text */
 
   /* Neutrals */
   --white: #fff;
@@ -117,10 +117,16 @@ a:hover { color: var(--sage-deeper); }
 /* On a filled button the ring would sit next to sage/terracotta, which it does
    not contrast against (1.76 and 1.67). The white box-shadow fills the outline
    offset so the ring is always bounded by white on the inside and by the page
-   background on the outside — both above 7:1. */
-.btn:focus-visible,
-.tel:focus-visible {
+   background on the outside - both above 7:1. */
+.btn:focus-visible {
   box-shadow: 0 0 0 3px var(--white);
+}
+
+/* On the dark contact panel the default navy ring would sit against near-black.
+   A light ring with an ink gap keeps the indicator visible there instead. */
+.contact__callNum:focus-visible {
+  outline-color: #9ec5f5;
+  box-shadow: 0 0 0 3px var(--ink);
 }
 
 /* --- Layout -------------------------------------------------------------- */
@@ -144,12 +150,6 @@ a:hover { color: var(--sage-deeper); }
   height: 1px;
   background: var(--terracotta);
   opacity: .55;
-}
-.lede {
-  font-size: clamp(1.1875rem, .7vw + 1rem, 1.5rem);
-  line-height: 1.5;
-  color: var(--ink);
-  max-width: 46ch;
 }
 
 .skip {
@@ -212,13 +212,8 @@ a:hover { color: var(--sage-deeper); }
   cursor: pointer;
   min-height: 44px;
 }
-.nav__label::before {
-  content: '';
-  width: 1.125rem;
-  height: 2px;
-  background: currentColor;
-  box-shadow: 0 5px 0 currentColor, 0 -5px 0 currentColor;
-}
+/* Bars are drawn by the .burger span instead, so the open state can render a
+   cross. See the burger icon block further down. */
 .nav__toggle:focus-visible + .nav__label {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
@@ -274,14 +269,6 @@ a:hover { color: var(--sage-deeper); }
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
-.hero__creds {
-  color: var(--ink-muted);
-  font-size: .9375rem;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  margin: 0 0 1.5rem;
-  max-width: 34ch;
-}
 .hero h1 { margin-bottom: 1.5rem; }
 .hero__lede { margin-bottom: 2.25rem; }
 
@@ -300,7 +287,7 @@ a:hover { color: var(--sage-deeper); }
   .portrait { order: -1; justify-self: start; }
 }
 
-/* Hand-authored botanical accent — no licensed stock imagery. */
+/* Hand-authored botanical accent - no licensed stock imagery. */
 .leaf {
   position: absolute;
   color: var(--sage);
@@ -362,24 +349,7 @@ a:hover { color: var(--sage-deeper); }
 }
 .stack > * + * { margin-top: 1.75rem; }
 
-.deflist { border-top: 1px solid var(--rule); }
-.deflist div {
-  display: grid;
-  grid-template-columns: minmax(7rem, 12rem) 1fr;
-  gap: .5rem 1.5rem;
-  padding: .9rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-.deflist dt {
-  font-weight: 500;
-  color: var(--ink);
-  font-size: .9375rem;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.deflist dd { margin: 0; color: var(--ink-muted); }
 @media (max-width: 34rem) {
-  .deflist div { grid-template-columns: 1fr; gap: .15rem; }
 }
 
 .ticklist li {
@@ -400,21 +370,16 @@ a:hover { color: var(--sage-deeper); }
 }
 
 /* --- Specialism chips ---------------------------------------------------- */
-.chips { display: flex; flex-wrap: wrap; gap: .625rem; }
-.chip {
-  border: 1px solid var(--blush-deep);
-  background: var(--white);
-  border-radius: 999px;
-  padding: .5rem 1.1rem;
-  font-size: 1rem;
-  color: var(--ink);
-}
+/* Editorial asides take the real Newsreader italic. Jost ships no italic, so
+   without this the browser synthesises a sheared oblique instead. */
 .note {
   margin-top: 1.75rem;
-  font-size: 1rem;
-  color: var(--ink-muted);
+  font-family: var(--serif);
   font-style: italic;
-  max-width: 52ch;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 54ch;
 }
 
 /* --- Fees ---------------------------------------------------------------- */
@@ -440,38 +405,9 @@ a:hover { color: var(--sage-deeper); }
   color: var(--ink-muted);
 }
 
-.hours { border-top: 1px solid var(--rule); }
-.hours div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25rem 1.25rem;
-  justify-content: space-between;
-  padding: .8rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-.hours dt { font-weight: 500; min-width: 6.5rem; }
-.hours dd { margin: 0; color: var(--ink-muted); text-align: right; flex: 1; min-width: 12rem; }
 @media (max-width: 34rem) { .hours dd { text-align: left; } }
 
 /* --- Contact ------------------------------------------------------------- */
-.contact-card {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--terracotta);
-  border-radius: var(--radius);
-  padding: clamp(1.5rem, 3vw, 2rem);
-}
-.contact-card h3 { margin-bottom: .6rem; }
-.tel {
-  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
-  font-weight: 500;
-  color: var(--sage-text);
-  text-decoration: none;
-  letter-spacing: .02em;
-  display: inline-block;
-  min-height: 44px;
-}
-.tel:hover { text-decoration: underline; }
 address { font-style: normal; color: var(--ink-muted); }
 
 /* --- FAQ ---------------------------------------------------------------- */
@@ -507,7 +443,7 @@ address { font-style: normal; color: var(--ink-muted); }
 .faq__body { padding: 0 0 1.5rem; }
 .faq__body p { font-size: 1.0625rem; }
 
-/* --- Draft flags — visible in the page, not just the README -------------- */
+/* --- Draft flags - visible in the page, not just the README -------------- */
 .draft-banner {
   border: 2px dashed var(--terracotta-deep);
   background: var(--white);
@@ -558,7 +494,7 @@ address { font-style: normal; color: var(--ink-muted); }
 }
 .helpline dt { font-weight: 500; color: var(--ink); }
 .helpline dd { margin: .2rem 0 0; color: var(--ink-muted); font-size: 1rem; }
-/* Crisis numbers get a comfortable tap target — these are the links most
+/* Crisis numbers get a comfortable tap target - these are the links most
    likely to be pressed one-handed, in a hurry, on a phone. */
 .helpline a,
 .footer a[href^="tel:"] {
@@ -610,7 +546,7 @@ address { font-style: normal; color: var(--ink-muted); }
   html { scroll-behavior: smooth; }
 }
 
-/* --- Print — fees, address, access and crisis lines are what get printed - */
+/* --- Print - fees, address, access and crisis lines are what get printed - */
 @media print {
   :root { --gap-section: 1.5rem; }
   body { font-size: 11pt; line-height: 1.45; color: #000; }
@@ -626,4 +562,652 @@ address { font-style: normal; color: var(--ink-muted); }
   a { color: #000; text-decoration: underline; }
   a[href^="tel:"]::after { content: ''; }
   .portrait { display: none; }
+}
+
+/* ==========================================================================
+   Second pass: hero credentials, how-i-can-help, index list, schedule,
+   contact. Adds Newsreader as an editorial counterweight to Jost.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('assets/fonts/newsreader-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('assets/fonts/newsreader-latin-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Hero: eyebrow, credentials, trust row ------------------------------- */
+.eyebrow {
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage-text);
+  margin: 0 0 1.1rem;
+  max-width: none;
+}
+
+.hero h1 { margin-bottom: 1.1rem; }
+
+/* Post-nominals: sentence case as he writes them, hairline separators
+   instead of pipes, wrapping without stranding a single item. */
+.creds {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .3rem 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  margin-bottom: 1.9rem;
+  max-width: 34rem;
+}
+.creds li {
+  font-size: .9375rem;
+  letter-spacing: .04em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+/* The separator belongs to the item BEFORE it, as inline content. An
+   absolutely positioned one stranded a leading "|" at the start of a wrapped
+   line on narrow screens. */
+.creds li:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: .85em;
+  margin-left: 1rem;
+  vertical-align: -.08em;
+  background: var(--rule);
+}
+
+/* The emotional line carries the serif. It is the one sentence on the page
+   most likely to be the reason someone keeps reading. */
+.hero__lede {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.375rem, 1.4vw + 1.05rem, 1.9375rem);
+  line-height: 1.34;
+  letter-spacing: -.005em;
+  color: var(--ink);
+  max-width: 30ch;
+  margin-bottom: 2.25rem;
+}
+
+.trust {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 1.5rem 2rem;
+  margin: 2.75rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--rule);
+  max-width: 42rem;
+}
+.trust div { display: flex; flex-direction: column; gap: .3rem; }
+.trust dt {
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sage-text);
+}
+.trust dd {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+/* --- Pull quote + prose (How I can help) --------------------------------- */
+.pullquote {
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  max-width: 30ch;
+}
+.pullquote blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.625rem, 2.6vw + 1rem, 2.75rem);
+  line-height: 1.2;
+  letter-spacing: -.012em;
+  color: var(--sage-text);
+  text-wrap: balance;
+}
+
+/* Prose offset right of the quote at width: an asymmetric column where
+   neither block loses its comfortable measure. */
+.prose {
+  max-width: 40rem;
+  margin-left: auto;
+  border-top: 1px solid var(--blush-deep);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+.prose p { max-width: none; }
+.prose__lead {
+  font-size: clamp(1.125rem, .5vw + 1rem, 1.25rem);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.section--blush .prose { border-top-color: rgba(113, 144, 108, .28); }
+
+.section__intro {
+  color: var(--ink-muted);
+  max-width: 46ch;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: 1.0625rem;
+}
+
+/* --- Index list (What I help with) --------------------------------------- */
+.index-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+  gap: 0 clamp(2rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--rule);
+}
+.index-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  padding: 1.05rem .25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* --- Contact ------------------------------------------------------------- */
+.contact {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  align-items: start;
+}
+.contact > div {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2.15rem);
+}
+.contact h3 { margin-bottom: .9rem; }
+.contact p { font-size: 1.0625rem; }
+
+/* The one action, given the page's strongest contrast.
+   NOTE: these selectors are doubled up on purpose. `.contact > div` and
+   `.contact p` are (0,1,1) and would otherwise out-specify a single class,
+   which silently painted this panel white with white text on it. */
+.contact > .contact__call {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+  grid-column: 1 / -1;
+}
+.contact .contact__callLabel {
+  margin: 0 0 .5rem;
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #cfc9c6;
+}
+.contact__callNum {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: var(--white);
+  text-decoration: none;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+.contact__callNum:hover {
+  color: var(--white);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.contact .contact__callNote { color: #d8d2cf; margin: .8rem 0 0; max-width: 42ch; }
+
+.contact__alt {
+  margin-top: 1.9rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: center;
+}
+.contact .contact__altLabel {
+  flex: 1 0 100%;
+  margin: 0;
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #cfc9c6;
+}
+.contact .contact__altNote {
+  flex: 1 0 100%;
+  margin: .35rem 0 0;
+  font-size: .9375rem;
+  color: #cfc9c6;
+  max-width: 56ch;
+}
+.btn--onDark {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, .5);
+  min-height: 44px;
+  padding: .65rem 1.35rem;
+  font-size: .9375rem;
+}
+.btn--onDark:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+.btn--onDark:focus-visible { box-shadow: 0 0 0 3px var(--ink); outline-color: #9ec5f5; }
+.btn svg, .maplink svg { width: 1em; height: 1em; flex: none; }
+
+.contact address {
+  margin-bottom: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.maplink { margin: 1rem 0 0; }
+.maplink a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .9375rem;
+  font-weight: 500;
+  min-height: 44px;
+}
+
+.modes { display: grid; gap: 1.1rem; }
+.modes li { display: flex; align-items: flex-start; gap: .9rem; }
+.modes svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex: none;
+  color: var(--sage-text);
+  margin-top: .1rem;
+}
+.modes div { display: flex; flex-direction: column; }
+.modes strong { font-weight: 500; color: var(--ink); font-size: 1.0625rem; }
+.modes span { font-size: .9375rem; color: var(--ink-muted); line-height: 1.45; }
+
+.quoted {
+  margin: .9rem 0 0;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--terracotta);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .3rem; }
+.pills li {
+  border: 1px solid var(--blush-deep);
+  background: var(--blush);
+  border-radius: 999px;
+  padding: .35rem .85rem;
+  font-size: .9375rem;
+  color: var(--ink);
+}
+
+/* Helpline hours on their own line, keeping the number scannable. */
+.hrs { display: block; font-size: .9375rem; color: var(--ink-muted); }
+
+@media print {
+  .contact > .contact__call { background: #fff; border: 2pt solid #000; color: #000; }
+  .contact__callNum,
+  .contact__callLabel,
+  .contact__callNote,
+  .contact__altLabel,
+  .contact__altNote { color: #000; }
+  .contact__alt, .btn--onDark { display: none; }
+  .pullquote blockquote, .index-list__t, .trust dd { color: #000; }
+}
+
+/* ==========================================================================
+   Third pass, from review feedback:
+   - terracotta retired as a rule/line colour on white (it read as muddy brown
+     next to the section headings, most visibly on "Where to find me" and
+     "If you need help now"). It now survives only as a tint behind draft flags.
+   - "Where to find me" pinned to two columns so the fourth card cannot strand
+     itself alone on a third row.
+   - "What I help with" is a single column: 11 items across two columns always
+     left an orphan.
+   - "How I can help" is a real two-column pairing with a sticky quote, so the
+     column does not go dead once the quote ends.
+   ========================================================================== */
+
+/* --- Retire brown rules on white ----------------------------------------- */
+.section__head h2::after {
+  background: var(--rule);
+  opacity: 1;
+}
+.quoted { border-left-color: rgba(113, 144, 108, .55); }
+
+/* Draft flags: ink on a warm tint, dashed. Reads as an editorial marker
+   rather than brown-on-white, and still obviously provisional. */
+.draft-tag {
+  color: var(--ink);
+  border: 1px dashed rgba(40, 38, 38, .55);
+  background: rgba(207, 141, 126, .12);
+}
+.draft-banner {
+  border: 1px dashed rgba(40, 38, 38, .55);
+  background: rgba(207, 141, 126, .1);
+}
+.draft-banner p { color: var(--ink); }
+.draft-banner strong { color: var(--ink); }
+
+/* Draft-only note inside an otherwise first-person answer. */
+.todo {
+  margin-top: .8rem;
+  padding-top: .7rem;
+  border-top: 1px dashed rgba(40, 38, 38, .28);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink-muted);
+}
+
+/* --- How I can help: paired columns -------------------------------------- */
+.helpgrid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .helpgrid { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); }
+  .pullquote { position: sticky; top: 7rem; }
+}
+.pullquote {
+  margin: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.pullquote blockquote { max-width: 24ch; }
+
+/* Hand-drawn sprig. No licensed stock imagery is available for this site, and
+   a stock photograph of a stranger would be worse than none. */
+.sprig {
+  width: clamp(4.5rem, 9vw, 7rem);
+  height: auto;
+  color: var(--sage);
+  opacity: .55;
+}
+@media (max-width: 60rem) {
+  .sprig { display: none; }
+}
+
+.prose {
+  max-width: 42rem;
+  margin-left: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+/* --- What I help with: one column ---------------------------------------- */
+.index-list {
+  display: block;
+  max-width: 46rem;
+  border-top: 1px solid var(--rule);
+}
+.index-list li {
+  display: block;
+  padding: .95rem .25rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, .5vw + 1rem, 1.3125rem);
+  line-height: 1.35;
+  color: var(--ink);
+}
+.section__intro {
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, .6vw + 1rem, 1.375rem);
+  color: var(--ink);
+  margin-bottom: 1.6rem;
+}
+
+/* --- Availability grid --------------------------------------------------- */
+.availability { margin-top: clamp(2.5rem, 5vw, 4rem); }
+.availability h3 { margin-bottom: 1.4rem; }
+
+/* Narrow screens scroll the grid rather than crushing seven columns. */
+.grid-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.75rem;
+  padding-bottom: .25rem;
+}
+.grid {
+  border-collapse: separate;
+  border-spacing: 4px;
+  width: 100%;
+  min-width: 30rem;
+}
+.grid thead th {
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0 0 .4rem;
+  text-align: center;
+}
+.grid thead th abbr { text-decoration: none; border: 0; }
+.grid tbody th {
+  font-size: .875rem;
+  font-weight: 400;
+  text-align: left;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  padding-right: 1rem;
+  width: 1%;
+}
+.grid td {
+  background: rgba(40, 38, 38, .06);
+  border-radius: 3px;
+  height: 2.5rem;
+  min-width: 2.5rem;
+}
+/* Available cells: sage fill plus a tick, so availability is not carried by
+   colour alone. Screen readers get the wording from the .sr-only span. */
+.grid td.on {
+  background: var(--sage-deep);
+  position: relative;
+}
+.grid td.on::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: .6rem;
+  height: .34rem;
+  margin: -.24rem 0 0 -.3rem;
+  border-left: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+  transform: rotate(-45deg);
+}
+
+.daylines { border-top: 1px solid var(--rule); max-width: 46rem; }
+.daylines li {
+  padding: .75rem .25rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1.0625rem;
+  color: var(--ink-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .15rem .9rem;
+}
+.daylines__d {
+  font-weight: 500;
+  color: var(--ink);
+  min-width: 6rem;
+  font-family: 'Jost', system-ui, sans-serif;
+}
+
+.split--fees { align-items: start; }
+
+/* --- Contact: locked to two columns ------------------------------------- */
+@media (min-width: 48rem) {
+  .contact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 47.9375rem) {
+  .contact { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media print {
+  .sprig { display: none; }
+  .grid td.on { background: #000; }
+  .grid td { background: #eee; }
+  .draft-tag, .draft-banner, .todo { border-color: #000; background: #fff; }
+}
+
+/* ==========================================================================
+   Fourth pass: real mobile bugs found on device.
+
+   1. Horizontal scroll on phones. Cause: the availability table's 480px
+      min-content width leaked out of its `overflow-x: auto` scroller and into
+      the ROOT element's scrollWidth (449px against a 375px viewport). Mobile
+      browsers pan to the root's scroll width, which is why the page slid
+      sideways even though `body.scrollWidth` was exactly 375 and a scripted
+      `window.scrollTo` could not reproduce it. Note `body { overflow-x: clip }`
+      does NOT fix this, it only hides other symptoms.
+      Fix: `contain: paint` on the scroller, plus a fixed table layout so the
+      grid fits a phone outright instead of needing to scroll at all.
+
+   2. The expanded burger menu sat inline in the header's flex row instead of
+      dropping to a full-width panel underneath.
+   ========================================================================== */
+
+/* --- 1. Availability grid fits the viewport ------------------------------ */
+.grid-scroll {
+  contain: paint;              /* stops the table's min-content escaping to the root */
+  overflow-x: auto;
+}
+
+.grid {
+  table-layout: fixed;         /* columns no longer sized by min-content */
+  min-width: 0;
+  width: 100%;
+}
+/* Explicit column widths, needed once the layout is fixed. */
+.grid thead td:first-child,
+.grid tbody th { width: 27%; }
+.grid thead th { width: 10.4%; }
+
+.grid td {
+  min-width: 0;
+  height: 2.35rem;
+}
+.grid tbody th {
+  padding-right: .6rem;
+  font-size: .8125rem;
+  line-height: 1.25;
+  white-space: normal;         /* "Early afternoon" may wrap on a narrow phone */
+  hyphens: auto;
+}
+
+@media (max-width: 26rem) {
+  .grid { border-spacing: 3px; }
+  .grid thead th { font-size: .6875rem; letter-spacing: .04em; }
+  .grid tbody th { font-size: .75rem; padding-right: .4rem; }
+  .grid td { height: 2.1rem; }
+}
+
+/* --- 2. Burger menu -------------------------------------------------------
+   The nav is a flex sibling of the brand, so when it opened it tried to sit
+   on the same row. It now breaks to its own full-width row, visually separated
+   from the bar above it. */
+@media (max-width: 60rem) {
+  .header__bar { flex-wrap: wrap; row-gap: 0; }
+
+  .nav__list {
+    flex: 1 0 100%;
+    width: 100%;
+    order: 3;
+    margin-top: 0;
+    border-top: 1px solid var(--rule);
+    padding: .35rem 0 .6rem;
+    max-height: calc(100vh - 4.25rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .nav__list a {
+    padding: .9rem .25rem;
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.0625rem;
+    letter-spacing: .02em;
+    color: var(--ink);
+  }
+  .nav__list a:last-child { border-bottom: 0; }
+
+}
+
+/* --- Burger icon ---------------------------------------------------------
+   A dedicated span so the three bars and the open-state cross can each use a
+   pseudo-element. Without JS there is no aria-expanded, so the icon flipping
+   to a cross is the only affordance telling you the control closes the menu. */
+.burger {
+  position: relative;
+  display: block;
+  width: 1.125rem;
+  height: 2px;
+  background: currentColor;
+  flex: none;
+}
+.burger::before,
+.burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+}
+.burger::before { top: -6px; }
+.burger::after { top: 6px; }
+
+.nav__toggle:checked ~ .nav__label .burger { background: transparent; }
+.nav__toggle:checked ~ .nav__label .burger::before { top: 0; transform: rotate(45deg); }
+.nav__toggle:checked ~ .nav__label .burger::after { top: 0; transform: rotate(-45deg); }
+.nav__toggle:checked ~ .nav__label { color: var(--ink); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .burger::before, .burger::after { transition: transform .18s ease, top .18s ease; }
+}
+
+
+/* The hero leaf is large and pale; at phone width it sat right behind the
+   credentials and the pull quote. Smaller and fainter there. */
+@media (max-width: 48rem) {
+  .leaf--tr { width: 15rem; opacity: .1; top: -1.5rem; right: -5rem; }
 }
