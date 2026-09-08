@@ -37,61 +37,63 @@
 <div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">If you have an already existing mod and want the amblekit then add this to your <strong>build.gradle</strong>!</h3></div>
 <div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="repositories {
     maven {
-        url &quot;https://jitpack.io&quot;
+        url &quot;https://maven.amblelabs.dev&quot;
 
-        metadataSources {
-            artifact() // Look directly for artifact
+        content {
+            includeGroup &quot;dev.amblelabs&quot;
         }
     }
 }
 
 dependencies {
-    modImplementation(&quot;com.github.amblelabs:modkit:${project.modkit_version}&quot;) {
+    modImplementation(&quot;dev.amblelabs:modkit:${project.modkit_version}&quot;) {
         exclude(group: &quot;net.fabricmc.fabric-api&quot;)
     }
 }"><pre class="notranslate"><code>repositories {
     maven {
-        url "https://jitpack.io"
+        url "https://maven.amblelabs.dev"
 
-        metadataSources {
-            artifact() // Look directly for artifact
+        content {
+            includeGroup "dev.amblelabs"
         }
     }
 }
 
 dependencies {
-    modImplementation("com.github.amblelabs:modkit:${project.modkit_version}") {
+    modImplementation("dev.amblelabs:modkit:${project.modkit_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }
 </code></pre></div>
 <p dir="auto">or if you are using kotlin</p>
-<div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="  repositories {
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="repositories {
     maven {
-        url = uri(&quot;https://jitpack.io&quot;)
-        metadataSources {
-            artifact() // Look directly for artifact
+        url &quot;https://maven.amblelabs.dev&quot;
+
+        content {
+            includeGroup &quot;dev.amblelabs&quot;
         }
     }
-    mavenCentral()
 }
 
-
 dependencies {
-    modImplementation(&quot;com.github.amblelabs:modkit:${project.property(&quot;modkit_version&quot;)}&quot;)
-}"><pre class="notranslate"><code>  repositories {
+    modImplementation(&quot;dev.amblelabs:modkit:${project.modkit_version}&quot;) {
+        exclude(group: &quot;net.fabricmc.fabric-api&quot;)
+    }
+}"><pre class="notranslate"><code>repositories {
     maven {
-        url = uri("https://jitpack.io")
-        metadataSources {
-            artifact() // Look directly for artifact
+        url "https://maven.amblelabs.dev"
+
+        content {
+            includeGroup "dev.amblelabs"
         }
     }
-    mavenCentral()
 }
 
-
 dependencies {
-    modImplementation("com.github.amblelabs:modkit:${project.property("modkit_version")}")
+    modImplementation("dev.amblelabs:modkit:${project.modkit_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 }
 </code></pre></div>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">
