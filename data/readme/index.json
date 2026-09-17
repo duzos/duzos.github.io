@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T10:27:57.646Z",
+  "generatedAt": "2026-09-17T10:38:00.280Z",
   "readmes": {
     "duzos__space": {
       "repo": "duzos/space"
@@ -43,8 +43,14 @@
     "amblelabs__regeneration": {
       "repo": "amblelabs/regeneration"
     },
+    "amblelabs__k9-mod": {
+      "repo": "amblelabs/k9-mod"
+    },
     "duzos__mobeditor": {
       "repo": "Duzos/mobeditor"
+    },
+    "duzos__fakeplayer": {
+      "repo": "Duzos/fakeplayer"
     },
     "duzos__superhero": {
       "repo": "duzos/superhero"
@@ -52,38 +58,32 @@
     "duzos__originlife": {
       "repo": "Duzos/originlife"
     },
-    "duzos__mobspawners": {
-      "repo": "duzos/mobspawners"
+    "whocraft__tardisrefined": {
+      "repo": "Whocraft/TardisRefined"
     },
     "duzos__animation-mc": {
       "repo": "Duzos/animation-mc"
     },
-    "duzos__cheesy": {
-      "repo": "Duzos/cheesy"
+    "amblelabs__stargate": {
+      "repo": "amblelabs/stargate"
     },
-    "duzos__fakeplayer": {
-      "repo": "Duzos/fakeplayer"
+    "duzos__mobspawners": {
+      "repo": "duzos/mobspawners"
     },
     "duzos__origin-regen": {
       "repo": "Duzos/origin-regen"
     },
-    "pavatus__sakitus": {
-      "repo": "pavatus/sakitus"
-    },
-    "amblelabs__k9-mod": {
-      "repo": "amblelabs/k9-mod"
+    "duzos__vortex-manipulator": {
+      "repo": "Duzos/vortex-manipulator"
     },
     "amblelabs__ait": {
       "repo": "amblelabs/ait"
     },
-    "amblelabs__stargate": {
-      "repo": "amblelabs/stargate"
+    "pavatus__sakitus": {
+      "repo": "pavatus/sakitus"
     },
-    "whocraft__tardisrefined": {
-      "repo": "Whocraft/TardisRefined"
-    },
-    "duzos__vortex-manipulator": {
-      "repo": "Duzos/vortex-manipulator"
+    "duzos__cheesy": {
+      "repo": "Duzos/cheesy"
     }
   }
 }
