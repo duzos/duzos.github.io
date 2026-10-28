@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T11:14:46.329Z",
+  "generatedAt": "2026-10-28T11:48:55.630Z",
   "readmes": {
     "duzos__space": {
       "repo": "duzos/space"
@@ -43,47 +43,47 @@
     "amblelabs__regeneration": {
       "repo": "amblelabs/regeneration"
     },
-    "whocraft__tardisrefined": {
-      "repo": "Whocraft/TardisRefined"
-    },
-    "amblelabs__k9-mod": {
-      "repo": "amblelabs/k9-mod"
-    },
-    "pavatus__sakitus": {
-      "repo": "pavatus/sakitus"
-    },
-    "duzos__mobeditor": {
-      "repo": "Duzos/mobeditor"
-    },
-    "duzos__fakeplayer": {
-      "repo": "Duzos/fakeplayer"
-    },
-    "duzos__animation-mc": {
-      "repo": "Duzos/animation-mc"
-    },
-    "amblelabs__stargate": {
-      "repo": "amblelabs/stargate"
-    },
-    "duzos__originlife": {
-      "repo": "Duzos/originlife"
-    },
-    "duzos__origin-regen": {
-      "repo": "Duzos/origin-regen"
-    },
-    "duzos__vortex-manipulator": {
-      "repo": "Duzos/vortex-manipulator"
-    },
-    "duzos__mobspawners": {
-      "repo": "duzos/mobspawners"
+    "duzos__cheesy": {
+      "repo": "Duzos/cheesy"
     },
     "amblelabs__ait": {
       "repo": "amblelabs/ait"
     },
-    "duzos__cheesy": {
-      "repo": "Duzos/cheesy"
+    "duzos__origin-regen": {
+      "repo": "Duzos/origin-regen"
+    },
+    "duzos__originlife": {
+      "repo": "Duzos/originlife"
+    },
+    "amblelabs__k9-mod": {
+      "repo": "amblelabs/k9-mod"
+    },
+    "duzos__vortex-manipulator": {
+      "repo": "Duzos/vortex-manipulator"
+    },
+    "duzos__animation-mc": {
+      "repo": "Duzos/animation-mc"
+    },
+    "pavatus__sakitus": {
+      "repo": "pavatus/sakitus"
+    },
+    "duzos__fakeplayer": {
+      "repo": "Duzos/fakeplayer"
+    },
+    "whocraft__tardisrefined": {
+      "repo": "Whocraft/TardisRefined"
+    },
+    "duzos__mobspawners": {
+      "repo": "duzos/mobspawners"
+    },
+    "duzos__mobeditor": {
+      "repo": "Duzos/mobeditor"
     },
     "duzos__superhero": {
       "repo": "duzos/superhero"
+    },
+    "amblelabs__stargate": {
+      "repo": "amblelabs/stargate"
     }
   }
 }
