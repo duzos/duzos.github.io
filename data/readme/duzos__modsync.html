@@ -32,19 +32,20 @@
 </blockquote>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Configuration</h2></div>
 <p dir="auto"><code>config/modsync-common.toml</code>:</p>
-<div class="highlight highlight-source-toml notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="[server]
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="[server]
 httpPort = 25566      # HTTP port for serving mod files
 serverSecret = &quot;&quot;     # shared secret for downloads (empty = no auth)
 
 [client]
 autoDownload = false  # start downloading missing mods automatically (still asks consent)
-autoRestart = false   # restart automatically after download"><pre>[<span class="pl-en">server</span>]
-<span class="pl-smi">httpPort</span> = <span class="pl-c1">25566</span>      <span class="pl-c"><span class="pl-c">#</span> HTTP port for serving mod files</span>
-<span class="pl-smi">serverSecret</span> = <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>     <span class="pl-c"><span class="pl-c">#</span> shared secret for downloads (empty = no auth)</span>
+autoRestart = false   # restart automatically after download"><pre lang="toml" class="notranslate"><code>[server]
+httpPort = 25566      # HTTP port for serving mod files
+serverSecret = ""     # shared secret for downloads (empty = no auth)
 
-[<span class="pl-en">client</span>]
-<span class="pl-smi">autoDownload</span> = <span class="pl-c1">false</span>  <span class="pl-c"><span class="pl-c">#</span> start downloading missing mods automatically (still asks consent)</span>
-<span class="pl-smi">autoRestart</span> = <span class="pl-c1">false</span>   <span class="pl-c"><span class="pl-c">#</span> restart automatically after download</span></pre></div>
+[client]
+autoDownload = false  # start downloading missing mods automatically (still asks consent)
+autoRestart = false   # restart automatically after download
+</code></pre></div>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto"><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji> Security</h2></div>
 <p dir="auto"><strong>Only sync mods from servers you trust.</strong> Mods have full access to your computer - ModSync verifies file integrity, but it can't vouch for what a mod actually does.</p>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Requirements</h2></div>
@@ -53,11 +54,12 @@ autoRestart = false   # restart automatically after download"><pre>[<span class=
 <li>Forge <strong>47.4+</strong></li>
 </ul>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Building</h2></div>
-<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="git clone https://github.com/duzos/modsync.git
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="git clone https://github.com/duzos/modsync.git
 cd modsync
-./gradlew build      # output in build/libs/"><pre>git clone https://github.com/duzos/modsync.git
-<span class="pl-c1">cd</span> modsync
-./gradlew build      <span class="pl-c"><span class="pl-c">#</span> output in build/libs/</span></pre></div>
+./gradlew build      # output in build/libs/"><pre lang="bash" class="notranslate"><code>git clone https://github.com/duzos/modsync.git
+cd modsync
+./gradlew build      # output in build/libs/
+</code></pre></div>
 <div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Links</h2></div>
 <ul dir="auto">
 <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/duzos/modsync/releases">Releases</a></li>
