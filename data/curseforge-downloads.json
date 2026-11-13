@@ -1,71 +1,71 @@
 {
-  "generatedAt": "2026-06-11T19:03:34.675Z",
+  "generatedAt": "2026-11-13T00:29:45.324Z",
   "source": "CurseForge Core API",
   "downloads": {
     "782697": {
       "name": "TARDIS Refined",
       "slug": "tardis-refined",
-      "downloadCount": 536340,
+      "downloadCount": 666407,
       "url": "https://www.curseforge.com/minecraft/mc-mods/tardis-refined"
     },
     "845992": {
       "name": "Fake Player",
       "slug": "fake-player",
-      "downloadCount": 151160,
+      "downloadCount": 193792,
       "url": "https://www.curseforge.com/minecraft/mc-mods/fake-player"
     },
     "856138": {
-      "name": "Adventures In Time - TARDIS",
+      "name": "Adventures in Time - TARDIS",
       "slug": "adventures-in-time",
-      "downloadCount": 99550,
+      "downloadCount": 106710,
       "url": "https://www.curseforge.com/minecraft/mc-mods/adventures-in-time"
     },
     "863972": {
       "name": "Cheesy",
       "slug": "cheesy",
-      "downloadCount": 1440,
+      "downloadCount": 1521,
       "url": "https://www.curseforge.com/minecraft/mc-mods/cheesy"
     },
     "866639": {
-      "name": "K9",
+      "name": "Adventures In Time - K9",
       "slug": "k9",
-      "downloadCount": 13337,
+      "downloadCount": 16366,
       "url": "https://www.curseforge.com/minecraft/mc-mods/k9"
     },
     "871545": {
       "name": "Timeless Heroes",
       "slug": "timeless-heroes",
-      "downloadCount": 65740,
+      "downloadCount": 76210,
       "url": "https://www.curseforge.com/minecraft/mc-mods/timeless-heroes"
     },
     "893078": {
       "name": "Timed Lives",
       "slug": "timed-lives",
-      "downloadCount": 123,
+      "downloadCount": 140,
       "url": "https://www.curseforge.com/minecraft/mc-mods/timed-lives"
     },
     "963834": {
       "name": "Origins: Regenerated",
       "slug": "origins-regenerated",
-      "downloadCount": 2648,
+      "downloadCount": 2817,
       "url": "https://www.curseforge.com/minecraft/mc-mods/origins-regenerated"
     },
     "973580": {
       "name": "Vortex",
       "slug": "vortex",
-      "downloadCount": 289,
+      "downloadCount": 400,
       "url": "https://www.curseforge.com/minecraft/mc-mods/vortex"
     },
     "1204806": {
       "name": "AmbleKit",
       "slug": "amblekit",
-      "downloadCount": 77034,
+      "downloadCount": 123197,
       "url": "https://www.curseforge.com/minecraft/mc-mods/amblekit"
     },
     "1204812": {
       "name": "Stargate",
       "slug": "stargate",
-      "downloadCount": 1043,
+      "downloadCount": 1441,
       "url": "https://www.curseforge.com/minecraft/mc-mods/stargate"
     }
   }

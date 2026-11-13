@@ -1,434 +1,343 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>James Hall | Java Developer</title>
 
-        <title>duzo | Java Developer</title>
+    <meta name="description" content="James Hall (duzo) is a Java developer working on backend and game server infrastructure at SSundee LLC. Java, Kotlin, Docker, SQL.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
 
-        <meta name="description" content="duzo - Java Developer, Minecraft Modder, and Creator">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#0b0b0d">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <link rel="canonical" href="https://duzo.is-a.dev/">
 
-        <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-        <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://duzo.is-a.dev/">
+    <meta property="og:title" content="James Hall | Java Developer">
+    <meta property="og:description" content="Java developer working on backend and game server infrastructure. Java, Kotlin, Docker, SQL.">
+    <meta property="og:image" content="https://duzo.is-a.dev/img/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="James Hall | Java Developer">
+    <meta name="twitter:description" content="Java developer working on backend and game server infrastructure. Java, Kotlin, Docker, SQL.">
+    <meta name="twitter:image" content="https://duzo.is-a.dev/img/og-banner.png">
 
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://duzo.is-a.dev/">
-        <meta property="og:title" content="duzo | Java Developer">
-        <meta property="og:description" content="duzo - Java Developer, Minecraft Modder, and Creator">
-        <meta property="og:image" content="https://duzo.is-a.dev/img/og-banner.png">
-        <meta property="og:image:width" content="1200">
-        <meta property="og:image:height" content="630">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="duzo | Java Developer">
-        <meta name="twitter:description" content="duzo - Java Developer, Minecraft Modder, and Creator">
-        <meta name="twitter:image" content="https://duzo.is-a.dev/img/og-banner.png">
+    <!-- Apply a saved theme before first paint; otherwise the system setting wins -->
+    <script>
+        try {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light' || savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        } catch (e) { /* storage blocked: follow the system */ }
+    </script>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-        <script src="https://kit.fontawesome.com/2b1db366f1.js" crossorigin="anonymous"></script>
-        <script defer data-domain="duzo.is-a.dev" src="https://analytics.is-a.dev/js/script.js"></script>
-        <script src="./script/carousel.js" defer></script>
-        <script src="./script/projects.js" defer></script>
-        <script src="./script/spotify.js" defer></script>
-        <script src="./script/animations.js" defer></script>
-    </head>
-    <body>
+    <script defer data-domain="duzo.is-a.dev" src="https://analytics.is-a.dev/js/script.js"></script>
+    <script src="./script/projects.js" defer></script>
+    <script src="./script/discord.js" defer></script>
+    <script src="./script/site.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Noise texture overlay -->
-    <div class="noise-overlay" aria-hidden="true"></div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <a href="#" class="nav-brand">DUZO<span class="nav-brand-star">★</span></a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about"><span class="nav-index">01</span>About</a></li>
-            <li><a href="#skills"><span class="nav-index">02</span>Skills</a></li>
-            <li><a href="#projects"><span class="nav-index">03</span>Projects</a></li>
-            <li><a href="#contact"><span class="nav-index">04</span>Contact</a></li>
-            <li><a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank" class="nav-icon-link"><i class="fa-brands fa-linkedin"></i></a></li>
-            <li>
-                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
-                    <i class="fa-solid fa-sun" id="themeIcon"></i>
-                </button>
-            </li>
-        </ul>
-        <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a href="#top" class="brand">James Hall</a>
+            <nav aria-label="Sections">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme" hidden>
+                <span class="theme-toggle-glyph" aria-hidden="true"></span>
+            </button>
         </div>
-    </nav>
+    </header>
 
-    <main>
-        <!-- Hero -->
-        <header class="hero">
-            <div class="hero-halftone" aria-hidden="true"></div>
-            <div class="hero-slash" aria-hidden="true"></div>
-            <div class="hero-slash hero-slash-2" aria-hidden="true"></div>
-            <p class="hero-prefix animate-hero">// hello world</p>
-            <h1 class="title-text animate-hero">DUZO</h1>
-            <p class="title-tagline animate-hero">
-                <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank">Java Developer</a>
-                <span class="tagline-sep">★</span>
-                Minecraft Modder
-                <span class="tagline-sep">★</span>
-                Creator
+    <main id="main">
+        <!-- Intro -->
+        <section class="intro wrap" id="top">
+            <div class="banner">
+                <img src="./img/banner.jpg" alt="" width="1400" height="350">
+            </div>
+            <img class="avatar" src="./img/profile.jpg" alt="James Hall" width="400" height="400">
+            <p class="eyebrow">Merseyside, UK</p>
+            <h1>James Hall</h1>
+            <p class="headline">Java Developer · Backend &amp; Game Server Infrastructure · Java, Kotlin, Docker, SQL</p>
+            <p class="lede">
+                I build backend systems and game server infrastructure in Java and Kotlin.
+                Currently working full-time on <a href="https://minebounds.com/">MineBounds</a> at SSundee LLC.
             </p>
-            <div class="hero-cta animate-hero">
-                <a href="#projects" class="hero-btn"><span>View Projects</span></a>
-                <a href="#contact" class="hero-btn hero-btn-ghost"><span>Get in Touch</span></a>
-            </div>
-            <div class="scroll-indicator" aria-hidden="true">
-                <span class="chevron"></span>
-                <span class="chevron"></span>
-            </div>
-        </header>
-
-        <!-- Marquee strip -->
-        <div class="marquee marquee-tilt" aria-hidden="true">
-            <div class="marquee-track">
-                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
-                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
-                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
-                <span>DUZO ★ JAVA DEVELOPER ★ MINECRAFT MODDER ★ CREATOR ★&nbsp;</span>
-            </div>
-        </div>
+            <ul class="intro-links">
+                <li><a class="button" href="https://github.com/duzos">GitHub</a></li>
+                <li><a class="button" href="https://www.linkedin.com/in/duzo/">LinkedIn</a></li>
+                <li><a class="button button-quiet" href="mailto:james.hall01@outlook.com">Email</a></li>
+            </ul>
+        </section>
 
         <!-- About -->
-        <section id="about">
-            <div class="section-header">
-                <span class="section-ghost" aria-hidden="true">ABOUT</span>
-                <span class="section-number">01</span>
-                <h2 class="section-title">About Me</h2>
-                <div class="section-line"></div>
+        <section class="section wrap" id="about">
+            <h2 class="section-title">About</h2>
+            <div class="section-body prose">
+                <p>
+                    I'm a Java developer working full-time on <a href="https://minebounds.com/">MineBounds</a>,
+                    SSundee LLC's multiplayer Minecraft network. I build the features players see and the
+                    infrastructure that runs them, and I take features from the first conversation about an
+                    idea through to testing, release and monitoring.
+                </p>
+                <p>
+                    I'm self-taught and have been writing software professionally since 2023. Before SSundee
+                    I freelanced for 15+ clients, most of whom came back, and built or contributed to
+                    open-source mods with over 1.8 million downloads.
+                </p>
+                <p>
+                    Day to day I work in Java, Kotlin, SQL, Docker and Linux, with AI-assisted tools as
+                    part of my workflow.
+                </p>
             </div>
-            <div class="about-layout">
-                <div class="about-left">
-                    <div class="about-main animate-on-scroll">
-                        <div class="about-text">
-                            <p class="about-greeting">hello, my name is <span class="greeting-name">James</span>.</p>
-                            <p>i make Minecraft mods and server stuff, mostly in <strong>Java</strong>.</p>
-                            <p>i also build websites, help run <a href="https://minebounds.com/" target="_blank">MineBounds</a>, and write small utilities for whatever i'm working on.</p>
-                            <div class="a-levels">
-                                <span class="a-level-tag"><strong>A*</strong> Computer Science</span>
-                                <span class="a-level-tag"><strong>B</strong> Mathematics</span>
-                                <span class="a-level-tag"><strong>B</strong> Physics</span>
-                            </div>
-                        </div>
-                        <div class="about-avatar">
-                            <div class="avatar-frame">
-                                <img class="avatar-img" src="./img/hollybolly.png" alt="duzo's avatar">
-                            </div>
-                            <div class="avatar-status">
-                                <span class="status-dot"></span>
-                                <span class="status-text">Online</span>
-                            </div>
-                        </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section wrap" id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="section-body">
+                <article class="role">
+                    <img class="org-logo" src="./img/org/ssundee.jpg" alt="SSundee logo" width="48" height="48" loading="lazy">
+                    <div class="role-main">
+                        <header class="role-head">
+                            <h3>Java Developer <span class="role-org">SSundee LLC</span></h3>
+                            <p class="role-meta">Aug 2025 to present · Contract · Remote</p>
+                        </header>
+                        <ul>
+                            <li>Build player-facing features in Java and Kotlin for MineBounds, SSundee's multiplayer Minecraft network, from in-game systems and interfaces to the services behind them.</li>
+                            <li>Built custom Minecraft mods in Java for videos on the SSundee YouTube channel.</li>
+                            <li>Main developer on a feature area, taking work from design to release and working directly with non-developers to turn ideas into requirements.</li>
+                            <li>Improved server tick rate, memory usage and database query speed, using profilers, logs and dashboards to find the cause.</li>
+                            <li>Build and run the server's infrastructure: Docker-based game servers, plus builds, releases and deployment of the server and its custom plugins.</li>
+                            <li>Built monitoring and analytics for server health and player activity, including the SQL behind it.</li>
+                            <li>Write unit and integration tests, review code on GitHub and document what I build.</li>
+                        </ul>
                     </div>
-                    <div class="section-window spotify-widget animate-on-scroll" id="spotifyWidget">
-                        <div class="now-playing-badge" id="nowPlayingBadge" style="display: none;">
-                            <div class="equalizer">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            Now Playing
-                        </div>
-                        <div class="spotify-content">
-                            <h3 class="spotify-label">now spinning..</h3>
-                            <p id="spotify-song"></p>
-                            <div class="vinyl-wrap">
-                                <img id="spotify-album-cover" src="./img/spotify.png" alt="Album cover">
-                            </div>
-                            <p id="spotify-album-info"></p>
-                        </div>
+                </article>
+
+                <article class="role">
+                    <img class="org-logo" src="./favicon.svg" alt="" width="48" height="48" loading="lazy">
+                    <div class="role-main">
+                        <header class="role-head">
+                            <h3>Freelance Software Developer <span class="role-org">Self-employed</span></h3>
+                            <p class="role-meta">Sep 2023 to Aug 2025 · Remote</p>
+                        </header>
+                        <ul>
+                            <li>Delivered custom Minecraft mods in Java for 15+ clients, including content creators, server networks and small studios. Most came back for more work.</li>
+                            <li>Ran the business side myself: quoting, invoicing and hitting deadlines.</li>
+                            <li>Built or contributed to open-source mods with 1.8M+ downloads, some still generating revenue.</li>
+                            <li>Wrote my own build and release tooling to ship mods across multiple game versions and mod loaders.</li>
+                            <li>Partnered with BisectHosting, a game server host, to promote their services to my mods' players.</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="about-right">
-                    <div class="section-window cat-card polaroid animate-on-scroll">
-                        <img class="rounded" src="./img/cat.jpg" alt="My cat" loading="lazy">
-                        <h3>my cat</h3>
+                </article>
+
+                <article class="role">
+                    <img class="org-logo" src="./img/org/kgv.png" alt="KGV Sixth Form College logo" width="48" height="48" loading="lazy">
+                    <div class="role-main">
+                        <header class="role-head">
+                            <h3>A-levels <span class="role-org">KGV Sixth Form College</span></h3>
+                            <p class="role-meta">Sep 2024 to Jul 2026</p>
+                        </header>
+                        <p class="role-note">Mathematics, Computer Science and Physics.</p>
                     </div>
-                </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Work -->
+        <section class="section wrap" id="work">
+            <h2 class="section-title">Work</h2>
+            <div class="section-body">
+                <p class="section-intro">
+                    Open-source mods I built or contributed to. Counts combine Modrinth and CurseForge.
+                </p>
+
+                <!-- Hard-coded so the numbers are right without JavaScript; projects.js refreshes them.
+                     Icons load straight from Modrinth; projects.js swaps in the current one from the API. -->
+                <dl class="stats">
+                    <div class="stat">
+                        <dt>Downloads</dt>
+                        <dd id="statDownloads">1.9M+</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Projects</dt>
+                        <dd id="statProjects">30</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Clients</dt>
+                        <dd>15+</dd>
+                    </div>
+                </dl>
+
+                <ul class="work-grid">
+                    <li class="work-card" data-modrinth="tardis-refined" data-cf="782697">
+                        <div class="work-head">
+                            <img class="project-icon" data-icon src="https://cdn.modrinth.com/data/nqVt6aES/f24930555b2256e434801069a2c9d9229326fded_96.webp" alt="" width="40" height="40" loading="lazy">
+                            <h3><a href="https://modrinth.com/mod/tardis-refined">TARDIS Refined</a></h3>
+                        </div>
+                        <p>Adds the Doctor Who TARDIS to Minecraft, for Fabric and Forge.</p>
+                        <p class="work-meta"><span data-downloads>1.1M</span> downloads · <a href="https://github.com/Whocraft/TardisRefined">Source</a></p>
+                    </li>
+                    <li class="work-card" data-modrinth="fake-players" data-cf="845992">
+                        <div class="work-head">
+                            <img class="project-icon" data-icon src="https://cdn.modrinth.com/data/1RSY6DQH/a4d76f75be943ec42a1b34eeb00d7fcc81aecf28_96.webp" alt="" width="40" height="40" loading="lazy">
+                            <h3><a href="https://modrinth.com/mod/fake-players">Fake Players</a></h3>
+                        </div>
+                        <p>Fake player entities with auto-updating skins and item functionality.</p>
+                        <p class="work-meta"><span data-downloads>285k</span> downloads · <a href="https://github.com/duzos/fakeplayer">Source</a></p>
+                    </li>
+                    <li class="work-card" data-modrinth="ait" data-cf="856138">
+                        <div class="work-head">
+                            <img class="project-icon" data-icon src="https://cdn.modrinth.com/data/ZMP9ZjB9/43bd4bc4aa72c619f77b4f3f69b3ca09de1ef41e_96.webp" alt="" width="40" height="40" loading="lazy">
+                            <h3><a href="https://modrinth.com/mod/ait">Adventures in Time</a></h3>
+                        </div>
+                        <p>A large Doctor Who content mod with its own datapack and addon ecosystem.</p>
+                        <p class="work-meta"><span data-downloads>204k</span> downloads · <a href="https://github.com/amblelabs/ait">Source</a></p>
+                    </li>
+                    <li class="work-card" data-modrinth="amblekit" data-cf="1204806">
+                        <div class="work-head">
+                            <img class="project-icon" data-icon src="https://cdn.modrinth.com/data/ZNWAUUsB/45c6687b82c55d993084006abfd4e240cfd4a76b_96.webp" alt="" width="40" height="40" loading="lazy">
+                            <h3><a href="https://modrinth.com/mod/amblekit">AmbleKit</a></h3>
+                        </div>
+                        <p>A Fabric library shared across the Amble Labs mods.</p>
+                        <p class="work-meta"><span data-downloads>183k</span> downloads · <a href="https://github.com/pavatus/sakitus">Source</a></p>
+                    </li>
+                    <li class="work-card" data-modrinth="superhero" data-cf="871545">
+                        <div class="work-head">
+                            <img class="project-icon" data-icon src="https://cdn.modrinth.com/data/VPum1CA1/e840dd160609c0b294c6ff5b10db1205d1d41da8_96.webp" alt="" width="40" height="40" loading="lazy">
+                            <h3><a href="https://modrinth.com/mod/superhero">Timeless Heroes</a></h3>
+                        </div>
+                        <p>Superhero suits and abilities, built on a custom player animation library.</p>
+                        <p class="work-meta"><span data-downloads>147k</span> downloads · <a href="https://github.com/duzos/superhero">Source</a></p>
+                    </li>
+                    <li class="work-card" data-modrinth="k9-mod" data-cf="866639">
+                        <div class="work-head">
+                            <img class="project-icon" data-icon src="https://cdn.modrinth.com/data/KZvTlFBC/85478e5ebebbbbb4af7ebbd88add662c9b615de3_96.webp" alt="" width="40" height="40" loading="lazy">
+                            <h3><a href="https://modrinth.com/mod/k9-mod">Adventures in Time: K9</a></h3>
+                        </div>
+                        <p>A robot companion mod for Fabric.</p>
+                        <p class="work-meta"><span data-downloads>41k</span> downloads · <a href="https://github.com/amblelabs/k9-mod">Source</a></p>
+                    </li>
+                </ul>
+
+                <article class="case role">
+                    <img class="org-logo" src="https://raw.githubusercontent.com/duzos/Summit/master/Summit/Icon.ico" alt="" width="48" height="48" loading="lazy">
+                    <div class="role-main">
+                        <header class="role-head">
+                            <h3><a href="https://github.com/duzos/Summit">Summit</a> <span class="role-org">A-level Computer Science coursework</span></h3>
+                            <p class="role-meta">C# · .NET · MonoGame</p>
+                        </header>
+                        <ul>
+                            <li>A mathematical deck-building roguelike where players build equations from cards to hit a target score.</li>
+                            <li>Wrote SummitKit, the reusable MonoGame framework behind it, covering input, UI, audio, scenes, physics and rendering.</li>
+                            <li>Implemented an expression resolver with three scoring modes, seeded rounds, save/load and a developer console for testing.</li>
+                            <li>Produced full design documentation and system diagrams.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <details class="all-projects" id="allProjectsDetails">
+                    <summary>All projects</summary>
+                    <ul class="project-list" id="allProjects">
+                        <li class="project-list-fallback">
+                            The full list is on <a href="https://github.com/duzos?tab=repositories">GitHub</a>.
+                        </li>
+                    </ul>
+                </details>
             </div>
         </section>
 
         <!-- Skills -->
-        <section id="skills">
-            <div class="section-header">
-                <span class="section-ghost" aria-hidden="true">SKILLS</span>
-                <span class="section-number">02</span>
-                <h2 class="section-title">Tech Stack</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="skills-grid animate-on-scroll">
-                <a href="https://www.java.com/" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-java"></i>
-                    <span>Java</span>
-                </a>
-                <a href="https://www.python.org/" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-python"></i>
-                    <span>Python</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-js"></i>
-                    <span>JavaScript</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-html5"></i>
-                    <span>HTML/CSS</span>
-                </a>
-                <a href="https://git-scm.com/" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-git-alt"></i>
-                    <span>Git</span>
-                </a>
-                <a href="https://fabricmc.net/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-cube"></i>
-                    <span>Fabric</span>
-                </a>
-                <a href="https://neoforged.net/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-fire"></i>
-                    <span>Forge</span>
-                </a>
-                <a href="https://www.linux.org/" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-linux"></i>
-                    <span>Linux</span>
-                </a>
-                <a href="https://www.mysql.com/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-database"></i>
-                    <span>SQL</span>
-                </a>
-                <a href="https://www.docker.com/" target="_blank" class="skill-item">
-                    <i class="fa-brands fa-docker"></i>
-                    <span>Docker</span>
-                </a>
-                <a href="https://gradle.org/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-gears"></i>
-                    <span>Gradle</span>
-                </a>
-                <a href="https://www.gnu.org/software/bash/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-terminal"></i>
-                    <span>Bash</span>
-                </a>
-                <a href="https://claude.ai/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-robot"></i>
-                    <span>Claude</span>
-                </a>
-                <a href="https://www.cursor.com/" target="_blank" class="skill-item">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Cursor</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Projects -->
-        <section id="projects">
-            <div class="section-header">
-                <span class="section-ghost" aria-hidden="true">WORK</span>
-                <span class="section-number">03</span>
-                <h2 class="section-title">Projects</h2>
-                <div class="section-line"></div>
-                <div class="project-stats" id="projectStats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="statProjects">0</span>
-                        <span class="stat-label">projects</span>
+        <section class="section wrap" id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="section-body">
+                <dl class="skills">
+                    <div>
+                        <dt>Languages</dt>
+                        <dd>Java, Kotlin, C#, SQL, JavaScript, Python</dd>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="statDownloads">0</span>
-                        <span class="stat-label">downloads</span>
+                    <div>
+                        <dt>Infrastructure</dt>
+                        <dd>Docker, Linux, Pterodactyl, Grafana, ClickHouse</dd>
                     </div>
-                </div>
-            </div>
-
-            <!-- GitHub Stats -->
-            <div class="github-stats animate-on-scroll">
-                <a href="https://github.com/duzos" target="_blank">
-                    <img src="https://github-readme-stats-ashy-one-11.vercel.app/api?username=duzos&show_icons=true&theme=transparent&title_color=e1062c&text_color=f7f3e8&icon_color=e1062c&border_color=2a2a2e&custom_title=Stats&bg_color=0b0b0d" alt="GitHub Stats" loading="lazy">
-                </a>
-                <a href="https://github.com/duzos" target="_blank">
-                    <img src="https://github-readme-stats-ashy-one-11.vercel.app/api/top-langs/?username=duzos&show_icons=true&layout=compact&theme=transparent&title_color=e1062c&text_color=f7f3e8&border_color=2a2a2e&bg_color=0b0b0d" alt="Top Languages" loading="lazy">
-                </a>
-            </div>
-
-            <!-- Featured Project -->
-            <div class="featured-project animate-on-scroll" id="featuredProject">
-                <div class="featured-badge"><i class="fa-solid fa-star"></i> Featured</div>
-                <div class="featured-content" id="featuredContent">
-                    <div class="featured-skeleton">
-                        <div class="skeleton-circle"></div>
-                        <div class="skeleton-lines">
-                            <div class="skeleton-line skeleton-line-title"></div>
-                            <div class="skeleton-line skeleton-line-desc"></div>
-                            <div class="skeleton-line skeleton-line-short"></div>
-                        </div>
+                    <div>
+                        <dt>Tooling</dt>
+                        <dd>Git, GitHub, Gradle, IntelliJ IDEA, Bash</dd>
                     </div>
-                </div>
-            </div>
-
-            <!-- Project Spotlight (calling card) -->
-            <div class="project-spotlight" id="projectSpotlight">
-                <div class="spotlight-inner">
-                    <div class="spotlight-left">
-                        <img class="spotlight-logo" id="spotlightLogo" src="" alt="">
-                        <div class="spotlight-meta">
-                            <h3 class="spotlight-name" id="spotlightName"></h3>
-                            <p class="spotlight-desc" id="spotlightDesc"></p>
-                        </div>
+                    <div>
+                        <dt>Platforms</dt>
+                        <dd>.NET, MonoGame, Fabric, NeoForge</dd>
                     </div>
-                    <div class="spotlight-links" id="spotlightLinks"></div>
-                </div>
-                <div class="spotlight-hint">
-                    <span>hover or click a project below</span>
-                </div>
-            </div>
-
-            <!-- Project Carousel -->
-            <div class="carousel-container animate-on-scroll" id="projectCarousel">
-                <div class="carousel-fade carousel-fade-left"></div>
-                <div class="carousel-fade carousel-fade-right"></div>
-                <div class="carousel-track" id="carouselTrack"></div>
-            </div>
-            <div class="carousel-controls">
-                <button id="toggleProjects" onclick="toggleCarouselExpand()">
-                    <i class="fa-solid fa-grip"></i> Show All
-                </button>
+                    <div>
+                        <dt>Practices</dt>
+                        <dd>Unit and integration testing, debugging and profiling, code review, AI-assisted development</dd>
+                    </div>
+                </dl>
             </div>
         </section>
 
         <!-- Contact -->
-        <section id="contact">
-            <div class="section-header">
-                <span class="section-ghost" aria-hidden="true">HELLO</span>
-                <span class="section-number">04</span>
-                <h2 class="section-title">Contact</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contact-layout">
-                <div class="contact-main animate-on-scroll">
-                    <h3 class="contact-heading">Send a calling card.</h3>
-                    <p class="contact-subtext">Feel free to reach out for collaborations, questions, or just to say hi.</p>
-                    <div class="contact-links">
-                        <a href="mailto:duz.0@outlook.com" title="Email" class="contact-link-item">
-                            <i class="fa-solid fa-envelope"></i>
-                            <span>Email</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/james-hall-082b46285/" target="_blank" title="LinkedIn" class="contact-link-item">
-                            <i class="fa-brands fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="https://www.youtube.com/@duzo_" target="_blank" title="YouTube" class="contact-link-item">
-                            <i class="fa-brands fa-youtube"></i>
-                            <span>YouTube</span>
-                        </a>
-                        <a href="https://discord.gg/ZgssqpUMHS" target="_blank" title="Discord" class="contact-link-item">
-                            <i class="fa-brands fa-discord"></i>
-                            <span>Discord</span>
-                        </a>
-                        <a href="https://github.com/Duzos" target="_blank" title="GitHub" class="contact-link-item">
-                            <i class="fa-brands fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://open.spotify.com/user/jamestheproyt" target="_blank" title="Spotify" class="contact-link-item">
-                            <i class="fa-brands fa-spotify"></i>
-                            <span>Spotify</span>
-                        </a>
-                        <a href="https://steamcommunity.com/id/duzo_/" target="_blank" title="Steam" class="contact-link-item">
-                            <i class="fa-brands fa-steam"></i>
-                            <span>Steam</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="contact-side animate-on-scroll">
-                    <img class="persona-cat" src="./img/personacat.png" alt="Persona cat" loading="lazy">
-                    <p class="cat-caption">persona cat lol</p>
-                </div>
+        <section class="section wrap" id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="section-body">
+                <p class="section-intro">Email is the best way to reach me.</p>
+                <ul class="contact-list">
+                    <li><span class="contact-label">Email</span> <a href="mailto:james.hall01@outlook.com">james.hall01@outlook.com</a></li>
+                    <li><span class="contact-label">LinkedIn</span> <a href="https://www.linkedin.com/in/duzo/">linkedin.com/in/duzo</a></li>
+                    <li><span class="contact-label">GitHub</span> <a href="https://github.com/duzos">github.com/duzos</a></li>
+                </ul>
+
+                <!-- Live Discord presence (script/discord.js). Static text is the no-JS / offline fallback. -->
+                <a class="discord-card" id="discordCard" href="https://discord.com/users/327807253052653569" data-status="unknown">
+                    <span class="discord-avatar" aria-hidden="true">
+                        <img id="discordAvatar" alt="" width="44" height="44" hidden>
+                        <span class="discord-dot"></span>
+                    </span>
+                    <span class="discord-body">
+                        <span class="discord-line">
+                            <span class="discord-name" id="discordName">duzo</span>
+                            <span class="discord-status" id="discordStatus">on Discord</span>
+                        </span>
+                        <span class="discord-activity" id="discordActivity">@duzo.</span>
+                    </span>
+                </a>
             </div>
         </section>
     </main>
 
-    <!-- Footer marquee -->
-    <footer class="marquee marquee-footer" aria-hidden="true">
-        <div class="marquee-track marquee-reverse">
-            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
-            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
-            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
-            <span>THANK YOU FOR VISITING ★ DUZO ★ TAKE YOUR TIME ★&nbsp;</span>
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <p>James Hall, also known as duzo.</p>
+            <p><a href="#top">Back to top</a></p>
         </div>
     </footer>
 
-    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-    <script>
-        kofiWidgetOverlay.draw('duzoo', {
-            'type': 'floating-chat',
-            'floating-chat.donateButton.text': 'Support me',
-            'floating-chat.donateButton.background-color': '#0b0b0d',
-            'floating-chat.donateButton.text-color': '#e1062c'
-        });
-    </script>
-
-    <script>
-        // Navigation toggle for mobile
-        function toggleNav() {
-            document.getElementById('navLinks').classList.toggle('active');
-            document.getElementById('navToggle').classList.toggle('active');
-        }
-
-        // Close nav when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-                document.getElementById('navToggle').classList.remove('active');
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Hero stagger animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroElements = document.querySelectorAll('.animate-hero');
-            heroElements.forEach((el, i) => {
-                el.style.animationDelay = `${0.15 + i * 0.12}s`;
-            });
-        });
-
-        // Theme toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const current = html.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            updateThemeIcon(next);
-        }
-
-        function updateThemeIcon(theme) {
-            const icon = document.getElementById('themeIcon');
-            if (!icon) return;
-            icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        }
-
-        // Load saved theme, falling back to the system preference
-        (function() {
-            const saved = localStorage.getItem('theme')
-                || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-            document.documentElement.setAttribute('data-theme', saved);
-            document.addEventListener('DOMContentLoaded', () => updateThemeIcon(saved));
-        })();
-    </script>
-    </body>
+    <dialog class="readme-dialog" id="readmeDialog" aria-labelledby="readmeTitle">
+        <header class="readme-head">
+            <h2 id="readmeTitle">README</h2>
+            <button type="button" class="button button-quiet" id="readmeClose">Close</button>
+        </header>
+        <div class="readme-body" id="readmeBody"></div>
+    </dialog>
+</body>
 </html>

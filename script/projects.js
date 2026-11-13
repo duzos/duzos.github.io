@@ -1,119 +1,19 @@
+// Project list + live download counts.
+//
+// The page ships with hard-coded numbers, so it reads correctly without
+// JavaScript. This script refreshes those numbers from Modrinth and the cached
+// CurseForge data, and fills in the "All projects" list.
+//
+// NOTE: scripts/lib/resolve-projects.mjs loads this file in a sandbox and reads
+// the `projects` array, and scripts/update-curseforge-downloads.mjs greps the
+// `new ModrinthProject(...)` calls for CurseForge ids. Keep the class names,
+// constructor argument order and the top-level `projects.push(new ...)` lines.
+
 function formatCount(count) {
-    if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M';
+    if (count >= 1000000) return (Math.floor(count / 100000) / 10).toFixed(1) + 'M'; // round down, never overstate
     if (count >= 1000) return (count / 1000).toFixed(count >= 10000 ? 0 : 1) + 'k';
     return String(count);
 }
-
-// Native link chips (replaces shields.io badge images)
-function createChip(href, iconClasses, label, title) {
-    let chip = document.createElement("a");
-    chip.classList.add("chip");
-    chip.href = href;
-    chip.target = "_blank";
-    if (title) chip.title = title;
-
-    let icon = document.createElement("i");
-    iconClasses.split(" ").forEach(c => icon.classList.add(c));
-    chip.appendChild(icon);
-
-    let text = document.createElement("span");
-    text.textContent = label;
-    chip.appendChild(text);
-
-    return chip;
-}
-
-function createDownloadChip(href, iconClasses, fallbackLabel, count, title) {
-    const value = Number(count) || 0;
-    const label = value > 0 ? formatCount(value) + " downloads" : fallbackLabel;
-    return createChip(href, iconClasses, label, title);
-}
-
-function createCurseForgeChip(project) {
-    return createDownloadChip(
-        "https://www.curseforge.com/minecraft/mc-mods/" + project.curseforge,
-        "fa-solid fa-fire",
-        "curseforge",
-        project.curseforgeDownloads,
-        "Downloads on CurseForge"
-    );
-}
-
-function createModrinthChip(project) {
-    return createDownloadChip(
-        "https://modrinth.com/mod/" + project.modrinth,
-        "fa-solid fa-download",
-        "modrinth",
-        project.downloads,
-        "Downloads on Modrinth"
-    );
-}
-
-// ─── Download tracking for animated counter ───
-let totalDownloads = 0;
-let modrinthProjectCount = 0;
-const downloadCounts = new Map();
-
-function setDownloadCount(source, count) {
-    const value = Number(count) || 0;
-    if (value <= 0) return;
-
-    downloadCounts.set(source, value);
-    totalDownloads = 0;
-    downloadCounts.forEach(downloads => {
-        totalDownloads += downloads;
-    });
-    updateStatsDisplay();
-}
-
-function updateStatsDisplay() {
-    const statProjects = document.getElementById('statProjects');
-    const statDownloads = document.getElementById('statDownloads');
-
-    if (statProjects) {
-        animateCounter(statProjects, projects.length);
-    }
-
-    if (statDownloads && totalDownloads > 0) {
-        animateCounter(statDownloads, totalDownloads, true);
-    }
-}
-
-function animateCounter(element, target, abbreviate) {
-    const duration = 1200;
-    const start = parseInt(element.textContent.replace(/[^0-9]/g, '')) || 0;
-    const startTime = performance.now();
-
-    function update(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Ease out quint
-        const eased = 1 - Math.pow(1 - progress, 5);
-        const current = Math.round(start + (target - start) * eased);
-
-        if (abbreviate && current >= 1000) {
-            if (current >= 1000000) {
-                element.textContent = (current / 1000000).toFixed(1) + 'M';
-            } else {
-                element.textContent = (current / 1000).toFixed(current >= 10000 ? 0 : 1) + 'k';
-            }
-        } else {
-            element.textContent = current.toLocaleString();
-        }
-
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        }
-    }
-
-    requestAnimationFrame(update);
-}
-
-
-// (Skeleton tiles handled via CSS .loading-tile class)
-
-
-// ─── Project Classes ───
 
 class Project {
     constructor(name, desc, logoPath, github_name, github_project, wiki) {
@@ -127,43 +27,8 @@ class Project {
         this.wiki = wiki;
     }
 
-    toElement() {
-        let window = document.createElement("div");
-        window.classList.add("section-window");
-        window.id = this.id;
-
-        if (this.logoPath != null) {
-            let logo = document.createElement("img");
-            logo.classList.add("project-logo");
-            logo.src = this.logoPath;
-            window.appendChild(logo);
-        }
-
-        if (this.name != null) {
-            let header = document.createElement("h1");
-            header.textContent = this.name;
-            window.appendChild(header);
-        }
-
-        if (this.desc != null) {
-            let description = document.createElement("h3");
-            description.textContent = this.desc;
-            window.appendChild(description);
-        }
-
-        let links = document.createElement("div");
-        links.classList.add("links");
-        window.appendChild(links);
-
-        if (this.github != null) {
-            links.appendChild(createChip(this.github, "fa-brands fa-github", "source"));
-        }
-
-        if (this.wiki != null) {
-            links.appendChild(createChip(this.wiki, "fa-solid fa-book-open", "wiki"));
-        }
-
-        return window;
+    get totalDownloads() {
+        return (Number(this.downloads) || 0) + (Number(this.curseforgeDownloads) || 0);
     }
 }
 
@@ -174,329 +39,23 @@ class MinecraftProject extends Project {
         this.curseforge = curseforge;
         this.cf_id = cf_id;
         this.discord = discord;
-
-        this.id = "";
-        this.updateId();
-    }
-
-    updateId() {
-        if (this.modrinth != null) {
-            this.id = this.modrinth;
-            return;
-        }
-
-        if (this.github != null) {
-            this.id = /[^/]*$/.exec(this.github)[0];
-        }
-
-        if (this.curseforge != null) {
-            this.id = this.curseforge;
-        }
-    }
-
-    toElement() {
-        let window = super.toElement();
-        let links = window.querySelector(".links");
-
-        if (this.discord != null) {
-            links.appendChild(createChip(this.discord, "fa-brands fa-discord", "discord"));
-        }
-
-        if (this.curseforge != null && this.cf_id != null) {
-            links.appendChild(createCurseForgeChip(this));
-        }
-
-        if (this.modrinth != null) {
-            links.appendChild(createModrinthChip(this));
-        }
-
-        return window;
     }
 }
-
-const modrinth_api = "https://api.modrinth.com/v2";
-
-// ─── README manifest (built by scripts/update-readmes.mjs) ───
-let readmeKeys = new Set();
-
-function readmeKeyForGithub(url) {
-    if (!url) return null;
-    const m = /github\.com\/([^/]+)\/([^/?#]+)/.exec(url);
-    if (!m) return null;
-    return (m[1] + "__" + m[2].replace(/\.git$/, "")).toLowerCase();
-}
-
-function loadReadmeManifest() {
-    return fetch("./data/readme/index.json")
-        .then(response => (response.ok ? response.json() : null))
-        .then(data => {
-            if (data && data.readmes) {
-                readmeKeys = new Set(Object.keys(data.readmes));
-                applyReadmeMarkers();
-            }
-        })
-        .catch(() => { /* feature stays dormant if the manifest is missing */ });
-}
-
-// Toggle the .has-readme marker on every rendered card by reading the GitHub URL
-// from its source chip. Works for carousel clones and the grid alike, and re-runs
-// as Modrinth projects resolve their repo asynchronously.
-function applyReadmeMarkers() {
-    document.querySelectorAll(".section-window").forEach(card => {
-        const link = card.querySelector('a.chip[href*="github.com"]');
-        const key = link ? readmeKeyForGithub(link.getAttribute("href")) : null;
-        card.classList.toggle("has-readme", !!(key && readmeKeys.has(key)));
-    });
-}
-
-// Projects waiting on Modrinth data — fetched in one batched request by
-// loadModrinthProjects() instead of one request per project, which tripped
-// Modrinth's rate limiter (429s) and left blank tiles.
-let pendingModrinthProjects = [];
 
 class ModrinthProject extends MinecraftProject {
     constructor(slug, curseforge, cf_id) {
         super(null, null, null, null, null, curseforge, cf_id, slug);
-        modrinthProjectCount++;
-        pendingModrinthProjects.push(this);
     }
 
-    // Per-project fallback for slugs missing from the batch response
-    updateFromApi() {
-        fetch(modrinth_api + "/project/" + this.modrinth)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Modrinth API Response was not OK" + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {this.parseData(data)})
-            .catch(error => {
-                console.error("Modrinth Error:", error);
-            })
-    }
     parseData(data) {
         this.name = data["title"];
-        this.desc = data["description"];
+        this.desc = (data["description"] || "").split("\n")[0].trim();
         this.logoPath = data["icon_url"];
         this.wiki = data["wiki_url"];
         this.github = data["source_url"];
         this.discord = data["discord_url"];
         this.downloads = data["downloads"] || 0;
-
-        // Track Modrinth downloads for the shared counter.
-        setDownloadCount("modrinth:" + this.modrinth, this.downloads);
-
-        this.updateWindow();
-        this.updateFeatured();
     }
-
-    updateFeatured() {
-        if (this.name === featuredName) {
-            populateFeaturedCard(this);
-        }
-    }
-
-    updateWindow() {
-        this.updateId();
-
-        const windows = document.querySelectorAll(`#${CSS.escape(this.id)}`);
-        if (windows.length === 0) {
-            console.log("Could not update window for " + this.id);
-            return;
-        }
-
-        windows.forEach(window => {
-            const newElement = this.toElement();
-            window.replaceWith(newElement);
-        });
-
-        const track = document.getElementById('carouselTrack');
-        if (track) {
-            const slides = track.querySelectorAll('.carousel-slide');
-            slides.forEach(slide => {
-                const sectionWindow = slide.querySelector('.section-window');
-                if (sectionWindow && sectionWindow.id === this.id) {
-                    const newSlide = document.createElement('div');
-                    newSlide.classList.add('carousel-slide');
-                    if (slide.classList.contains('clone')) {
-                        newSlide.classList.add('clone');
-                    }
-                    newSlide.appendChild(this.toElement());
-                    slide.replaceWith(newSlide);
-                }
-            });
-
-            if (typeof setupSlideHoverListeners === 'function') {
-                setupSlideHoverListeners();
-            }
-        }
-
-        applyReadmeMarkers();
-    }
-}
-
-
-// Fetch every pending Modrinth project in a single batched request, then
-// hand each project its slice of the response via parseData().
-function loadModrinthProjects() {
-    const pending = pendingModrinthProjects.splice(0);
-    if (pending.length === 0) return;
-
-    const ids = JSON.stringify(pending.map(project => project.modrinth));
-    fetch(modrinth_api + "/projects?ids=" + encodeURIComponent(ids))
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Modrinth API Response was not OK" + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const bySlug = new Map();
-            for (const entry of data) {
-                bySlug.set(entry["slug"], entry);
-                bySlug.set(entry["id"], entry);
-            }
-
-            for (const project of pending) {
-                const entry = bySlug.get(project.modrinth);
-                if (entry) {
-                    project.parseData(entry);
-                } else {
-                    project.updateFromApi();
-                }
-            }
-        })
-        .catch(error => {
-            console.error("Modrinth Error:", error);
-            pending.forEach(project => project.updateFromApi());
-        });
-}
-
-function getCurseForgeDownloadMap(data) {
-    if (!data) return {};
-
-    if (Array.isArray(data)) {
-        return data.reduce((map, entry) => {
-            if (entry && entry.id != null) map[String(entry.id)] = entry;
-            return map;
-        }, {});
-    }
-
-    return data.downloads || data.data || data;
-}
-
-function getDownloadCountFromEntry(entry) {
-    if (typeof entry === "number" || typeof entry === "string") {
-        return Number(entry) || 0;
-    }
-
-    if (entry && typeof entry === "object") {
-        return Number(entry.downloadCount || entry.downloads || entry.totalDownloads) || 0;
-    }
-
-    return 0;
-}
-
-function refreshProject(project) {
-    if (typeof project.updateWindow === "function") {
-        project.updateWindow();
-    }
-
-    if (project.name === featuredName) {
-        populateFeaturedCard(project);
-    }
-}
-
-function applyCurseForgeDownloads(data) {
-    const downloads = getCurseForgeDownloadMap(data);
-
-    projects.forEach(project => {
-        if (!project.cf_id) return;
-
-        const entry = downloads[String(project.cf_id)];
-        const count = getDownloadCountFromEntry(entry);
-        if (count <= 0) return;
-
-        project.curseforgeDownloads = count;
-        setDownloadCount("curseforge:" + project.cf_id, count);
-        refreshProject(project);
-    });
-}
-
-function loadCurseForgeDownloads() {
-    fetch("./data/curseforge-downloads.json")
-        .then(response => {
-            if (response.status === 404) return null;
-            if (!response.ok) {
-                throw new Error("CurseForge download data response was not OK " + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data) applyCurseForgeDownloads(data);
-        })
-        .catch(error => {
-            console.warn("CurseForge download data unavailable:", error);
-        });
-}
-
-
-// Featured Project
-const featuredName = "MineBounds";
-
-function populateFeaturedCard(project) {
-    const container = document.getElementById('featuredContent');
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    if (project.logoPath) {
-        let logo = document.createElement('img');
-        logo.src = project.logoPath;
-        logo.alt = project.name;
-        logo.classList.add('featured-logo');
-        container.appendChild(logo);
-    }
-
-    let info = document.createElement('div');
-    info.classList.add('featured-info');
-
-    let name = document.createElement('h3');
-    name.classList.add('featured-name');
-    name.textContent = project.name || 'Loading...';
-    info.appendChild(name);
-
-    let desc = document.createElement('p');
-    desc.classList.add('featured-desc');
-    desc.textContent = project.desc || '';
-    info.appendChild(desc);
-
-    let links = document.createElement('div');
-    links.classList.add('featured-links');
-
-    if (project.github) {
-        links.appendChild(createChip(project.github, "fa-brands fa-github", "source"));
-    }
-
-    if (project.modrinth) {
-        links.appendChild(createModrinthChip(project));
-    }
-
-    if (project.curseforge && project.cf_id) {
-        links.appendChild(createCurseForgeChip(project));
-    }
-
-    if (project.discord) {
-        links.appendChild(createChip(project.discord, "fa-brands fa-discord", "discord"));
-    }
-
-    if (project.wiki) {
-        links.appendChild(createChip(project.wiki, "fa-solid fa-book-open", "wiki"));
-    }
-
-    info.appendChild(links);
-    container.appendChild(info);
 }
 
 
@@ -504,15 +63,15 @@ function populateFeaturedCard(project) {
 
 let projects = [];
 // Amble Space Program is still a draft on Modrinth (its "space-program" slug
-// 404s for anonymous API requests), so hardcode the tile until it's published.
-projects.push(new Project("Amble Space Program", "Space for 1.21.1 Fabric and Forge!", "https://raw.githubusercontent.com/duzos/space/main/common/src/main/resources/assets/space/textures/block/rocket_nose.png", "duzos", "space", null))
+// 404s for anonymous API requests), so hardcode the entry until it's published.
+projects.push(new Project("Amble Space Program", "Space for 1.21.1 Fabric and Forge", "https://raw.githubusercontent.com/duzos/space/main/common/src/main/resources/assets/space/textures/block/rocket_nose.png", "duzos", "space", null))
 projects.push(new ModrinthProject("ait", "adventures-in-time", 856138))
 projects.push(new ModrinthProject("fake-players", "fake-player", 845992))
 projects.push(new ModrinthProject("amblekit", "amblekit", 1204806))
 projects.push(new ModrinthProject("stargate-sojourner", "stargate", 1204812))
 projects.push(new ModrinthProject("tardis-refined", "tardis-refined", 782697))
 projects.push(new ModrinthProject("superhero", "timeless-heroes", 871545))
-projects.push(new Project("Merseyrail", "Railway 200 Website - Click the Wiki button", "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/0f1d678990c8232d3214549cc18ed902", "duzos", "merseyrail-site", "https://duzo.is-a.dev/merseyrail-site/"))
+projects.push(new Project("Merseyrail", "Railway 200 website", null, "duzos", "merseyrail-site", "https://duzo.is-a.dev/merseyrail-site/"))
 projects.push(new ModrinthProject("animator"))
 projects.push(new ModrinthProject("k9-mod", "k9", 866639))
 projects.push(new ModrinthProject("origin-regen", "origins-regenerated", 963834))
@@ -521,105 +80,376 @@ projects.push(new ModrinthProject("vortex", "vortex", 973580))
 projects.push(new ModrinthProject("timed-lives", "timed-lives", 893078))
 projects.push(new ModrinthProject("mobeditor"))
 projects.push(new ModrinthProject("forcedspawner", "force-load-spawners", null))
-projects.push(new Project("AIT Generator", "Create custom AIT datapacks & resource packs", "./img/project/ait.png", "duzos", "desktop-online", "https://duzos.github.io/desktop-online/"))
-projects.push(new MinecraftProject("Persona", "PERSONA but in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, "https://discord.gg/ZgssqpUMHS"));
-projects.push(new Project("Summit", "A mathematical card game", "https://raw.githubusercontent.com/duzos/Summit/master/Summit/Icon.ico", "duzos", "Summit", null));
+projects.push(new Project("AIT Generator", "Create custom AIT datapacks and resource packs", "./img/project/ait.png", "duzos", "desktop-online", "https://duzos.github.io/desktop-online/"))
+projects.push(new MinecraftProject("Persona", "Persona-style combat in Minecraft", "./img/project/persona.png", "duzos", "persona-mc", null, null, null, null, null));
+projects.push(new Project("Summit", "A mathematical deck-building roguelike in C#", "https://raw.githubusercontent.com/duzos/Summit/master/Summit/Icon.ico", "duzos", "Summit", null));
 projects.push(new Project("ClassCharts API (Python)", "Unofficial Python client for the ClassCharts API", null, "duzos", "classcharts-api-python", null));
 projects.push(new Project("ClassCharts API (Java)", "Unofficial Java library for the ClassCharts API", null, "duzos", "classcharts-api-java", null));
 projects.push(new Project("ModSync", "Auto-download a server's missing mods on join", null, "duzos", "modsync", null));
 projects.push(new Project("Death Sound", "Set a custom sound that plays when you die", null, "duzos", "deathsound-mc", null));
 projects.push(new Project("Snowy Mobs", "Mobs that gather snow as they wander", null, "duzos", "snowymobs", null));
-projects.push(new Project("Town Campfire", "Coloured campfires that found & name villages", null, "duzos", "towncampfire", null));
+projects.push(new Project("Town Campfire", "Coloured campfires that found and name villages", null, "duzos", "towncampfire", null));
 projects.push(new Project("Beyond the End", "New dimensions beyond the End", null, "duzos", "beyondtheend", null));
 projects.push(new Project("Tardis Hopper", "Teleport to your linked TARDIS interior (AIT addon)", null, "duzos", "ait-hopper", null));
-projects.push(new Project("Enchanting Overhaul", "A ground-up rework of enchanting & XP", null, "duzos", "xpoverhaul", null));
-projects.push(new Project("Regeneration", "Timelord Regeneration Mod", "https://raw.githubusercontent.com/amblelabs/regeneration/master/src/main/resources/assets/timelordregen/textures/item/pocket_watch.png", "amblelabs", "regeneration", null));
-projects.push(new Project("Jam Studios", "YouTube Content", "./img/project/jam_studio_inc_logo.jpg", null, null, "https://www.jam.studio/"))
-projects.push(new Project("MineBounds", "Minecraft Server Network", "https://minebounds.com/favicon.ico", null, null, "https://minebounds.com/"))
+projects.push(new Project("Enchanting Overhaul", "A ground-up rework of enchanting and XP", null, "duzos", "xpoverhaul", null));
+projects.push(new Project("Regeneration", "Timelord regeneration mod", "https://raw.githubusercontent.com/amblelabs/regeneration/master/src/main/resources/assets/timelordregen/textures/item/pocket_watch.png", "amblelabs", "regeneration", null));
+projects.push(new Project("MineBounds", "SSundee LLC's multiplayer Minecraft network", "https://minebounds.com/assets/favicon/favicon-96x96.png", null, null, "https://minebounds.com/"))
 
-function updateModrinthProjects(user, array) {
-    fetch(modrinth_api + "/user/" + user + "/projects")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Modrinth API Response was not OK" + response.statusText);
-        }
+
+// ─── Data loading ───
+
+const modrinth_api = "https://api.modrinth.com/v2";
+let readmeKeys = new Set();
+
+function fetchJson(url) {
+    return fetch(url).then(response => {
+        if (!response.ok) throw new Error(url + " responded " + response.status);
         return response.json();
-    })
-    .then(data => {parseModrinthProjects(array, data)})
-    .catch(error => {
-        console.error("Modrinth Error:", error);
-    })
+    });
 }
-function parseModrinthProjects(array, data) {
-    for (var i = 0; i < data.length; i++) {
-        let created = new ModrinthProject(data[i]["slug"]);
-        // The user endpoint already returns full project data — use it
-        // directly instead of leaving the project queued for a batch fetch.
-        pendingModrinthProjects.splice(pendingModrinthProjects.indexOf(created), 1);
-        created.parseData(data[i]);
-        array.push(created);
+
+// One batched request for every Modrinth project (per-project requests trip
+// Modrinth's rate limiter).
+function loadModrinth() {
+    const pending = projects.filter(project => project instanceof ModrinthProject);
+    const ids = JSON.stringify(pending.map(project => project.modrinth));
+
+    return fetchJson(modrinth_api + "/projects?ids=" + encodeURIComponent(ids)).then(data => {
+        const bySlug = new Map();
+        data.forEach(entry => {
+            bySlug.set(entry["slug"], entry);
+            bySlug.set(entry["id"], entry);
+        });
+        pending.forEach(project => {
+            const entry = bySlug.get(project.modrinth);
+            if (entry) project.parseData(entry);
+        });
+    });
+}
+
+function loadCurseForge() {
+    return fetchJson("./data/curseforge-downloads.json").then(data => {
+        const downloads = (data && data.downloads) || {};
+        projects.forEach(project => {
+            const entry = project.cf_id ? downloads[String(project.cf_id)] : null;
+            if (entry) project.curseforgeDownloads = Number(entry.downloadCount) || 0;
+        });
+    });
+}
+
+function loadReadmeManifest() {
+    return fetchJson("./data/readme/index.json").then(data => {
+        if (data && data.readmes) readmeKeys = new Set(Object.keys(data.readmes));
+    });
+}
+
+function readmeKeyForGithub(url) {
+    if (!url) return null;
+    const m = /github\.com\/([^/]+)\/([^/?#]+)/.exec(url);
+    if (!m) return null;
+    return (m[1] + "__" + m[2].replace(/\.git$/, "")).toLowerCase();
+}
+
+
+// ─── Rendering ───
+
+function updateStats(modrinthOk) {
+    const statProjects = document.getElementById('statProjects');
+    if (statProjects) statProjects.textContent = String(projects.length);
+
+    // Only replace the hard-coded total when the live Modrinth half arrived;
+    // otherwise the sum would silently drop to the CurseForge figure alone.
+    const statDownloads = document.getElementById('statDownloads');
+    if (statDownloads && modrinthOk) {
+        const total = projects.reduce((sum, project) => sum + project.totalDownloads, 0);
+        if (total > 0) statDownloads.textContent = formatCount(total);
     }
 }
 
-function updateProjectsWindow() {
-    let element = document.getElementById("carouselTrack");
-    if (!element) return;
+function updateFeaturedCards(modrinthOk) {
+    if (!modrinthOk) return;
+    document.querySelectorAll('.work-card[data-modrinth]').forEach(card => {
+        const project = projects.find(p => p.modrinth === card.dataset.modrinth);
+        if (!project) return;
 
-    element.replaceChildren();
-
-    // Shuffle projects for random order
-    let shuffled = [...projects].sort(() => Math.random() - 0.5);
-
-    for (let i = 0; i < shuffled.length; i++) {
-        let item = shuffled[i];
-        let created = item.toElement();
-
-        // Wrap in carousel slide
-        let slide = document.createElement("div");
-        slide.classList.add("carousel-slide");
-
-        // Add skeleton shimmer class if still loading from API
-        if (item.name == null) {
-            slide.classList.add("loading-tile");
+        const slot = card.querySelector('[data-downloads]');
+        if (slot && project.totalDownloads > 0) {
+            slot.textContent = formatCount(project.totalDownloads);
         }
 
-        slide.appendChild(created);
-        element.appendChild(slide);
-    }
-
-    // Update project count immediately
-    updateStatsDisplay();
-    applyReadmeMarkers();
-
-    // Populate featured card for non-Modrinth projects.
-    for (let i = 0; i < projects.length; i++) {
-        if (projects[i].name === featuredName) {
-            populateFeaturedCard(projects[i]);
-            break;
+        // Use the icon Modrinth currently reports; fall back to the one in the markup if it fails to load.
+        const icon = card.querySelector('img[data-icon]');
+        if (icon && project.logoPath) {
+            const bundled = icon.getAttribute('src');
+            icon.addEventListener('error', () => { icon.src = bundled; }, { once: true });
+            icon.src = project.logoPath;
         }
-    }
-
-    // Initialize carousel after projects are loaded
-    setTimeout(() => {
-        initCarousel();
-    }, 100);
+    });
 }
 
-// Build the carousel as soon as the DOM is parsed. Previously this waited on
-// `window.load`, which waits for every <img> — including all the remote shield
-// badges — so the Modrinth fetches almost always resolved first and tried to
-// patch DOM nodes that didn't exist yet.
-// The Modrinth batch fetch fires after the carousel exists so parseData()
-// always has tiles to update.
-function buildProjectsAndFetch() {
-    updateProjectsWindow();
-    loadModrinthProjects();
-    loadCurseForgeDownloads();
-    loadReadmeManifest();
+function link(href, text) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = text;
+    return a;
+}
+
+function projectIcon(project) {
+    const label = String(project.name || project.modrinth || '?');
+
+    const placeholder = () => {
+        const tile = document.createElement('span');
+        tile.className = 'project-icon project-icon-empty';
+        tile.setAttribute('aria-hidden', 'true');
+        tile.textContent = label.charAt(0);
+        return tile;
+    };
+
+    if (!project.logoPath) return placeholder();
+
+    const img = document.createElement('img');
+    img.className = 'project-icon';
+    img.alt = '';
+    img.width = 40;
+    img.height = 40;
+    img.loading = 'lazy';
+    img.addEventListener('error', () => img.replaceWith(placeholder()), { once: true });
+    img.src = project.logoPath;
+    return img;
+}
+
+function projectRow(project) {
+    const row = document.createElement('li');
+    row.appendChild(projectIcon(project));
+
+    const name = document.createElement('span');
+    name.className = 'project-name';
+    name.textContent = project.name || project.modrinth;
+    row.appendChild(name);
+
+    const links = document.createElement('span');
+    links.className = 'project-links';
+
+    if (project.totalDownloads > 0) {
+        const count = document.createElement('span');
+        count.textContent = formatCount(project.totalDownloads) + ' downloads';
+        links.appendChild(count);
+    }
+
+    const readmeKey = readmeKeyForGithub(project.github);
+    if (readmeKey && readmeKeys.has(readmeKey)) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = 'README';
+        button.addEventListener('click', () => openReadme(project, readmeKey));
+        links.appendChild(button);
+    }
+
+    if (project.github) links.appendChild(link(project.github, 'Source'));
+    if (project.modrinth) links.appendChild(link('https://modrinth.com/mod/' + project.modrinth, 'Modrinth'));
+    if (project.wiki) links.appendChild(link(project.wiki, 'Site'));
+    row.appendChild(links);
+
+    if (project.desc) {
+        const desc = document.createElement('span');
+        desc.className = 'project-desc';
+        desc.textContent = project.desc;
+        row.appendChild(desc);
+    }
+
+    return row;
+}
+
+function renderProjectList() {
+    const list = document.getElementById('allProjects');
+    if (!list) return;
+
+    const sorted = [...projects].sort((a, b) =>
+        b.totalDownloads - a.totalDownloads
+        || String(a.name || a.modrinth).localeCompare(String(b.name || b.modrinth)));
+
+    list.replaceChildren(...sorted.map(projectRow));
+}
+
+
+// ─── README dialog (data built by scripts/update-readmes.mjs) ───
+
+const readmeCache = new Map();
+let openReadmeKey = null;
+
+// The cached HTML comes from our own data/readme files (built from GitHub's
+// rendered READMEs). Open its links in a new tab and drop images that fail to
+// load, such as ones a README references by a repo-relative path.
+function fillReadme(container, html) {
+    container.innerHTML = html;
+    container.querySelectorAll('a[href]').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+    container.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', () => img.remove(), { once: true });
+    });
+}
+
+function fetchReadme(key) {
+    if (readmeCache.has(key)) return Promise.resolve(readmeCache.get(key));
+
+    return fetch('./data/readme/' + key + '.html')
+        .then(response => { if (!response.ok) throw new Error(response.status); return response.text(); })
+        .then(html => { readmeCache.set(key, html); return html; });
+}
+
+function openReadme(project, key) {
+    const dialog = document.getElementById('readmeDialog');
+    const body = document.getElementById('readmeBody');
+    const title = document.getElementById('readmeTitle');
+    if (!dialog || !body || typeof dialog.showModal !== 'function') {
+        window.open(project.github, '_blank', 'noopener');
+        return;
+    }
+
+    openReadmeKey = key;
+    title.textContent = project.name || 'README';
+    body.textContent = 'Loading…';
+    dialog.showModal();
+
+    const show = html => {
+        // Only paint if the dialog is still showing this project.
+        if (openReadmeKey !== key) return;
+        fillReadme(body, html);
+        body.scrollTop = 0;
+    };
+
+    fetchReadme(key)
+        .then(show)
+        .catch(() => { if (openReadmeKey === key) body.textContent = 'README unavailable.'; });
+}
+
+function setupReadmeDialog() {
+    const dialog = document.getElementById('readmeDialog');
+    const close = document.getElementById('readmeClose');
+    if (!dialog) return;
+
+    if (close) close.addEventListener('click', () => dialog.close());
+    // Click on the backdrop (the dialog element itself, outside its content) closes it.
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => { openReadmeKey = null; });
+}
+
+
+// ─── Expandable featured cards ───
+// Clicking a card (or its Details button) expands it across the grid and shows
+// per-platform counts, every link, and the cached README.
+
+function buildCardDetail(card) {
+    const project = projects.find(p => p.modrinth === card.dataset.modrinth) || {};
+
+    const detail = document.createElement('div');
+    detail.className = 'card-detail';
+
+    const facts = document.createElement('p');
+    facts.className = 'card-links';
+    const addFact = text => {
+        const span = document.createElement('span');
+        span.textContent = text;
+        facts.appendChild(span);
+    };
+    if (project.downloads > 0) addFact('Modrinth ' + formatCount(project.downloads));
+    if (project.curseforgeDownloads > 0) addFact('CurseForge ' + formatCount(project.curseforgeDownloads));
+
+    if (project.modrinth) facts.appendChild(link('https://modrinth.com/mod/' + project.modrinth, 'Modrinth page'));
+    if (project.curseforge) facts.appendChild(link('https://www.curseforge.com/minecraft/mc-mods/' + project.curseforge, 'CurseForge page'));
+    if (project.github) facts.appendChild(link(project.github, 'Source'));
+    if (project.wiki) facts.appendChild(link(project.wiki, 'Wiki'));
+    if (project.discord) facts.appendChild(link(project.discord, 'Discord'));
+    if (facts.childNodes.length) detail.appendChild(facts);
+
+    const key = readmeKeyForGithub(project.github);
+    if (key && readmeKeys.has(key)) {
+        const readme = document.createElement('div');
+        readme.className = 'readme-body card-readme';
+        readme.textContent = 'Loading README…';
+        detail.appendChild(readme);
+
+        fetchReadme(key)
+            .then(html => {
+                fillReadme(readme, html);
+            })
+            .catch(() => { readme.textContent = 'README unavailable.'; });
+    }
+
+    return detail;
+}
+
+function setCardExpanded(card, expanded) {
+    card.classList.toggle('expanded', expanded);
+
+    const toggle = card.querySelector('.card-toggle');
+    if (toggle) {
+        toggle.setAttribute('aria-expanded', String(expanded));
+        toggle.textContent = expanded ? 'Close' : 'Details';
+    }
+
+    let detail = card.querySelector('.card-detail');
+    if (expanded && !detail) {
+        detail = buildCardDetail(card);
+        card.appendChild(detail);
+    }
+    if (detail) detail.hidden = !expanded;
+}
+
+function toggleCard(card) {
+    const expanding = !card.classList.contains('expanded');
+    document.querySelectorAll('.work-card.expanded').forEach(other => setCardExpanded(other, false));
+    setCardExpanded(card, expanding);
+
+    if (expanding) {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        card.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    }
+}
+
+function setupCardExpansion() {
+    document.querySelectorAll('.work-card[data-modrinth]').forEach(card => {
+        card.classList.add('is-expandable');
+
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'card-toggle';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = 'Details';
+        toggle.addEventListener('click', () => toggleCard(card));
+
+        const meta = card.querySelector('.work-meta');
+        if (meta) meta.append(' · ', toggle);
+
+        // Anywhere on the card toggles it, except its own links, buttons and the open detail panel.
+        card.addEventListener('click', event => {
+            if (event.target.closest('a, button, .card-detail')) return;
+            if (String(window.getSelection())) return;
+            toggleCard(card);
+        });
+    });
+}
+
+
+// ─── Init ───
+
+function initProjects() {
+    setupReadmeDialog();
+
+    Promise.allSettled([loadModrinth(), loadCurseForge(), loadReadmeManifest()]).then(results => {
+        const modrinthOk = results[0].status === 'fulfilled';
+        results.forEach(result => {
+            if (result.status === 'rejected') console.warn('Project data unavailable:', result.reason);
+        });
+
+        updateStats(modrinthOk);
+        updateFeaturedCards(modrinthOk);
+        renderProjectList();
+        setupCardExpansion();
+    });
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', buildProjectsAndFetch);
+    document.addEventListener('DOMContentLoaded', initProjects);
 } else {
-    buildProjectsAndFetch();
+    initProjects();
 }

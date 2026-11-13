@@ -1,53 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-    <head>
-        <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page not found | James Hall</title>
 
-        <title>404 | duzo</title>
+    <meta name="description" content="Page not found">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="color-scheme" content="light dark">
 
-        <meta name="description" content="page not found">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex">
-        <meta name="theme-color" content="#0b0b0d">
-
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-        <link rel="stylesheet" href="/style.css">
-
-        <script>
-            (function() {
-                const saved = localStorage.getItem('theme')
-                    || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-                document.documentElement.setAttribute('data-theme', saved);
-            })();
-        </script>
-    </head>
-    <body>
-
-    <div class="noise-overlay" aria-hidden="true"></div>
-
-    <main>
-        <header class="hero">
-            <div class="hero-halftone" aria-hidden="true"></div>
-            <div class="hero-slash" aria-hidden="true"></div>
-            <div class="hero-slash hero-slash-2" aria-hidden="true"></div>
-            <p class="hero-prefix animate-hero">// page not found</p>
-            <h1 class="title-text animate-hero">404</h1>
-            <p class="title-tagline animate-hero">you took a wrong turn.</p>
-            <div class="hero-cta animate-hero">
-                <a href="/" class="hero-btn"><span>Back Home</span></a>
-            </div>
-        </header>
-    </main>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <script>
-        document.querySelectorAll('.animate-hero').forEach((el, i) => {
-            el.style.animationDelay = `${0.15 + i * 0.12}s`;
-        });
+        try {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light' || savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        } catch (e) { /* storage blocked: follow the system */ }
     </script>
-    </body>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="intro wrap not-found">
+        <p class="eyebrow">404</p>
+        <h1>Page not found</h1>
+        <p class="lede">That address doesn't lead anywhere on this site.</p>
+        <ul class="intro-links">
+            <li><a class="button" href="/">Back to the home page</a></li>
+        </ul>
+    </main>
+</body>
 </html>
